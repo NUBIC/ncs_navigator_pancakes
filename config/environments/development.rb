@@ -34,4 +34,7 @@ Pancakes::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Use Ember.js in development mode
+  config.ember.variant = :development
 end
