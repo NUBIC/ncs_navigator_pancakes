@@ -10,6 +10,7 @@ gem 'sidekiq'
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'compass-rails'
   gem 'hamlbars'
   gem 'sass-rails',   '~> 3.2.3'
   gem 'susy'

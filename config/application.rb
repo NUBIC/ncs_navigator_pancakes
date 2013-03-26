@@ -58,5 +58,8 @@ module Pancakes
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Make custom fonts accessible to the asset pipeline
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
   end
 end

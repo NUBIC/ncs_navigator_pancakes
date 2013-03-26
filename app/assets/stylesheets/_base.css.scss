@@ -1,0 +1,38 @@
+@import "compass";
+@import "susy";
+
+// ---------------------------------------------------------------------------
+// Typography
+// ---------------------------------------------------------------------------
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 400;
+  src: url('SourceSansPro-Regular.ttf');
+}
+
+$body-font-family       : 'Source Sans Pro', sans-serif;
+$base-font-size         : 18px;
+$base-line-height       : 24px;
+
+// ---------------------------------------------------------------------------
+// Grid
+// ---------------------------------------------------------------------------
+
+$total-columns          : 20;
+$column-width           : 5%;
+$gutter-width           : 1%;
+$grid-padding           : $gutter-width;
+
+$show-grid-backgrounds  : true;
+
+// ---------------------------------------------------------------------------
+// Colors
+// ---------------------------------------------------------------------------
+
+$nu_purple              : #520063;
+$light-background-color : #f8f8f8;
+$dark-background-color  : #353737;
+
+// vim:ts=2:sw=2:et:tw=78
+
