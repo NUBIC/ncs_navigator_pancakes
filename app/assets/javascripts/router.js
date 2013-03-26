@@ -1,0 +1,3 @@
+Pancakes.Router.map(function() {
+
+});
