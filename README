@@ -1,0 +1,28 @@
+1. ncs_navigator_pancakes
+
+This is a Web application for performing queries (and, eventually, data
+changes) across many NCS Navigator Cases[1] instances.  In the NUBIC[2]
+environment, it's used to aggregate data across an organizationally related
+group of Cases instances.  (Pan-Cases: pancakes.)
+
+2. Running it
+
+The short version:
+
+  $ bundle install
+  $ vi /etc/nubic/db/local_postgresql.yml  # and verify it's all good
+  $ bundle exec rake db:create db:migrate  # db, etc
+  $ bundle exec rake                       # tests
+
+3. License and authorship
+
+ncs_navigator_pancakes is developed by the Northwestern University Biomedical
+Informatics Center as part of the National Children's Study[3].
+
+ncs_navigator_pancakes is licensed under the MIT License.
+
+[1]: https://github.com/NUBIC/ncs_navigator_core
+[2]: http://projects.nubic.northwestern.edu/
+[3]: http://www.nationalchildrensstudy.gov/
+
+# vim:ts=2:sw=2:et:tw=78
