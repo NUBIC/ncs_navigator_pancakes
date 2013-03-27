@@ -11,6 +11,13 @@
   src: url('SourceSansPro-Regular.ttf');
 }
 
+@font-face {
+  font-family: 'Source Sans Pro Italic';
+  font-style: italic;
+  font-weight: 400;
+  src: url('SourceSansPro-Italic.ttf');
+}
+
 $body-font-family       : 'Source Sans Pro', sans-serif;
 $base-font-size         : 18px;
 $base-line-height       : 24px;
@@ -24,15 +31,16 @@ $column-width           : 5%;
 $gutter-width           : 1%;
 $grid-padding           : $gutter-width;
 
-$show-grid-backgrounds  : true;
+$show-grid-backgrounds  : false;
 
 // ---------------------------------------------------------------------------
 // Colors
 // ---------------------------------------------------------------------------
 
-$nu_purple              : #520063;
+$nu-purple              : #520063;
 $light-background-color : #f8f8f8;
-$dark-background-color  : #353737;
+$dark-background-color  : #c0c0c0;
+$link-color		: #0000ff;
 
 // vim:ts=2:sw=2:et:tw=78
 

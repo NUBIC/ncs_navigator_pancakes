@@ -1,0 +1,6 @@
+%header
+  = hb 'partial "events/search_criteria"'
+.status
+  Status
+.report
+  Report

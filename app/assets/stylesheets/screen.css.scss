@@ -16,14 +16,8 @@ body {
   @include susy-grid-background;
 }
 
-#main {
-  .status {
-    @include span-columns(3);
-  }
-
-  .report {
-    @include span-columns(17 omega);
-  }
+label[for] {
+  cursor: pointer;
 }
 
 // vim:ts=2:sw=2:et:tw=78

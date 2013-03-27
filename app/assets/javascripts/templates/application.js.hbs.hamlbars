@@ -1,9 +1,5 @@
 %header
-  .container
-    %h1
-      Pancakes
-#main.container
-  .status
-    Status
-  .report
-    Report
+  %h1
+    Pancakes
+.container
+  = hb 'outlet'

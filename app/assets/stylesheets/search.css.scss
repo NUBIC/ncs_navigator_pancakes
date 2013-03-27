@@ -1,0 +1,13 @@
+@import "base";
+
+.search {
+  label.default-value {
+    color: $link-color;
+  }
+
+  .default-value {
+    display: inline; 
+    font-style: italic;
+    text-transform: lowercase;
+  }
+}
