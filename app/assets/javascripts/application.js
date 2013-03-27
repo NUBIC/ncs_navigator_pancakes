@@ -16,6 +16,7 @@
 //= require ember
 //= require ember-data
 //= require_self
+//= require modernizr-latest
 //= require pancakes
 //= require_tree .
 
