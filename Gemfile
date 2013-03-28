@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'aker'
 gem 'ember-rails'
+gem 'haml'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'rails', '3.2.13'

@@ -218,6 +218,7 @@ DEPENDENCIES
   compass-rails
   cucumber-rails
   ember-rails
+  haml
   hamlbars
   jquery-rails
   jquery-ui-rails
