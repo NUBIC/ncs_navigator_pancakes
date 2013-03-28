@@ -1,44 +1,35 @@
-%header
-  .search
-    .event-type
-      = hb 'view Ember.Checkbox checkedBinding="useEventTypes" id="use-event-types"'
-      %label{:for => 'use-event-types'}
-        Event types:
-      = hb 'if useEventTypes' do
-        = hb 'view Ember.TextField'
-        = hb 'else'
-        %label.default-value{:for => 'use-event-types'}
-          All event types
-
-    .date-range
-      = hb 'view Ember.Checkbox checkedBinding="useScheduledStartDate" id="use-scheduled-start-date"'
-      %label{:for => 'use-scheduled-start-date'}
-        Scheduled between
-      = hb 'if useScheduledStartDate' do
-        = hb 'view Pancakes.DateField'
-        = hb 'else'
-        %label.default-value{:for => 'use-scheduled-start-date'}
-          The beginning of time
-
-      = hb 'view Ember.Checkbox checkedBinding="useScheduledEndDate" id="use-scheduled-end-date"'
-      %label{:for => 'use-scheduled-end-date'}
-        and
-      = hb 'if useScheduledEndDate' do
-        = hb 'view Pancakes.DateField'
-        = hb 'else'
-        %label.default-value{:for => 'use-scheduled-end-date'}
-          The end of time
-
-    .data-collector
-      = hb 'view Ember.Checkbox checkedBinding="useDataCollectors" id="use-data-collectors"'
-      %label{:for => 'use-data-collectors'}
+%header.search
+  .event-type
+    %label
+      .label
+        Event types
+      .input
+        = hb 'view Pancakes.MultiSelect placeholder="All event types" valueBinding="eventTypes"'
+  .scheduled-date.start
+    %label
+      .label
+        From
+      .input
+        = hb 'view Pancakes.DateField placeholder="The start of time" valueBinding="scheduledStartDate"'
+  .scheduled-date.end
+    %label
+      .label
+        To
+      .input
+        = hb 'view Pancakes.DateField placeholder="The end of time" valueBinding="scheduledEndDate"'
+  .done-by
+    %label
+      .label
         Done by
-        = hb 'if useDataCollectors' do
-          = hb 'view Ember.TextField'
-          = hb 'else'
-          %label.default-value{:for => 'use-data-collectors'}
-            Anybody
-.status
+      .input
+        = hb 'view Pancakes.MultiSelect placeholder="Anybody" valueBinding="dataCollectors"'
+  .go
+    %button{:_action => 'search'}
+      Search
+%section.status
+  %header
+    %h1
+      Cases locations
   = hb 'outlet status'
-.report
+%section.report
   = hb 'outlet report'

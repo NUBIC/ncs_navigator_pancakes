@@ -1,10 +1,9 @@
 #= require jquery.ui.datepicker
 
 Pancakes.DateField = Ember.TextField.extend
-  attributeBindings: ['type']
-  type: 'date'
+  attributeBindings: ['placeholder']
 
   didInsertElement: ->
-    @$().datepicker() unless Modernizr.inputtypes.date
+    @$().datepicker()
 
 # vim:ts=2:sw=2:et:tw=78
