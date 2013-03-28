@@ -7,5 +7,6 @@
 #= require_tree ./templates
 #= require ./router
 #= require_tree ./routes
+#= require fixtures
 
 window.Pancakes = Ember.Application.create()

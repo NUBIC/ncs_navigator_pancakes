@@ -1,0 +1,8 @@
+%ul
+  = hb 'each controller' do
+    %li
+      %label{:bind => { :title => 'url' }}
+        = hb 'view Ember.Checkbox checkedBinding="active"'
+        = hb 'name'
+    = hb 'else'
+    Loading hosts

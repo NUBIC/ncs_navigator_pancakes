@@ -1,6 +1,44 @@
 %header
-  = hb 'partial "events/search_criteria"'
+  .search
+    .event-type
+      = hb 'view Ember.Checkbox checkedBinding="useEventTypes" id="use-event-types"'
+      %label{:for => 'use-event-types'}
+        Event types:
+      = hb 'if useEventTypes' do
+        = hb 'view Ember.TextField'
+        = hb 'else'
+        %label.default-value{:for => 'use-event-types'}
+          All event types
+
+    .date-range
+      = hb 'view Ember.Checkbox checkedBinding="useScheduledStartDate" id="use-scheduled-start-date"'
+      %label{:for => 'use-scheduled-start-date'}
+        Scheduled between
+      = hb 'if useScheduledStartDate' do
+        = hb 'view Pancakes.DateField'
+        = hb 'else'
+        %label.default-value{:for => 'use-scheduled-start-date'}
+          The beginning of time
+
+      = hb 'view Ember.Checkbox checkedBinding="useScheduledEndDate" id="use-scheduled-end-date"'
+      %label{:for => 'use-scheduled-end-date'}
+        and
+      = hb 'if useScheduledEndDate' do
+        = hb 'view Pancakes.DateField'
+        = hb 'else'
+        %label.default-value{:for => 'use-scheduled-end-date'}
+          The end of time
+
+    .data-collector
+      = hb 'view Ember.Checkbox checkedBinding="useDataCollectors" id="use-data-collectors"'
+      %label{:for => 'use-data-collectors'}
+        Done by
+        = hb 'if useDataCollectors' do
+          = hb 'view Ember.TextField'
+          = hb 'else'
+          %label.default-value{:for => 'use-data-collectors'}
+            Anybody
 .status
-  Status
+  = hb 'outlet status'
 .report
-  Report
+  = hb 'outlet report'
