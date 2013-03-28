@@ -42,10 +42,6 @@ GEM
       ember-source
       execjs
       handlebars-source
-    bcdatabase (1.0.6)
-      activesupport (>= 2.0)
-      highline (~> 1.5)
-      i18n
     builder (3.0.4)
     capybara (2.0.2)
       mime-types (>= 1.16)
@@ -113,7 +109,6 @@ GEM
       sprockets
       tilt
     handlebars-source (1.0.0.rc3)
-    highline (1.6.16)
     hike (1.2.1)
     i18n (0.6.1)
     journey (1.0.4)
@@ -132,7 +127,6 @@ GEM
     multi_json (1.7.2)
     net-ldap (0.1.1)
     nokogiri (1.5.9)
-    pg (0.14.1)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -220,7 +214,6 @@ PLATFORMS
 
 DEPENDENCIES
   aker
-  bcdatabase
   coffee-rails (~> 3.2.1)
   compass-rails
   cucumber-rails
@@ -228,7 +221,6 @@ DEPENDENCIES
   hamlbars
   jquery-rails
   jquery-ui-rails
-  pg
   rails (= 3.2.13)
   rspec-rails
   sass-rails (~> 3.2.3)

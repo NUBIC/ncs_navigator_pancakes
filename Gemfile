@@ -1,11 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'aker'
-gem 'bcdatabase'
 gem 'ember-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'pg'
 gem 'rails', '3.2.13'
 gem 'sidekiq'
 

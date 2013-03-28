@@ -1,7 +1,0 @@
-<%
-  require 'bcdatabase'
-  bcdb = Bcdatabase.load
-%>
-
-<%= bcdb.development    :local_postgresql, :ncs_navigator_pancakes %>
-<%= bcdb.test           :local_postgresql, :ncs_navigator_pancakes_test %>
