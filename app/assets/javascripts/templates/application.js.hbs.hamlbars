@@ -1,4 +1,4 @@
-%header
+%header.banner
   %h1
     Pancakes
 .container

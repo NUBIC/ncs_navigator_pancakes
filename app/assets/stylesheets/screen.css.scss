@@ -11,6 +11,12 @@ body {
   line-height: $base-line-height;
 }
 
+.banner {
+  background-color: $nu-purple;
+  color: white;
+  margin-bottom: $base-line-height;
+}
+
 .container {
   @include container;
   @include susy-grid-background;
