@@ -22,8 +22,23 @@ body {
   @include susy-grid-background;
 }
 
-label[for] {
+button, input {
+  border: 1px solid black;
+  font-family: $body-font-family;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  margin: 0;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+button {
   cursor: pointer;
+  background-color: $dark-background-color;
+
+  &:active {
+    background-color: $light-background-color;
+  }
 }
 
 // vim:ts=2:sw=2:et:tw=78

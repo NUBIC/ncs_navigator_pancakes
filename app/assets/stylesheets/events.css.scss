@@ -1,30 +1,70 @@
 @import "base";
+@import "motifs";
+
+@mixin search-criterion {
+  .label, .input {
+    display: block;
+  }
+
+  .label {
+    @include heading;
+
+    float: left;
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  .input {
+    overflow: hidden;
+
+    input[type="text"] {
+      width: 100%;
+    }
+  }
+}
 
 .status {
-  background-color: $dark-background-color;
-
   @include span-columns(3);
+
+  h1 {
+    @include heading;
+  }
 }
 
 .report {
-  @include span-columns(17 omega);
+  @include span-columns(13 omega);
 }
 
 .search {
-  background-color: $dark-background-color;
-
   @include span-columns($total-columns);
 
+  padding-bottom: $base-line-height;
+
   .event-type {
-    @include span-columns(5, $total-columns);
+    @include span-columns(5);
+    @include search-criterion;
   }
 
-  .date-range {
-    @include span-columns(10, $total-columns);
+  .scheduled-date {
+    @include span-columns(3);
+    @include search-criterion;
   }
 
   .done-by {
-    @include span-columns(5 omega, $total-columns);
+    @include span-columns(4);
+    @include search-criterion;
+  }
+
+  .go {
+    @include span-columns(1 omega);
+
+    button {
+      width: 100%;
+    }
   }
 }
 
