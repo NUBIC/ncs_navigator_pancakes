@@ -3,3 +3,8 @@
     Pancakes
 .container
   = hb 'outlet'
+  %section.status
+    %header
+      %h1
+        Cases locations
+    = hb 'outlet status'

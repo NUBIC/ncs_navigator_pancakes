@@ -19,3 +19,20 @@ Pancakes.CasesInstance.FIXTURES = [
   }
 ]
 
+Pancakes.EventSearch.FIXTURES = [
+  {
+    id: '1',
+    eventTypes: '1,2,3',
+    scheduledStartDate: '01/23/4567',
+    scheduledEndDate: '04/10/4568',
+    dataCollectors: 'Me,You,Anyone'
+  },
+  {
+    id: '2',
+    eventTypes: '6,7,8',
+    scheduledStartDate: '11/11/1111',
+    scheduledEndDate: '10/10/1222',
+    dataCollectors: 'Nobody at all'
+  }
+]
+# vim:ts=2:sw=2:et:tw=78
