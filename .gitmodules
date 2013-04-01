@@ -1,0 +1,3 @@
+[submodule "vendor/assets/javascripts/tag-it"]
+	path = vendor/assets/javascripts/tag-it
+	url = https://github.com/aehlke/tag-it.git
