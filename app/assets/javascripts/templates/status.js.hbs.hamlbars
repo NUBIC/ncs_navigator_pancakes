@@ -5,4 +5,4 @@
         = hb 'view Ember.Checkbox checkedBinding="active"'
         = hb 'name'
     = hb 'else'
-    Loading hosts
+    Loading

@@ -6,5 +6,5 @@
   %section.status
     %header
       %h1
-        Cases locations
+        Study locations
     = hb 'outlet status'
