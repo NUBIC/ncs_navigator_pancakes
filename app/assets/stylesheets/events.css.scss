@@ -1,7 +1,7 @@
 @import "base";
 @import "motifs";
 
-@mixin search-criterion {
+@mixin search-criterion($stretch-input: false) {
   .label, .input {
     display: block;
   }
@@ -10,19 +10,21 @@
     @include heading;
 
     float: left;
-    margin-left: 0.25em;
-    margin-right: 0.25em;
+    margin-left: $beat-width;
+    margin-right: $beat-width;
 
     &:first-child {
       margin-left: 0;
     }
   }
 
-  .input {
-    overflow: hidden;
+  @if $stretch-input {
+    .input {
+      overflow: hidden;
 
-    input[type="text"] {
-      width: 100%;
+      input[type="text"] {
+        width: 100%;
+      }
     }
   }
 }
@@ -51,7 +53,7 @@
 
   .scheduled-date {
     @include span-columns(3);
-    @include search-criterion;
+    @include search-criterion(true);
   }
 
   .done-by {

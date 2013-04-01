@@ -1,0 +1,31 @@
+//= require tag-it/css/jquery.tagit
+
+@import "motifs";
+
+ul.tagit {
+  @include input-field;
+
+  li {
+    margin: 0;
+  }
+
+  li.tagit-new {
+    padding: 0;
+  }
+
+  li.tagit-choice-editable {
+    padding: 0 2px 0 0;
+  }
+
+  .tagit-label {
+    background-color: $dark-background-color;
+    color: invert($dark-background-color);
+
+    padding: {
+      left: $beat-width;
+      right: $beat-width;
+    }
+  }
+}
+
+// vim:ts=2:sw=2:et:tw=78
