@@ -1,3 +1,0 @@
-%header.search
-  = hb 'partial "event_searches/criteria"'
-= hb 'outlet'

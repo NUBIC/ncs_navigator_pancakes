@@ -1,7 +1,7 @@
 Pancakes.Router.map ->
   @resource 'event_searches', ->
+    @resource 'event_searches.show', path: '/:event_search_id'
     @route 'new'
-  @resource 'event_search', path: '/event_search/:event_search_id'
 
 Pancakes.Router.reopen
   location: 'history'

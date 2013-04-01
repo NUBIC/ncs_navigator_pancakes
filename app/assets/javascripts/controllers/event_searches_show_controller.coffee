@@ -1,4 +1,4 @@
-Pancakes.EventSearchesNewController = Ember.ObjectController.extend
+Pancakes.EventSearchesShowController = Ember.ObjectController.extend
   needs: 'eventSearchCriteria'
   contentBinding: 'controllers.eventSearchCriteria.content'
 
