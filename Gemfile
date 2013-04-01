@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'aker'
+gem 'aker-rails'
 gem 'ember-rails'
 gem 'haml'
 gem 'jquery-rails'
