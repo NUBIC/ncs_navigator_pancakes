@@ -4,4 +4,15 @@
   font-variant: small-caps;
 }
 
+@mixin input-field {
+  background-color: $light-background-color;
+  border: 1px solid black;
+  font-family: $body-font-family;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  margin: 0;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
 // vim:ts=2:sw=2:et:tw=78
