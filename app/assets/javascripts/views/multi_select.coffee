@@ -3,7 +3,6 @@
 #= require tag-it/js/tag-it
 
 Pancakes.MultiSelect = Ember.TextField.extend
-  attributeBindings: ['placeholder']
   showAutocompleteChoices: (->
     if @get('showChoicesCallback') && @get('candidates')
       cb = @get('showChoicesCallback')
