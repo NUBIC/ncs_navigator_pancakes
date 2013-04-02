@@ -1,6 +1,6 @@
 A = DS.attr
 
-Pancakes.CasesInstance = DS.Model.extend
+Pancakes.StudyLocation = DS.Model.extend
   active: A 'boolean'
   name: A 'string'
   url: A 'string'

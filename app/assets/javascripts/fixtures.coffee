@@ -1,4 +1,4 @@
-Pancakes.CasesInstance.FIXTURES = [
+Pancakes.StudyLocation.FIXTURES = [
   {
     id: '1',
     url: 'https://foobar.nubic.northwestern.edu',
