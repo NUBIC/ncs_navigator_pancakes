@@ -50,5 +50,14 @@ $light-background-color : #f8f8f8;
 $dark-background-color  : #c0c0c0;
 $link-color             : #0000ff;
 $border                 : 1px solid $dark-background-color;
+$focus-background-color : desaturate(lighten($nu-purple, 70%), 80%);
+$tag-background-color   : $focus-background-color;
+$tag-color              : invert($tag-background-color);
+
+// ---------------------------------------------------------------------------
+// Maxima
+// ---------------------------------------------------------------------------
+
+$visible-autocomplete-candidates  : 10;
 
 // vim:ts=2:sw=2:et:tw=78

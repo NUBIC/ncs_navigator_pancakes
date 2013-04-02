@@ -1,5 +1,8 @@
-//= require tag-it/css/jquery.tagit
+/*
+ *= require tag-it/css/jquery.tagit
+ */
 
+@import "base";
 @import "motifs";
 
 ul.tagit {
@@ -18,8 +21,8 @@ ul.tagit {
   }
 
   .tagit-label {
-    background-color: $dark-background-color;
-    color: invert($dark-background-color);
+    background-color: $tag-background-color;
+    color: $tag-color;
 
     padding: {
       left: $beat-width;
