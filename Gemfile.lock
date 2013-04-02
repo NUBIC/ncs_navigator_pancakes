@@ -37,6 +37,9 @@ GEM
       net-ldap (~> 0.1.1)
       rubytree (~> 0.7.0)
       warden (~> 1.0)
+    aker-rails (3.0.2)
+      aker (~> 3.0)
+      rails (~> 3.0, >= 3.0.4)
     arel (3.0.2)
     barber (0.4.1)
       ember-source
@@ -213,7 +216,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aker
+  aker-rails
   coffee-rails (~> 3.2.1)
   compass-rails
   cucumber-rails
