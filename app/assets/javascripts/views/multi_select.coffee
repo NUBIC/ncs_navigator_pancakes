@@ -13,6 +13,7 @@ Pancakes.MultiSelect = Ember.TextField.extend
   didInsertElement: ->
     @$().tagit
       autocomplete:
+        delay: 0
         source: (search, showChoices) =>
           @set 'showChoicesCallback', showChoices
           @set 'criterion', search.term
