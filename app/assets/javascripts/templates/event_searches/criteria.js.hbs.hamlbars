@@ -3,7 +3,7 @@
     .label
       Event types
     .input
-      = hb 'view Pancakes.MultiSelect placeholder="All event types" valueBinding="eventTypes"'
+      = hb 'view Pancakes.MultiSelect placeholder="All event types" valueBinding="eventTypes" criterionBinding="controller.eventTypeCriterion" candidatesBinding="controller.eventTypeCandidates"'
 .scheduled-date.start
   %label
     .label
