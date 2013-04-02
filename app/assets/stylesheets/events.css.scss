@@ -44,10 +44,14 @@
 .search {
   @include span-columns($total-columns);
 
-  padding-bottom: $base-line-height;
+  padding-bottom: $base-line-height / 2;
+
+  .label, .input {
+    padding-bottom: $base-line-height / 2;
+  }
 
   .event-type {
-    @include span-columns(5);
+    @include span-columns($total-columns);
     @include search-criterion;
   }
 
@@ -57,7 +61,7 @@
   }
 
   .done-by {
-    @include span-columns(4);
+    @include span-columns(9);
     @include search-criterion;
   }
 
