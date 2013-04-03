@@ -1,8 +1,9 @@
 %ul
-  = hb 'each controller' do
+  = hb 'each location in controller' do
     %li
       %label{:bind => { :title => 'url' }}
-        = hb 'view Ember.Checkbox checkedBinding="active"'
-        = hb 'name'
+        = hb 'if controller.editable' do
+          = hb 'view Ember.Checkbox checkedBinding="location.active"'
+        = hb 'location.name'
     = hb 'else'
     Loading
