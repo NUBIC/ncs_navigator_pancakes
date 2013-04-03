@@ -29,9 +29,10 @@ Pancakes::Application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
-  # Raise exception on mass assignment protection for Active Record models
-  config.active_record.mass_assignment_sanitizer = :strict
-
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # When doing integration testing, the client-side application should behave
+  # as if it's in production.
+  config.ember.variant = :production
 end
