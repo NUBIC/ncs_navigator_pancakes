@@ -20,5 +20,12 @@ end
 group :test, :development do
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails'
-  gem 'therubyracer', :require => false
+
+  platform :ruby do
+    gem 'therubyracer', :require => false
+  end
+
+  platform :jruby do
+    gem 'therubyrhino', :require => false
+  end
 end
