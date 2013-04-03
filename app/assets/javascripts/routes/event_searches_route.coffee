@@ -10,7 +10,6 @@ Pancakes.EventSearchesRoute = Ember.Route.extend
   setupController: (controller) ->
     @_super controller
 
-    @controllerFor('eventTypes').set 'content',
-      Pancakes.localStore.findAll(Pancakes.EventType)
+    @controllerFor('eventTypes').set 'content', Pancakes.EventType.find()
 
 # vim:ts=2:sw=2:et:tw=78
