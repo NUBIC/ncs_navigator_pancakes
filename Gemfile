@@ -20,4 +20,5 @@ end
 group :test, :development do
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails'
+  gem 'therubyracer', :require => false
 end
