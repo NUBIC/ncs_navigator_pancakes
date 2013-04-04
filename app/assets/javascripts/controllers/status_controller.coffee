@@ -21,10 +21,4 @@ Pancakes.StatusController = Ember.ArrayController.extend
   select: (location) ->
     @get('selection').addObject location
 
-  onDefault: (->
-    if @get('selectByDefault') && @get('command')
-      @get('available').forEach (l) =>
-        @select l
-  ).observes('available.@each', 'selectByDefault', 'command')
-
 # vim:ts=2:sw=2:et:tw=78
