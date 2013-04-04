@@ -16,7 +16,11 @@ Pancakes.StudyLocation.FIXTURES = [
 Pancakes.EventSearch.FIXTURES = [
   {
     id: '1',
-    eventTypes: '1,2,3',
+    eventTypes: [
+      '1394',
+      '1395',
+      '1396'
+    ]
     scheduledStartDate: '01/23/4567',
     scheduledEndDate: '04/10/4568',
     dataCollectors: 'Me,You,Anyone',
@@ -26,7 +30,11 @@ Pancakes.EventSearch.FIXTURES = [
   },
   {
     id: '2',
-    eventTypes: '6,7,8',
+    eventTypes: [
+      '4977',
+      '4976',
+      '4975'
+    ]
     scheduledStartDate: '11/11/1111',
     scheduledEndDate: '10/10/1222',
     dataCollectors: 'Nobody at all',
