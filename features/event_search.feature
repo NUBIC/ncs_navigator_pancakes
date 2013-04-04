@@ -6,6 +6,20 @@ Feature: Event search
   Scenario: New searches default to all study locations
     When I start an event search
 
-    Then all study locations are selected
+    Then my search involves the study locations
+      | name   | will search |
+      | Baz    | yes         |
+      | Foobar | yes         |
+      | Qux    | yes         |
+
+  Scenario: New searches have adjustable study location scope
+    When I start an event search
+    And I uncheck "Foobar"
+
+    Then my search involves the study locations
+      | name   | will search |
+      | Baz    | yes         |
+      | Foobar | no          |
+      | Qux    | yes         |
 
 # vim:ts=2:sw=2:et:tw=78
