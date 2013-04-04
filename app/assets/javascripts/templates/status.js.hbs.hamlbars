@@ -1,9 +1,9 @@
 %ul
-  = hb 'each location in controller' do
+  = hb 'each location in controller.arrangedContent' do
     %li
       %label{:bind => { :title => 'url' }}
         = hb 'if controller.editable' do
-          = hb 'view Ember.Checkbox checkedBinding="location.active"'
+          = hb 'view Pancakes.StudyLocationSelector locationBinding="location" selectionBinding="controller.selection"'
         = hb 'location.name'
     = hb 'else'
     Loading

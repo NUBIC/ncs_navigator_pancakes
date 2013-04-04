@@ -1,14 +1,24 @@
+# Displays study locations.  When a command (e.g. event search) is being
+# prepared, also mediates the selection of study locations for that command.
 Pancakes.StatusController = Ember.ArrayController.extend
-  command: null
-
+  available: []
   selectionBinding: 'command.studyLocations'
+  sortAscending: true
+  sortProperties: ['name']
 
-  setActiveBit: (->
+  content: (->
+    union = Ember.A []
     selection = @get 'selection'
-    content = @get 'content'
+    available = @get 'available'
 
-    content.forEach (location) ->
-      location.set 'active', selection?.contains(location)
-  ).observes('content.@each', 'selection.@each')
+    union.addObjects(selection) if selection?
+    union.addObjects(available)
+  ).property('available.@each', 'selection.@each')
+
+  deselect: (location) ->
+    @get('selection').removeObject location
+
+  select: (location) ->
+    @get('selection').addObject location
 
 # vim:ts=2:sw=2:et:tw=78
