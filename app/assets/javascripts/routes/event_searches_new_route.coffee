@@ -6,6 +6,7 @@ Pancakes.EventSearchesNewRoute = Ember.Route.extend
 
     statusController.setProperties
       editable: true
+      selectByDefault: true
       command: controller.get 'content'
 
 # vim:ts=2:sw=2:et:tw=78
