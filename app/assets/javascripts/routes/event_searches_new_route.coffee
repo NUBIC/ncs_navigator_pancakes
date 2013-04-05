@@ -1,10 +1,8 @@
 Pancakes.EventSearchesNewRoute = Ember.Route.extend
   setupController: (controller) ->
-    statusController = @controllerFor 'status'
-
     controller.set 'content', Pancakes.EventSearch.createRecord()
 
-    statusController.setProperties
+    @controllerFor('studyLocations').setProperties
       editable: true
       command: controller.get 'content'
 

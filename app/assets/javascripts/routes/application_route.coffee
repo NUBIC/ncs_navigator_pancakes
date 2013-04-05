@@ -2,15 +2,15 @@ Pancakes.ApplicationRoute = Ember.Route.extend
   renderTemplate: (controller, model) ->
     @_super(controller, model)
 
-    @render 'status',
+    @render 'study_locations',
       into: 'application',
-      outlet: 'status',
-      controller: 'status'
+      outlet: 'studyLocations',
+      controller: 'studyLocations'
 
   setupController: (controller) ->
     @_super(controller)
 
-    @controllerFor('status').setProperties
+    @controllerFor('studyLocations').setProperties
       editable: false
       available: Pancakes.StudyLocation.find()
 

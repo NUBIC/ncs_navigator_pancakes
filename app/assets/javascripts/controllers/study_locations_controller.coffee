@@ -1,6 +1,6 @@
 # Displays study locations.  When a command (e.g. event search) is being
 # prepared, also mediates the selection of study locations for that command.
-Pancakes.StatusController = Ember.ArrayController.extend
+Pancakes.StudyLocationsController = Ember.ArrayController.extend
   available: []
   selectionBinding: 'command.studyLocations'
   sortAscending: true
