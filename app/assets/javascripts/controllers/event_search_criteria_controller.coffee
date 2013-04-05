@@ -10,7 +10,7 @@ Pancakes.EventSearchCriteriaController = Ember.ObjectController.extend
 
   # Now we can bind.
   eventTypeCriterionBinding: 'controllers.eventTypes.criterion'
-  eventTypeCandidatesBinding: 'controllers.eventTypes.candidates'
+  eventTypeCandidatesBinding: Ember.Binding.oneWay 'controllers.eventTypes.candidates'
 
   search: ->
     @get('content').search()
