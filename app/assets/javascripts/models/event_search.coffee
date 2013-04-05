@@ -2,7 +2,7 @@ A = DS.attr
 HM = DS.hasMany
 
 Pancakes.EventSearch = DS.Model.extend
-  eventTypes: A 'string'
+  eventTypes: HM 'Pancakes.EventType'
   scheduledStartDate: A 'string'
   scheduledEndDate: A 'string'
   dataCollectors: A 'string'
