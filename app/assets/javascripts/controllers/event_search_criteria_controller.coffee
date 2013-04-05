@@ -15,4 +15,16 @@ Pancakes.EventSearchCriteriaController = Ember.ObjectController.extend
   search: ->
     @get('content').search()
 
+  canAddSelection: (content, item) ->
+    true
+
+  canRemoveSelection: (content, item) ->
+    true
+
+  addSelection: (content, item) ->
+    content.addObject item
+
+  removeSelection: (content, item) ->
+    content.removeObject item
+
 # vim:ts=2:sw=2:et:tw=78

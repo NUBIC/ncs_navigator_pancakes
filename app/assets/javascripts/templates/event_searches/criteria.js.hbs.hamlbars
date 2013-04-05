@@ -3,7 +3,7 @@
     .label
       Event types
     .input
-      = hb 'view Pancakes.MultiSelect placeholder="All event types" valueBinding="eventTypes" criterionBinding="controller.eventTypeCriterion" candidatesBinding="controller.eventTypeCandidates"'
+      = hb 'view Pancakes.Tagger selectionBinding="eventTypes" criterionBinding="controller.eventTypeCriterion" candidatesBinding="controller.eventTypeCandidates"'
 .scheduled-date.start
   %label
     .label
@@ -21,7 +21,7 @@
     .label
       Done by
     .input
-      = hb 'view Pancakes.MultiSelect placeholder="Anybody" valueBinding="dataCollectors"'
+      = hb 'view Pancakes.Tagger'
 .go
   %button{:_action => 'search'}
     Search
