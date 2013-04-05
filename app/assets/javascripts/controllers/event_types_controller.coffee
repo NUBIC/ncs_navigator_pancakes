@@ -1,9 +1,12 @@
 Pancakes.EventTypesController = Ember.ArrayController.extend
+  sortProperties: ['display_text']
+  sortAscending: true
+
   candidates: (->
     term = @get('criterion')
     r = new RegExp(term, 'i')
 
-    @get('content').filter (et) ->
+    @get('arrangedContent').filter (et) ->
       r.test et.get('display_text')
   ).property('content.@each', 'criterion')
 
