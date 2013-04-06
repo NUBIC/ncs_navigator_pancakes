@@ -49,16 +49,13 @@ Entry = Ember.TextField.extend
           @set 'wantsCandidates', false
           e.preventDefault()
 
-  resetSelectedCandidateIndex: (->
-    @set('selectedCandidateIndex', 0) if !@get('wantsCandidates')
-  ).observes('wantsCandidates')
-
 # ----------------------------------------------------------------------------
 
 CandidateList = Ember.CollectionView.extend
   tagName: 'ul'
   classNames: ['ui-widget-content']
   classNameBindings: ['isVisible']
+  currentIndex: 0
 
   currentItem: (->
     @get('content')?.objectAt @get('currentIndex')
@@ -95,7 +92,6 @@ Pancakes.Tagger = Ember.ContainerView.extend
 
   candidateList: CandidateList.extend
     contentBinding: 'parentView.candidates'
-    currentIndexBinding: 'parentView.entry.selectedCandidateIndex'
     isVisibleBinding: 'parentView.entry.wantsCandidates'
 
     reposition: (->
@@ -104,6 +100,10 @@ Pancakes.Tagger = Ember.ContainerView.extend
         my: 'left top'
         at: 'left bottom'
         collision: 'flip flip'
+    ).observes('isVisible')
+
+    resetCurrentIndex: (->
+      @set('currentIndex', 0) if !@get('isVisible')
     ).observes('isVisible')
 
   willAddSelection: ->
