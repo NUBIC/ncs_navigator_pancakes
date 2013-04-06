@@ -1,0 +1,38 @@
+@import "base";
+@import "motifs";
+
+.tagger {
+  @include input-field;
+  
+  overflow: hidden;
+
+  .tag-entry {
+    border: 0;
+    float: left;
+    outline: 0;
+  }
+
+  .remove-tag {
+    cursor: pointer;
+  }
+  
+  .selected-tags {
+    display: block;
+  }
+
+  .selected-tag {
+    background-color: $tag-background-color;
+    color: $tag-color;
+    float: left;
+    margin-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+
+    padding: {
+      left: $beat-width;
+      right: $beat-width;
+    }
+  }
+}
+
+// vim:ts=2:sw=2:et:tw=78

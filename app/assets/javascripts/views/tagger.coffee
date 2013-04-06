@@ -3,9 +3,10 @@
 
 SelectedTags = Ember.CollectionView.extend
   tagName: 'ul'
-  classNames: ['ui-widget-content']
+  classNames: ['ui-widget-content', 'selected-tags']
 
   itemViewClass: Ember.View.extend
+    classNames: ['selected-tag']
     template: Ember.Handlebars.compile '''
       {{view.content.label}}
       <span class="remove-tag">&#x232b;</span>
@@ -18,7 +19,7 @@ SelectedTags = Ember.CollectionView.extend
 # ----------------------------------------------------------------------------
 
 Entry = Ember.TextField.extend
-  classNames: ['ui-widget']
+  classNames: ['ui-widget', 'tag-entry']
   wantsCandidates: false
 
   hasText: (->
@@ -53,7 +54,7 @@ Entry = Ember.TextField.extend
 
 CandidateList = Ember.CollectionView.extend
   tagName: 'ul'
-  classNames: ['ui-widget-content']
+  classNames: ['ui-widget-content', 'ui-autocomplete', 'ui-menu']
   classNameBindings: ['isVisible']
   currentIndex: 0
 
@@ -62,11 +63,12 @@ CandidateList = Ember.CollectionView.extend
   ).property('content.@each', 'currentIndex')
 
   itemViewClass: Ember.View.extend
+    classNames: ['ui-menu-item']
     classNameBindings: ['isSelected']
     template: Ember.Handlebars.compile '{{view.content.label}}'
 
     isSelected: (->
-      @get('content') == @get('parentView.currentItem')
+      'ui-state-focus' if @get('content') == @get('parentView.currentItem')
     ).property('parentView.currentItem')
 
   cycleIndex: (->
@@ -81,6 +83,7 @@ CandidateList = Ember.CollectionView.extend
 # ----------------------------------------------------------------------------
 
 Pancakes.Tagger = Ember.ContainerView.extend
+  classNames: ['ui-widget', 'tagger']
   childViews: ['selections', 'entry', 'candidateList']
 
   selections: SelectedTags.extend
