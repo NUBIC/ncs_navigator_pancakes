@@ -27,28 +27,29 @@ Entry = Ember.TextField.extend
   ).property('value')
 
   keyDown: (e) ->
-    @set 'wantsCandidates', true
     pv = @get 'parentView'
 
     switch e.keyCode
       when $.ui.keyCode.TAB, $.ui.keyCode.ENTER
         @set 'wantsCandidates', false
+        pv.willAddSelection()
 
         if @get 'hasText'
-          pv.willAddSelection()
           @set 'value', ''
           e.preventDefault()
       when $.ui.keyCode.UP
-        pv.selectPreviousCandidate()
+        pv.selectPreviousCandidate() if @get 'wantsCandidates'
         @set 'wantsCandidates', true
       when $.ui.keyCode.DOWN
-        pv.selectNextCandidate()
+        pv.selectNextCandidate() if @get 'wantsCandidates'
         @set 'wantsCandidates', true
       when $.ui.keyCode.BACKSPACE
         if !@get 'hasText'
           pv.willRemoveLastSelection()
           @set 'wantsCandidates', false
           e.preventDefault()
+      else
+        @set 'wantsCandidates', true
 
 # ----------------------------------------------------------------------------
 
