@@ -65,7 +65,7 @@ CandidateList = Ember.CollectionView.extend
   itemViewClass: Ember.View.extend
     classNames: ['ui-menu-item']
     classNameBindings: ['isSelected']
-    template: Ember.Handlebars.compile '{{view.content.label}}'
+    template: Ember.Handlebars.compile '<a href="#">{{view.content.label}}</a>'
 
     isSelected: (->
       'ui-state-focus' if @get('content') == @get('parentView.currentItem')
