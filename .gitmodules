@@ -1,6 +1,3 @@
-[submodule "vendor/assets/javascripts/tag-it"]
-	path = vendor/assets/javascripts/tag-it
-	url = https://github.com/aehlke/tag-it.git
 [submodule "vendor/assets/javascripts/underscore"]
 	path = vendor/assets/javascripts/underscore
 	url = https://github.com/documentcloud/underscore.git
