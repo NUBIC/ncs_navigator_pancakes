@@ -1,4 +1,5 @@
 #= require jquery.ui.core
+#= require jquery.ui.position
 
 SelectedTags = Ember.CollectionView.extend
   tagName: 'ul'
@@ -96,6 +97,14 @@ Pancakes.Tagger = Ember.ContainerView.extend
     contentBinding: 'parentView.candidates'
     currentIndexBinding: 'parentView.entry.selectedCandidateIndex'
     isVisibleBinding: 'parentView.entry.wantsCandidates'
+
+    reposition: (->
+      @$().position
+        of: @get('parentView.entry').$()
+        my: 'left top'
+        at: 'left bottom'
+        collision: 'flip flip'
+    ).observes('isVisible')
 
   willAddSelection: ->
     item = @get 'candidateList.currentItem'
