@@ -81,6 +81,33 @@ CandidateList = Ember.CollectionView.extend
       @set 'currentIndex', 0
   ).observes('currentIndex', 'content.length')
 
+  ensureVisible: (->
+    @scrollToCurrent() if @hasScroll()
+  ).observes('currentIndex')
+
+  scrollToCurrent: ->
+    el = @$()
+    view = @get('childViews').objectAt(@get('currentIndex'))?.$()
+
+    return unless view
+
+    bt = parseFloat(el.css('borderTopWidth')) || 0
+    pt = parseFloat(el.css('paddingTop')) || 0
+    offset = view.offset().top - el.offset().top - bt - pt
+    scroll = el.scrollTop()
+    height = el.height()
+    viewHeight = view.height()
+
+    if offset < 0
+      el.scrollTop(scroll + offset)
+    else if (offset + viewHeight > height)
+      el.scrollTop(scroll + offset - height + viewHeight)
+
+  hasScroll: ->
+    el = @$()
+
+    el.outerHeight() < el.prop 'scrollHeight'
+
 # ----------------------------------------------------------------------------
 
 Pancakes.Tagger = Ember.ContainerView.extend
