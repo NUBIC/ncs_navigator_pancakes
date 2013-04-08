@@ -31,7 +31,6 @@ Entry = Ember.TextField.extend
 
     switch e.keyCode
       when $.ui.keyCode.TAB, $.ui.keyCode.ENTER
-        @set 'wantsCandidates', false
         pv.willAddSelection()
 
         if @get 'hasText'
@@ -46,7 +45,6 @@ Entry = Ember.TextField.extend
       when $.ui.keyCode.BACKSPACE
         if !@get 'hasText'
           pv.willRemoveLastSelection()
-          @set 'wantsCandidates', false
           e.preventDefault()
       else
         @set 'wantsCandidates', true
@@ -74,6 +72,12 @@ CandidateList = Ember.CollectionView.extend
 
     mouseEnter: ->
       @set 'parentView.currentIndex', @get('contentIndex')
+
+    click: ->
+      @get('parentView').willAddSelection()
+
+  willAddSelection: ->
+    @get('parentView').willAddSelection()
 
   cycleIndex: (->
     ci = @get 'currentIndex'
@@ -145,10 +149,12 @@ Pancakes.Tagger = Ember.ContainerView.extend
 
     if @get('controller').canAddSelection @get('selections.content'), item
       @get('controller').addSelection @get('selections.content'), item
+      @set 'entry.wantsCandidates', false
 
   willRemoveSelection: (item) ->
     if @get('controller').canRemoveSelection @get('selections.content'), item
       @get('controller').removeSelection @get('selections.content'), item
+      @set 'entry.wantsCandidates', false
 
   willRemoveLastSelection: ->
     @willRemoveSelection @get('selections.content.lastObject')
