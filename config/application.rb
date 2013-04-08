@@ -57,5 +57,8 @@ module Pancakes
 
     # Make custom fonts accessible to the asset pipeline
     config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
+
+    # Turn on threadsafe mode
+    config.threadsafe!
   end
 end
