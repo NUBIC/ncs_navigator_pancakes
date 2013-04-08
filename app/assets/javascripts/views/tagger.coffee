@@ -72,6 +72,9 @@ CandidateList = Ember.CollectionView.extend
       'ui-state-focus' if @get('content') == @get('parentView.currentItem')
     ).property('parentView.currentItem')
 
+    mouseEnter: ->
+      @set 'parentView.currentIndex', @get('contentIndex')
+
   cycleIndex: (->
     ci = @get 'currentIndex'
 
