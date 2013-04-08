@@ -35,4 +35,7 @@ Pancakes::Application.configure do
   # When doing integration testing, the client-side application should behave
   # as if it's in production.
   config.ember.variant = :production
+
+  # Where we expect to find the NCS Navigator configuration
+  config.navigator_ini_path = File.expand_path('../test_navigator.ini', __FILE__)
 end

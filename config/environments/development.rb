@@ -30,4 +30,7 @@ Pancakes::Application.configure do
 
   # Use Ember.js in development mode
   config.ember.variant = :development
+
+  # Where we expect to find the NCS Navigator configuration
+  config.navigator_ini_path = File.expand_path('../development_navigator.ini', __FILE__)
 end
