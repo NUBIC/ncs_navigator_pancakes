@@ -254,6 +254,7 @@ DEPENDENCIES
   hana
   jquery-rails
   jquery-ui-rails
+  ncs_mdes
   ncs_navigator_configuration!
   rails (= 3.2.13)
   rspec-rails
