@@ -5,12 +5,10 @@ module Pancakes::NcsNavigatorConfiguration
   Lock = Mutex.new
 
   def mdes_version=(v)
-    puts "Setting mdes_version to #{v}"
     Lock.synchronize { @mdes_version = v }
   end
 
   def mdes_version
-    puts "MDES version: #{@mdes_version}"
     @mdes_version
   end
 
