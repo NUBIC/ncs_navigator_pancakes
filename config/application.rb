@@ -4,6 +4,8 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "sprockets/railtie"
 
+require 'ncs_navigator/configuration'
+
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
@@ -60,5 +62,12 @@ module Pancakes
 
     # Turn on threadsafe mode
     config.threadsafe!
+
+    # Set MDES version and other NCS Navigator bits
+    config.before_initialize do
+      ncs_config = NcsNavigator::Configuration.new(config.navigator_ini_path)
+
+      config.mdes_version = ncs_config.pancakes_mdes_version
+    end
   end
 end
