@@ -1,9 +1,9 @@
-adapter = if window.location.search.lastIndexOf('fixture') != -1
-            DS.FixtureAdapter.extend
-              latency: 250
-          else
+adapter = if window.location.search.lastIndexOf('real') != -1
             DS.RESTAdapter.extend
               namespace: 'api/v1'
+          else
+            DS.FixtureAdapter.extend
+              latency: 250
 
 Pancakes.Adapter = adapter
 
