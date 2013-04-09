@@ -1,5 +1,4 @@
 #= require adapter
-#= require local_adapter
 
 Pancakes.Store = DS.Store.extend
   revision: 11
