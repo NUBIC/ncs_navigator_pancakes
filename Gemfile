@@ -22,8 +22,9 @@ end
 
 group :test, :development do
   gem 'cucumber-rails', :require => false
-  gem 'rspec-rails'
   gem 'hana'
+  gem 'rack-test'
+  gem 'rspec-rails'
 
   platform :ruby do
     gem 'therubyracer', :require => false

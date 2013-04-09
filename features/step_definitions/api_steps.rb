@@ -1,3 +1,9 @@
+# BIG IMPORTANT NOTE: These are NOT using Capybara methods.  #get and
+# friends are supplied by rack-test.
+#
+# You MUST NOT introduce Capybaraisms (e.g. #visit, #have_content) into
+# these steps.  They won't work and you'll end up very confused.
+
 require 'hana'
 
 Given(/^Pancakes uses MDES version ([\d.]+)$/) do |version|
