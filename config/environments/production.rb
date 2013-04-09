@@ -61,6 +61,10 @@ Pancakes::Application.configure do
   # Use Ember.js in production mode
   config.ember.variant = :production
 
+  # Where we expect to find the NCS Navigator configuration
+  config.navigator_ini_path = ENV['NCS_NAVIGATOR_INI_PATH'] ||
+    File.expand_path('../production_navigator.ini', __FILE__)
+
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
