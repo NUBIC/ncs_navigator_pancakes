@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'ncs_mdes'
 gem 'ncs_navigator_configuration', :git => 'https://github.com/NUBIC/ncs_navigator_configuration.git'
+gem 'puma'
 gem 'rails', '3.2.13'
 gem 'sidekiq'
 
