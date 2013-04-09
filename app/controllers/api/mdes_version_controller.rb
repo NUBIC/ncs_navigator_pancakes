@@ -2,7 +2,8 @@ class Api::MdesVersionController < ApiController
   before_filter :require_development
 
   def set
-    Pancakes::Application.mdes_version = params[:mdes_version]
+    Pancakes::Application.config.mdes_version = params[:mdes_version]
+    Stores.reload
 
     respond_with ok
   end

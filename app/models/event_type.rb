@@ -6,7 +6,7 @@ class EventType
   attr_reader :errors
 
   def self.all
-    EventTypeStore.new.tap(&:load).all
+    Stores.event_types.all
   end
 
   def initialize(code = nil)

@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'aker-rails'
+gem 'celluloid'
 gem 'ember-rails'
 gem 'haml'
 gem 'jquery-rails'

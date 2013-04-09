@@ -245,6 +245,7 @@ PLATFORMS
 
 DEPENDENCIES
   aker-rails
+  celluloid
   coffee-rails (~> 3.2.1)
   compass-rails
   cucumber-rails
