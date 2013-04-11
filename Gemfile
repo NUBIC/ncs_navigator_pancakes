@@ -24,6 +24,7 @@ end
 group :test, :development do
   gem 'castanet-testing', :git => 'https://github.com/NUBIC/castanet-testing.git'
   gem 'cucumber-rails', :require => false
+  gem 'foreman', '0.60.2'
   gem 'hana'
   gem 'rack-test'
   gem 'rspec-rails'
