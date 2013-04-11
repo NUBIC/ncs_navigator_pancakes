@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/NUBIC/castanet-testing.git
+  revision: 0852c35fbc136bc20b0fba395773134129d4eccc
+  specs:
+    castanet-testing (0.0.1)
+      json
+      rack
+      rake (~> 10.0)
+
+GIT
   remote: https://github.com/NUBIC/ncs_navigator_configuration.git
   revision: 57ed105e42730aeb987c42287040b4ad9e86b021
   specs:
@@ -249,6 +258,7 @@ PLATFORMS
 
 DEPENDENCIES
   aker-rails
+  castanet-testing!
   celluloid
   coffee-rails (~> 3.2.1)
   compass-rails

@@ -22,6 +22,7 @@ group :assets do
 end
 
 group :test, :development do
+  gem 'castanet-testing', :git => 'https://github.com/NUBIC/castanet-testing.git'
   gem 'cucumber-rails', :require => false
   gem 'hana'
   gem 'rack-test'
