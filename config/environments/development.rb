@@ -34,6 +34,11 @@ Pancakes::Application.configure do
   # Where we expect to find the NCS Navigator configuration
   config.navigator_ini_path = File.expand_path('../development_navigator.ini', __FILE__)
 
+  # Get SSL verification errors out of our way
+  config.before_initialize do
+    OpenSSL::SSL::SSLContext::DEFAULT_PARAMS[:verify_mode] = OpenSSL::SSL::VERIFY_NONE
+  end
+
   config.aker do
     authorities :cas, Aker::Authorities::Static.from_file(File.expand_path('../../dev_logins.yml', __FILE__))
   end
