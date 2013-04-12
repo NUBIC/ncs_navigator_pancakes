@@ -57,5 +57,19 @@ module Pancakes
 
       config.mdes_version = ncs_config.pancakes_mdes_version
     end
+
+    # Use CAS for interactive authentication; permit HTTP Basic auth for
+    # testing API endpoints.
+    config.aker do
+      api_mode :http_basic
+      ui_mode :cas
+      portal :NCSNavigator
+
+      cas_parameters({
+        base_url: ENV['CAS_BASE_URL'],
+        proxy_callback_url: ENV['CAS_PROXY_CALLBACK_URL'],
+        proxy_retrieval_url: ENV['CAS_PROXY_RETRIEVAL_URL']
+      })
+    end
   end
 end

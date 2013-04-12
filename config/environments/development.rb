@@ -33,4 +33,8 @@ Pancakes::Application.configure do
 
   # Where we expect to find the NCS Navigator configuration
   config.navigator_ini_path = File.expand_path('../development_navigator.ini', __FILE__)
+
+  config.aker do
+    authorities :cas, Aker::Authorities::Static.from_file(File.expand_path('../../dev_logins.yml', __FILE__))
+  end
 end

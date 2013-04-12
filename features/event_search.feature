@@ -3,6 +3,9 @@ Feature: Event search
   Study coordinators
   Need to be able to view events scheduled across many Cases instances.
 
+  Background:
+    Given I log in as "user":"user"
+
   Scenario: New searches default to all study locations
     When I start an event search
 

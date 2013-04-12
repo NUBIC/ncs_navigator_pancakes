@@ -5,7 +5,8 @@ Feature: Event types API
   Needs to know what event types exists.
 
   Background:
-    Given Pancakes uses MDES version 3.2
+    Given I use the credentials "user":"user"
+    And Pancakes uses MDES version 3.2
 
   Scenario: GET /api/v1/event_types.json returns all known event types
     When I GET /api/v1/event_types.json

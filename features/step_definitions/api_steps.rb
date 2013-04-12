@@ -14,6 +14,10 @@ Given(/^Pancakes uses MDES version ([\d.]+)$/) do |version|
   }
 end
 
+Given(/^I use the credentials "(.*?)":"(.*?)"$/) do |username, password|
+  basic_authorize username, password
+end
+
 When(/^I GET ([^\s]+)$/) do |path|
   get path
 end
