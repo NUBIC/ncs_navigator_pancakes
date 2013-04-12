@@ -13,6 +13,11 @@ if [ -z $CI_RUBY ]; then
     exit 1
 fi
 
+if [ -z $PORT_BASE ]; then
+    echo "PORT_BASE must be set"
+    exit 1
+fi
+
 # Feel free to bump this as new versions of bundler that work with this CI
 # script are released.
 export BUNDLER_VERSION=1.3.2
@@ -48,5 +53,9 @@ fi
 set -e
 
 bundle _${BUNDLER_VERSION}_ install
-
+bundle exec rake castanet:testing:jasig:download
+bundle exec foreman start -p $PORT_BASE > /dev/null 2>&1 &
 bundle _${BUNDLER_VERSION}_ exec rake --trace
+RETVAL=$?
+jobs -p | xargs kill -TERM
+exit $RETVAL

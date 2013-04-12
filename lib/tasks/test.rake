@@ -12,14 +12,16 @@ Castanet::Testing::JasigServerTasks.new(:scratch_dir => "#{scratch_dir}/server",
 namespace :test do
   desc 'Set up process environment for tests'
   task :env do
+    timeout = 120
+
     $stderr.puts <<-END
-Looking for test infrastructure.  Will give up after 30 seconds.
+Looking for test infrastructure.  Will give up after #{timeout} seconds.
 
 If you haven't done so already, run foreman start in a separate shell or as a
 background process.
     END
 
-    Timeout::timeout(30) do
+    Timeout::timeout(timeout) do
       Rake::Task['test:env:cas'].invoke
     end
   end
