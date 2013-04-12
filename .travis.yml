@@ -3,8 +3,8 @@ env:
   DISPLAY=':99.0'
 before_script:
   - "sh -e /etc/init.d/xvfb start"
-  - "bundle exec foreman start &"
-  - "eval `bundle exec rake test:dependencies:cas`"
+  - "bundle exec rake castanet:testing:jasig:download"
+  - "bundle exec foreman start > /tmp/foreman.log 2>&1 &"
 rvm:
   - rbx-19mode
   - jruby
