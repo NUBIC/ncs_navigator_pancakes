@@ -28,6 +28,7 @@ group :test, :development do
   gem 'hana'
   gem 'rack-test'
   gem 'rspec-rails'
+  gem 'term-ansicolor'
 
   platform :ruby do
     gem 'therubyracer', :require => false

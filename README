@@ -5,14 +5,13 @@ changes) across many NCS Navigator Cases[1] instances.  In the NUBIC[2]
 environment, it's used to aggregate data across an organizationally related
 group of Cases instances.  (Pan-Cases: pancakes.)
 
-2. Running it
+2. Running tests
 
 The short version:
 
   $ bundle install
-  $ vi /etc/nubic/db/local_postgresql.yml  # and verify it's all good
-  $ bundle exec rake db:create db:migrate  # db, etc
-  $ bundle exec rake                       # tests
+  $ foreman start   # starts up development infrastructure
+  $ rake            # runs specs and scenarios
 
 3. License and authorship
 

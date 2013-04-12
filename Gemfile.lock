@@ -232,6 +232,7 @@ GEM
     susy (1.0.8)
       compass (>= 0.12.2)
       sass (>= 3.2.0)
+    term-ansicolor (1.0.7)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
@@ -281,6 +282,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   sidekiq
   susy
+  term-ansicolor
   therubyracer
   therubyrhino
   uglifier (>= 1.0.3)
