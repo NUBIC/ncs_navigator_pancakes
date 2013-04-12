@@ -2,7 +2,7 @@
 Feature: Event types API
   To permit searching by event types
   The frontend application
-  Needs to know what event types exists.
+  Needs to know what event types exist.
 
   Background:
     Given I use the credentials "user":"user"
