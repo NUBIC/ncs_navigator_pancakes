@@ -6,8 +6,9 @@ scratch_dir = Rails.root.join('tmp', 'castanet-testing')
 
 Castanet::Testing::CallbackServerTasks.new(:scratch_dir => "#{scratch_dir}/callback")
 Castanet::Testing::JasigServerTasks.new(:scratch_dir => "#{scratch_dir}/server",
-                                        :jasig_url => 'http://downloads.jasig.org/cas/cas-server-3.4.12-release.tar.gz',
-                                        :jasig_checksum => 'd67466b0d3441b3a5817d1a918add6a0f598a3367ca595c33e6efcef5b170ab6')
+                                        :jasig_url => 'https://download.nubic.northwestern.edu/ncs_navigator_pancakes/build_deps/cas-server-3.4.12-release.tar.gz',
+                                        :jasig_checksum => 'd67466b0d3441b3a5817d1a918add6a0f598a3367ca595c33e6efcef5b170ab6',
+                                        :jetty_url => 'https://download.nubic.northwestern.edu/ncs_navigator_pancakes/build_deps/jetty-distribution-8.1.7.v20120910.tar.gz')
 
 namespace :test do
   desc 'Set up process environment for tests'
