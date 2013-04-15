@@ -45,6 +45,6 @@ Pancakes::Application.configure do
   end
 
   config.aker do
-    authorities :cas, Aker::Authorities::Static.from_file(File.expand_path('../../dev_logins.yml', __FILE__))
+    authorities :cas, Aker::Authorities::Static.from_file(File.expand_path('../../../devel/logins.yml', __FILE__))
   end
 end
