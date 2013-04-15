@@ -58,18 +58,30 @@ module Pancakes
       config.mdes_version = ncs_config.pancakes_mdes_version
     end
 
+    # Pancakes relies on many other services.
+    #
+    # Because we require connections to all of these services, we group them
+    # into an object that we can easily scan.  Any blank value raises a fatal
+    # error.
+    config.services = {}
+
+    # Load up the Ops URL.
+    config.services[:ops] = ENV['OPS_URL']
+
+    # Load up the CAS URLs.
+    config.services[:cas] = {
+      base_url: ENV['CAS_BASE_URL'],
+      proxy_callback_url: ENV['CAS_PROXY_CALLBACK_URL'],
+      proxy_retrieval_url: ENV['CAS_PROXY_RETRIEVAL_URL']
+    }
+
     # Use CAS for interactive authentication; permit HTTP Basic auth for
     # testing API endpoints.
     config.aker do
       api_mode :http_basic
       ui_mode :cas
       portal :NCSNavigator
-
-      cas_parameters({
-        base_url: ENV['CAS_BASE_URL'],
-        proxy_callback_url: ENV['CAS_PROXY_CALLBACK_URL'],
-        proxy_retrieval_url: ENV['CAS_PROXY_RETRIEVAL_URL']
-      })
+      cas_parameters Pancakes::Application.config.services[:cas]
     end
   end
 end
