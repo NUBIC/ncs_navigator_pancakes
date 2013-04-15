@@ -28,6 +28,7 @@ group :test, :development do
   gem 'hana'
   gem 'rack-test'
   gem 'rspec-rails'
+  gem 'sinatra'
   gem 'term-ansicolor'
 
   platform :ruby do

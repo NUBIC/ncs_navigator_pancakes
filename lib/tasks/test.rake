@@ -2,7 +2,7 @@ require 'castanet/testing'
 require 'term/ansicolor'
 require 'timeout'
 
-scratch_dir = Rails.root.join('tmp', 'castanet-testing')
+scratch_dir = Rails.root.join('tmp', 'devel', 'servers')
 
 Castanet::Testing::CallbackServerTasks.new(:scratch_dir => "#{scratch_dir}/callback")
 Castanet::Testing::JasigServerTasks.new(:scratch_dir => "#{scratch_dir}/server",
@@ -24,6 +24,7 @@ background process.
 
     Timeout::timeout(timeout) do
       Rake::Task['test:env:cas'].invoke
+      Rake::Task['test:env:ops'].invoke
     end
   end
 
@@ -51,6 +52,23 @@ background process.
       end
     end
 
+    task :ops do
+      loop do
+        ops_urls = Dir["#{scratch_dir}/ops_mock/**/.urls"]
+
+        w ||= warn_if_multiple 'Ops', ops_urls, scratch_dir
+
+        if !ops_urls.empty?
+          url = JSON.parse(File.read(ops_urls.first))['url']
+
+          set_env('OPS_URL', url)
+          break
+        else
+          sleep 1
+        end
+      end
+    end
+
     def warn_if_multiple(entity, values, scratch_dir)
       if values.length > 1
         $stderr.puts(Term::ANSIColor::yellow {
@@ -65,9 +83,7 @@ The URLs in #{values.first} will be used.
 This could indicate that you're starting up more than one #{entity}, or
 that a cleanup process from a prior test failed.
 
-You can use the castanet:testing:{jasig, callback}:cleanall tasks to
-eliminate old data.  Alternatively, you can delete
-#{scratch_dir}.
+To fix this, delete #{scratch_dir}.
 ------------------------------------------------------------------------------
           }
         })
@@ -79,6 +95,22 @@ eliminate old data.  Alternatively, you can delete
     def set_env(var, value)
       puts "export #{var}='#{value}'"
       ENV[var] = value
+    end
+  end
+
+  namespace :ops do
+    task :start => 'test:env:cas' do
+      cd File.expand_path('../../../devel/servers', __FILE__) do
+        abort "PORT must be set" unless ENV['PORT']
+        port = ENV['PORT']
+
+        state_dir = "#{scratch_dir}/ops_mock/ops_mock.#{$$}"
+        mkdir_p state_dir
+        ENV['STATE_DIR'] = state_dir
+        File.open("#{state_dir}/.urls", 'w') { |f| f.write(%Q{{"url":"http://localhost:#{port}"}}) }
+
+        exec("bundle exec rackup -p #{port} ops_mock.ru")
+      end
     end
   end
 end
