@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/NUBIC/castanet-testing.git
-  revision: c33b864400b657e72187119c76d01ea73f0282e1
+  revision: 2144bb04537dc6ae5272ee15aa88139c3cc26704
   specs:
     castanet-testing (0.0.1)
       json
