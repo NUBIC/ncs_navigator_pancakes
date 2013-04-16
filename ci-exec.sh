@@ -67,7 +67,7 @@ set +e
 
 bundle _${BUNDLER_VERSION}_ exec rake --trace
 RETVAL=$?
-kill -INT $MASTER_PID && wait $MASTER_PID
+kill -TERM $MASTER_PID && wait $MASTER_PID
 exit $RETVAL
 
 # vim:ts=4:sw=4:et:tw=78
