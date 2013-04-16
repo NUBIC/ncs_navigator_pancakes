@@ -25,13 +25,14 @@ $USERS = <<-END
 ]
 END
 
-class OpsMock < Sinatra::Base
-  get '/users.json' do
-    content_type 'application/json'
-    $USERS
-  end
-end
+abort 'PORT must be set' unless ENV['PORT']
+set :port, ENV['PORT']
 
-run OpsMock
+trap('TERM') { exit! 0 }
+
+get '/users.json' do
+  content_type 'application/json'
+  $USERS
+end
 
 # vim:ts=2:sw=2:et:tw=78:ft=ruby

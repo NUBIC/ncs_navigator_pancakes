@@ -1,10 +1,12 @@
 require 'castanet/testing'
+require 'shellwords'
 require 'term/ansicolor'
 require 'timeout'
 
 require "#{Rails.root}/devel/foreman_engine"
 
 scratch_dir = Rails.root.join('tmp', 'devel', 'servers')
+server_dir = File.expand_path('../../../devel/servers', __FILE__)
 
 desc 'Start services for development and test environments'
 task :devenv do
@@ -91,12 +93,7 @@ the past.  To eliminate this warning, remove all urls.* files under
 
   namespace :ops do
     task :start => 'test:env' do
-      cd File.expand_path('../../../devel/servers', __FILE__) do
-        abort "PORT must be set" unless ENV['PORT']
-        port = ENV['PORT']
-
-        exec("bundle exec puma -p #{port} ops_mock.ru")
-      end
+      exec "cd #{Shellwords.shellescape(server_dir)} && bundle exec ruby ops_mock.rb"
     end
   end
 end
