@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash
 
 if [ -z $RAILS_ENV ]; then
     export RAILS_ENV='test'
@@ -15,6 +15,11 @@ fi
 
 if [ -z $PORT_BASE ]; then
     echo "PORT_BASE must be set"
+    exit 1
+fi
+
+if [ -z $WORKSPACE ]; then
+    echo "WORKSPACE must be set"
     exit 1
 fi
 
@@ -53,9 +58,16 @@ fi
 set -e
 
 bundle _${BUNDLER_VERSION}_ install
-bundle exec rake castanet:testing:jasig:download
-bundle exec foreman start -p $PORT_BASE > /dev/null 2>&1 &
+bundle _${BUNDLER_VERSION}_ exec rake devenv:clean
+bundle _${BUNDLER_VERSION}_ exec rake castanet:testing:jasig:download
+PORT=$PORT_BASE bundle _${BUNDLER_VERSION}_ exec rake devenv > $WORKSPACE/log/devenv.log 2>&1 &
+MASTER_PID=$!
+
+set +e
+
 bundle _${BUNDLER_VERSION}_ exec rake --trace
 RETVAL=$?
-jobs -p | xargs kill -TERM
+kill -INT $MASTER_PID && wait $MASTER_PID
 exit $RETVAL
+
+# vim:ts=4:sw=4:et:tw=78

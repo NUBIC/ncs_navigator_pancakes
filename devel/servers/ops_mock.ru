@@ -1,11 +1,5 @@
 require 'sinatra'
 
-abort "STATE_DIR must be set" unless ENV['STATE_DIR']
-
-at_exit do
-  FileUtils.rm_rf(ENV['STATE_DIR'])
-end
-
 $USERS = <<-END
 [
     {
