@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/NUBIC/ncs_navigator_authority.git
-  revision: b8d42dff0ffa5230871bc223bcb43da85ef02366
+  revision: 50165cc59389a609471bbaef854eda022f1cd7ce
   branch: configurable-sp-url
   specs:
     ncs_navigator_authority (1.1.2)
