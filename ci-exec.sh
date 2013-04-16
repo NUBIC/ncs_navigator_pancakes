@@ -60,7 +60,7 @@ set -e
 bundle _${BUNDLER_VERSION}_ install
 bundle _${BUNDLER_VERSION}_ exec rake devenv:clean
 bundle _${BUNDLER_VERSION}_ exec rake castanet:testing:jasig:download
-PORT=$PORT_BASE bundle _${BUNDLER_VERSION}_ exec rake devenv > $WORKSPACE/log/devenv.log 2>&1 &
+PORT=$PORT_BASE bundle _${BUNDLER_VERSION}_ exec rake devenv > "$WORKSPACE/log/devenv.log" 2>&1 &
 MASTER_PID=$!
 
 set +e
