@@ -18,7 +18,7 @@ if [ -z $PORT_BASE ]; then
     exit 1
 fi
 
-if [ -z $WORKSPACE ]; then
+if [ -z "$WORKSPACE" ]; then
     echo "WORKSPACE must be set"
     exit 1
 fi
