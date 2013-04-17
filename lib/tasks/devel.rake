@@ -5,7 +5,7 @@ require 'timeout'
 
 require "#{Rails.root}/devel/foreman_engine"
 
-scratch_dir = Rails.root.join('tmp', 'devel', 'servers')
+scratch_dir = Rails.root.join('tmp', 'devel', Rails.env, 'servers')
 server_dir = File.expand_path('../../../devel/servers', __FILE__)
 
 desc 'Start services for development and test environments'
