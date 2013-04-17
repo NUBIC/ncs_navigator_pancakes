@@ -31,7 +31,8 @@ Entry = Ember.TextField.extend
 
     switch e.keyCode
       when $.ui.keyCode.TAB, $.ui.keyCode.ENTER
-        pv.willAddSelection()
+        if @get('wantsCandidates')
+          pv.willAddSelection()
 
         if @get 'hasText'
           @set 'value', ''
