@@ -1,5 +1,5 @@
 Pancakes.EventSearchCriteriaController = Ember.ObjectController.extend
-  needs: 'eventTypes'
+  needs: ['dataCollectors', 'eventTypes']
 
   # eventType{Criterion, Candidates} are attributes of the controller that
   # will later be manipulated with bindings; those attributes should not be
@@ -7,10 +7,14 @@ Pancakes.EventSearchCriteriaController = Ember.ObjectController.extend
   # here.
   eventTypeCriterion: null
   eventTypeCandidates: []
+  dataCollectorCriterion: null
+  dataCollectorCandidates: []
 
   # Now we can bind.
   eventTypeCriterionBinding: 'controllers.eventTypes.criterion'
   eventTypeCandidatesBinding: Ember.Binding.oneWay 'controllers.eventTypes.candidates'
+  dataCollectorCriterionBinding: 'controllers.dataCollectors.criterion'
+  dataCollectorCandidatesBinding: Ember.Binding.oneWay 'controllers.dataCollectors.candidates'
 
   search: ->
     @get('content').search()

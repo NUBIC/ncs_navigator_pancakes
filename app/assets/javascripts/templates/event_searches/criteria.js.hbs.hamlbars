@@ -21,7 +21,7 @@
     .label
       Done by
     .input
-      = hb 'view Pancakes.Tagger'
+      = hb 'view Pancakes.Tagger selectionBinding="dataCollectors" criterionBinding="controller.dataCollectorCriterion" candidatesBinding="controller.dataCollectorCandidates"'
 .go
   %button{:_action => 'search'}
     Search
