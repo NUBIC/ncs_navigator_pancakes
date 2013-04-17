@@ -8,7 +8,7 @@ Feature: Data collectors API
     Given I use the credentials "user":"user"
 
   Scenario: GET /api/v1/data_collectors returns names and usernames
-    The data in this scenario comes from devel/servers/ops_mock.ru.
+    The data in this scenario comes from devel/servers/ops_mock.rb.
 
     When I GET /api/v1/data_collectors.json
 
