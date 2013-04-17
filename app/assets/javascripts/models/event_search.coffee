@@ -5,7 +5,7 @@ Pancakes.EventSearch = DS.Model.extend
   eventTypes: HM 'Pancakes.EventType'
   scheduledStartDate: A 'string'
   scheduledEndDate: A 'string'
-  dataCollectors: A 'string'
+  dataCollectors: HM 'Pancakes.DataCollector'
   studyLocations: HM 'Pancakes.StudyLocation'
 
   search: ->

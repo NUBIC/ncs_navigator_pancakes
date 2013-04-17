@@ -17,4 +17,5 @@
 //= require ember-data
 //= require modernizr-latest
 //= require pancakes
+//= require underscore/underscore
 //= require_tree .
