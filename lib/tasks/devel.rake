@@ -10,12 +10,17 @@ server_dir = File.expand_path('../../../devel/servers', __FILE__)
 
 desc 'Start services for development and test environments'
 task :devenv do
-  eng = ForemanEngine.new
-  eng.service_manifest_file = "#{scratch_dir}/urls.#$$.json"
+  options = YAML.load_file(Rails.root.join('.foreman')) || {}
+  eng = ForemanEngine.new({:formation => options['concurrency']}.merge(options))
+
+  eng.service_manifest_file = "#{scratch_dir}/services.#$$.json"
+  eng.study_locations_file = "#{scratch_dir}/study_locations.#$$.json"
   eng.load_procfile(Rails.root.join('Procfile'))
 
   mkdir_p File.dirname(eng.service_manifest_file)
+  mkdir_p File.dirname(eng.study_locations_file)
   File.open(eng.service_manifest_file, 'w') { |f| f.write(eng.service_manifest) }
+  File.open(eng.study_locations_file, 'w') { |f| f.write(eng.study_locations) }
 
   eng.start
 end
@@ -46,32 +51,32 @@ background process.
 
     Timeout::timeout(timeout) do
       loop do
-        url_files = Dir["#{scratch_dir}/urls.*.json"]
+        services_files = Dir["#{scratch_dir}/services.*.json"]
 
-        urls = url_files.first
+        services = services_files.first
 
-        if url_files.length > 1
+        if services_files.length > 1
           $stderr.puts(Term::ANSIColor.yellow {
             %Q{
-Multiple URL files were found:
+Multiple service configuration files were found:
 
-#{url_files.join("\n")}
+#{services_files.join("\n")}
 
-The URLs in #{urls} will be used.  This might contact nonexistent services,
-which in turn may cause test failures.
+The services in #{services} will be used.  This might contact nonexistent
+services, which in turn may cause test failures.
 
-This often indicates improper development environment shutdown occurred in
-the past.  To eliminate this warning, remove all urls.* files under
+This often indicates improper development environment shutdown occurred in the
+past.  To eliminate this warning, remove all services.* files under
 #{scratch_dir} or run rake devenv:clean.
             }
           })
         end
 
         begin
-          if urls
-            $stderr.puts "Reading service configuration from #{urls}"
+          if services
+            $stderr.puts "Reading service configuration from #{services}"
 
-            json = JSON.parse(File.read(urls))
+            json = JSON.parse(File.read(services))
             json.each do |k, v|
               puts "export #{k}='#{v}'"
               ENV[k] = v
@@ -84,7 +89,7 @@ the past.  To eliminate this warning, remove all urls.* files under
         rescue JSON::ParserError
           # If we get this, we might have won a race with rake devenv.  Oops.
           # Just try again.
-          puts "#{urls} contains invalid JSON, trying again"
+          puts "#{services} contains invalid JSON, trying again"
           sleep 1
         end
       end
@@ -94,6 +99,12 @@ the past.  To eliminate this warning, remove all urls.* files under
   namespace :ops do
     task :start => 'test:env' do
       exec "cd #{Shellwords.shellescape(server_dir)} && bundle exec ruby ops_mock.rb"
+    end
+  end
+
+  namespace :cases do
+    task :start => 'test:env' do
+      exec "cd #{Shellwords.shellescape(server_dir)} && bundle exec ruby cases_mock.rb"
     end
   end
 end

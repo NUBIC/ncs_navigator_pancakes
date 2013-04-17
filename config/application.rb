@@ -68,6 +68,9 @@ module Pancakes
     # Load up the Ops URL.
     config.services[:ops] = ENV['OPS_URL']
 
+    # Load up our study location manifest.
+    config.services[:study_locations_file] = ENV['STUDY_LOCATIONS_PATH']
+
     # Load up the CAS URLs.
     config.services[:cas] = {
       base_url: ENV['CAS_BASE_URL'],

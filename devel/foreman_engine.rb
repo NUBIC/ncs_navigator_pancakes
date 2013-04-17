@@ -7,6 +7,7 @@ class ForemanEngine < Foreman::Engine::CLI
   include FileUtils
 
   attr_accessor :service_manifest_file
+  attr_accessor :study_locations_file
 
   def service_manifest
     cas = process('cas')
@@ -17,7 +18,8 @@ class ForemanEngine < Foreman::Engine::CLI
       'CAS_BASE_URL' => "https://localhost:#{port_for(cas, 1)}/cas",
       'CAS_PROXY_CALLBACK_URL' => "https://localhost:#{port_for(callback, 1)}/receive_pgt",
       'CAS_PROXY_RETRIEVAL_URL' => "https://localhost:#{port_for(callback, 1)}/retrieve_pgt",
-      'OPS_URL' => "http://localhost:#{port_for(ops, 1)}"
+      'OPS_URL' => "http://localhost:#{port_for(ops, 1)}",
+      'STUDY_LOCATIONS_PATH' => study_locations_file
     }
 
     conf.to_json
@@ -27,5 +29,10 @@ class ForemanEngine < Foreman::Engine::CLI
     super
 
     rm_f service_manifest_file if service_manifest_file
+    rm_f study_locations_file if study_locations_file
+  end
+
+  def study_locations
+    {}.to_json
   end
 end
