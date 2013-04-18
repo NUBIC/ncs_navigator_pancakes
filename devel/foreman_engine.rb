@@ -33,6 +33,20 @@ class ForemanEngine < Foreman::Engine::CLI
   end
 
   def study_locations
-    {}.to_json
+    cases = process('cases')
+    ports = (1..3).map { |n| port_for(cases, n) }
+
+    { study_locations: [
+        { name: "Foo",
+          id: "http://localhost:#{ports[0]}"
+        },
+        { name: "Bar",
+          id: "http://localhost:#{ports[1]}"
+        },
+        { name: "Baz",
+          id: "http://localhost:#{ports[2]}"
+        }
+      ]
+    }.to_json
   end
 end
