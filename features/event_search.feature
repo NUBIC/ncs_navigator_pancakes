@@ -11,18 +11,18 @@ Feature: Event search
 
     Then my search involves the study locations
       | name   | will search |
+      | Bar    | yes         |
       | Baz    | yes         |
-      | Foobar | yes         |
-      | Qux    | yes         |
+      | Foo    | yes         |
 
   Scenario: New searches have adjustable study location scope
     When I start an event search
-    And I uncheck "Foobar"
+    And I uncheck "Baz"
 
     Then my search involves the study locations
       | name   | will search |
-      | Baz    | yes         |
-      | Foobar | no          |
-      | Qux    | yes         |
+      | Bar    | yes         |
+      | Baz    | no          |
+      | Foo    | yes         |
 
 # vim:ts=2:sw=2:et:tw=78
