@@ -17,5 +17,7 @@ class Stores < Celluloid::SupervisionGroup
 
   def self.reload
     event_types.reload
+    data_collectors.reload
+    study_locations.reload
   end
 end
