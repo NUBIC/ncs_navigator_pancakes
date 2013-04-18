@@ -16,9 +16,6 @@ Pancakes.EventSearchCriteriaController = Ember.ObjectController.extend
   dataCollectorCriterionBinding: 'controllers.dataCollectors.criterion'
   dataCollectorCandidatesBinding: Ember.Binding.oneWay 'controllers.dataCollectors.candidates'
 
-  search: ->
-    @get('content').search()
-
   canAddSelection: (content, item) ->
     true
 
