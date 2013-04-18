@@ -3,6 +3,7 @@ require 'ncs_navigator/authorization'
 
 class DataCollectorStore
   include Celluloid
+  include Store
 
   def initialize
     @authority = NcsNavigator::Authorization::Core::Authority.new(
@@ -13,18 +14,9 @@ class DataCollectorStore
     )
   end
 
-  def request(*args)
-    @f ||= Celluloid::Future.new do
-      @authority.find_users(*args).freeze
+  def request
+    @response ||= Celluloid::Future.new do
+      @authority.find_users.freeze
     end
-  end
-
-  def reload(*args)
-    @f = nil
-    request(*args)
-  end
-
-  def all
-    request.value
   end
 end
