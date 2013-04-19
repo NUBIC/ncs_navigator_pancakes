@@ -6,6 +6,7 @@
 
 @mixin input-field {
   background-color: $light-background-color;
+  color: $foreground-color;
   border: $border;
   font-family: $body-font-family;
   font-size: $base-font-size;

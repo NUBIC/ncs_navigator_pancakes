@@ -53,6 +53,7 @@ $border                 : 1px solid $dark-background-color;
 $focus-background-color : desaturate(lighten($nu-purple, 70%), 80%);
 $tag-background-color   : $focus-background-color;
 $tag-color              : invert($tag-background-color);
+$foreground-color       : #222222;
 
 // ---------------------------------------------------------------------------
 // Maxima
