@@ -27,4 +27,7 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  # Isolate tests within their own transaction
+  config.use_transactional_fixtures = true
 end

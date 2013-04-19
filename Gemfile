@@ -25,11 +25,13 @@ end
 group :test, :development do
   gem 'castanet-testing', :git => 'https://github.com/NUBIC/castanet-testing.git'
   gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
   gem 'foreman', '0.63.0'
   gem 'hana'
   gem 'rack-test'
   gem 'rspec-rails'
   gem 'sinatra'
+  gem 'sqlite3'
   gem 'term-ansicolor'
 
   platform :ruby do

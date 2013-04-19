@@ -19,3 +19,6 @@
 
 # Ignore Rubinius JIT products.
 .rbx
+
+# Ignore SQLite files.
+db/*.sqlite
