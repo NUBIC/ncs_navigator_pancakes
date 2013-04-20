@@ -89,7 +89,7 @@ past.  To eliminate this warning, remove all services.* files under
         rescue JSON::ParserError
           # If we get this, we might have won a race with rake devenv.  Oops.
           # Just try again.
-          puts "#{services} contains invalid JSON, trying again"
+          $stderr.puts "#{services} contains invalid JSON, trying again"
           sleep 1
         end
       end
@@ -108,6 +108,3 @@ past.  To eliminate this warning, remove all services.* files under
     end
   end
 end
-
-task :spec => ['test:env']
-task :cucumber => ['test:env']

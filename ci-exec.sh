@@ -65,7 +65,8 @@ MASTER_PID=$!
 
 set +e
 
-bundle _${BUNDLER_VERSION}_ exec rake --trace
+eval `bundle _${BUNDLER_VERSION}_ exec rake test:env`
+bundle _${BUNDLER_VERSION}_ exec rake db:migrate default --trace
 RETVAL=$?
 kill -TERM $MASTER_PID && wait $MASTER_PID
 exit $RETVAL
