@@ -31,14 +31,15 @@ group :test, :development do
   gem 'rack-test'
   gem 'rspec-rails'
   gem 'sinatra'
-  gem 'sqlite3'
   gem 'term-ansicolor'
 
   platform :ruby do
     gem 'therubyracer', :require => false
+    gem 'sqlite3'
   end
 
   platform :jruby do
     gem 'therubyrhino', :require => false
+    gem 'activerecord-jdbcsqlite3-adapter'
   end
 end
