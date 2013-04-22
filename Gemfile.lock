@@ -130,7 +130,7 @@ GEM
       ember-source
       execjs (>= 1.2)
       railties (>= 3.1)
-    ember-source (0.0.3)
+    ember-source (1.0.0.rc3)
       handlebars-source (>= 1.0.0.rc3, < 1.0.0.rc4)
     erubis (2.7.0)
     execjs (1.4.0)
@@ -307,6 +307,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   ember-rails
+  ember-source (= 1.0.0.rc3)
   foreman (= 0.63.0)
   haml
   hamlbars
