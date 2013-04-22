@@ -25,4 +25,17 @@ Feature: Event search
       | Baz    | no          |
       | Foo    | yes         |
 
+  @wip
+  Scenario: Clicking "search" tells the user that a search is in progress
+    When I start an event search with the parameters
+      | event type | Pre-Pregnancy Visit |
+      | event type | Pregnancy Visit 1   |
+      | start date | 04/01/2013          |
+      | end date   | 04/14/2013          |
+      | done by    | arl012              |
+      | done by    | fcr456              |
+    And I click "Search"
+
+    Then I see "Search in progress"
+
 # vim:ts=2:sw=2:et:tw=78
