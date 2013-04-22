@@ -1,14 +1,8 @@
-adapter = if window.location.search.lastIndexOf('fixture') != -1
-            DS.FixtureAdapter.extend
-              latency: 250
-          else
-            DS.RESTAdapter.configure 'plurals',
-              event_search: 'event_searches'
+Pancakes.Adapter = DS.RESTAdapter.extend
+  namespace: 'api/v1'
 
-            DS.RESTAdapter.extend
-              namespace: 'api/v1'
-
-Pancakes.Adapter = adapter
+Pancakes.Adapter.configure 'plurals',
+  event_search: 'event_searches'
 
 Pancakes.Adapter.map 'Pancakes.EventType',
   primaryKey: 'local_code'
