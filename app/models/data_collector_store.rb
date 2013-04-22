@@ -15,8 +15,8 @@ class DataCollectorStore
   end
 
   def request
-    @response ||= Celluloid::Future.new do
-      @authority.find_users.freeze
-    end
+    @response ||= Celluloid::Future.new { @authority.find_users.freeze }
   end
 end
+
+# vim:ts=2:sw=2:et:tw=78
