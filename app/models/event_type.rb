@@ -30,8 +30,6 @@ class EventType
     @code.try(:value)
   end
 
-  alias_method :id, :local_code
-
   def display_text
     @code.try(:label)
   end
@@ -39,8 +37,7 @@ class EventType
   def attributes
     {
       local_code: local_code,
-      display_text: display_text,
-      id: id
+      display_text: display_text
     }
   end
   

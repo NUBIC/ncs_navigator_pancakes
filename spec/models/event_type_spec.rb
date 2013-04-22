@@ -13,10 +13,6 @@ describe EventType do
       json['local_code'].should == 1
     end
 
-    it 'maps local_code to "id"' do
-      json['id'].should == 1
-    end
-
     it 'maps display_text to "display_text"' do
       json['display_text'].should == 'foo'
     end

@@ -38,13 +38,13 @@ class ForemanEngine < Foreman::Engine::CLI
 
     { study_locations: [
         { name: "Foo",
-          id: "http://localhost:#{ports[0]}"
+          url: "http://localhost:#{ports[0]}"
         },
         { name: "Bar",
-          id: "http://localhost:#{ports[1]}"
+          url: "http://localhost:#{ports[1]}"
         },
         { name: "Baz",
-          id: "http://localhost:#{ports[2]}"
+          url: "http://localhost:#{ports[2]}"
         }
       ]
     }.to_json

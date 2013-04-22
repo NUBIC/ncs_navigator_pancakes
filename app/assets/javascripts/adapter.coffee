@@ -10,8 +10,14 @@ adapter = if window.location.search.lastIndexOf('fixture') != -1
 
 Pancakes.Adapter = adapter
 
+Pancakes.Adapter.map 'Pancakes.EventType',
+  primaryKey: 'local_code'
+
 Pancakes.Adapter.map 'Pancakes.DataCollector',
   primaryKey: 'username'
+
+Pancakes.Adapter.map 'Pancakes.StudyLocation',
+  primaryKey: 'url'
 
 Pancakes.Adapter.map 'Pancakes.EventSearch',
   eventTypes:

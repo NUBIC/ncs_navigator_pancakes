@@ -1,14 +1,17 @@
 Pancakes.StudyLocation.FIXTURES = [
   {
-    id: 'https://foobar.nubic.northwestern.edu',
+    id: '1',
+    url: 'https://foobar.nubic.northwestern.edu',
     name: 'Foobar'
   },
   {
-    id: 'https://qux.nubic.northwestern.edu',
+    id: '2',
+    url: 'https://qux.nubic.northwestern.edu',
     name: 'Qux',
   },
   {
-    id: 'https://baz.nubic.northwestern.edu',
+    id: '3',
+    url: 'https://baz.nubic.northwestern.edu',
     name: 'Baz'
   }
 ]

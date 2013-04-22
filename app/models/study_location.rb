@@ -6,7 +6,7 @@ class StudyLocation
   include ActiveModel::Serialization
 
   attr_reader :name
-  attr_reader :id
+  attr_reader :url
   attr_reader :errors
 
   def self.all
@@ -15,18 +15,16 @@ class StudyLocation
 
   def initialize(config = {})
     @name = config['name']
-    @id = config['id']
+    @url = config['url']
     @errors = ActiveModel::Errors.new(self)
   end
 
-  alias_method :url, :id
-
   def valid?
-    !!(name && id)
+    !!(name && url)
   end
 
   def new_record?
-    !!id
+    !!url
   end
   
   def persisted?
@@ -35,7 +33,7 @@ class StudyLocation
 
   def attributes
     { name: name,
-      id: id
+      url: url
     }
   end
   

@@ -6,7 +6,7 @@ describe StudyLocation do
   it_should_behave_like 'an ActiveModel object'
 
   let(:model) do
-    StudyLocation.new('name' => 'Foobar', 'id' => 'https://cases.example.edu')
+    StudyLocation.new('name' => 'Foobar', 'url' => 'https://cases.example.edu')
   end
 
   describe '#to_json' do
@@ -16,8 +16,8 @@ describe StudyLocation do
       json['name'].should == "Foobar"
     end
 
-    it 'maps url to "id"' do
-      json['id'].should == "https://cases.example.edu"
+    it 'maps url to "url"' do
+      json['url'].should == "https://cases.example.edu"
     end
   end
 end
