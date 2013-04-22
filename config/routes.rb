@@ -8,6 +8,8 @@ Pancakes::Application.routes.draw do
       enum.resources :study_locations
     end
 
+    resources :event_searches, :only => [:create, :update, :show]
+
     put '/mdes_version' => 'mdes_version#set'
 
     match '*all' => 'landing#unknown'

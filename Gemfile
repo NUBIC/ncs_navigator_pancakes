@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'active_model_serializers', '~> 0.7.0'
 gem 'aker-rails'
 gem 'celluloid'
 gem 'ember-rails'

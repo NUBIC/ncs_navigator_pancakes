@@ -3,6 +3,7 @@
 # saved in an EventSearch instance.  After the instance is persisted to the
 # database, the instance is passed to the search processors.
 class EventSearch < ActiveRecord::Base
+  serialize :json
 end
 
 # vim:ts=2:sw=2:et:tw=78

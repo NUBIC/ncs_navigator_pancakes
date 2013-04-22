@@ -297,6 +297,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers (~> 0.7.0)
   activerecord-jdbcsqlite3-adapter
   aker-rails
   castanet-testing!
