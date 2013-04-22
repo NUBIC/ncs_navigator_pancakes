@@ -5,7 +5,7 @@ class ApiController < ApplicationController
     { ok: false, error: text }
   end
 
-  def ok
-    { ok: true }
+  def ok(id = nil)
+    { ok: true, id: id }.reject { |_, v| !v }
   end
 end

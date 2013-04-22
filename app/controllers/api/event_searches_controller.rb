@@ -3,6 +3,6 @@ class Api::EventSearchesController < ApiController
     e = EventSearch.create(:json => params[:event_search],
                            :username => current_user.username)
 
-    respond_with e
+    respond_with ok(e.id), :status => :created, :location => event_search_path(e.id)
   end
 end
