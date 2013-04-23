@@ -38,18 +38,20 @@ Pancakes.Adapter = DS.RESTAdapter.extend
       error: (xhr) ->
         @didError store, type, record, xhr
 
+  # Set up custom primary keys.
+  #
+  # FYI, Ember Data passes constants in the type parameter, not strings.  This
+  # is a bit odd because Adapter.map receives strings.  Whatever.
+  serializer: DS.RESTSerializer.extend
+    primaryKey: (type, record) ->
+      switch type
+        when Pancakes.EventType     then 'local_code'
+        when Pancakes.DataCollector then 'username'
+        when Pancakes.StudyLocation then 'url'
+        else 'id'
+
 Pancakes.Adapter.configure 'plurals',
   event_search: 'event_searches'
-
-Pancakes.Adapter.map 'Pancakes.EventType',
-  primaryKey: (type) ->
-    'local_code'
-
-Pancakes.Adapter.map 'Pancakes.DataCollector',
-  primaryKey: 'username'
-
-Pancakes.Adapter.map 'Pancakes.StudyLocation',
-  primaryKey: 'url'
 
 Pancakes.Adapter.map 'Pancakes.EventSearch',
   eventTypes:
