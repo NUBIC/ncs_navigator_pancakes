@@ -13,11 +13,13 @@ class ForemanEngine < Foreman::Engine::CLI
     cas = process('cas')
     callback = process('callback')
     ops = process('ops')
+    redis = process('redis')
 
     conf = {
       'CAS_BASE_URL' => "https://localhost:#{port_for(cas, 1)}/cas",
       'CAS_PROXY_CALLBACK_URL' => "https://localhost:#{port_for(callback, 1)}/receive_pgt",
       'CAS_PROXY_RETRIEVAL_URL' => "https://localhost:#{port_for(callback, 1)}/retrieve_pgt",
+      'REDIS_URL' => "redis://localhost:#{port_for(redis, 1)}",
       'OPS_URL' => "http://localhost:#{port_for(ops, 1)}",
       'STUDY_LOCATIONS_PATH' => study_locations_file
     }

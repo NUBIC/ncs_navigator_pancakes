@@ -10,6 +10,8 @@ server_dir = File.expand_path('../../../devel/servers', __FILE__)
 
 desc 'Start services for development and test environments'
 task :devenv do
+  ENV['SCRATCH_DIR'] = scratch_dir.to_s
+
   options = YAML.load_file(Rails.root.join('.foreman')) || {}
   eng = ForemanEngine.new({:formation => options['concurrency']}.merge(options))
 
