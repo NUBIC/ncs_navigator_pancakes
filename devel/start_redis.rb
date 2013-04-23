@@ -10,6 +10,7 @@ abort "PORT or SCRATCH_DIR not set" unless ENV['PORT'] && ENV['SCRATCH_DIR']
 
 port = ENV['PORT']
 scratch_dir = ENV['SCRATCH_DIR']
+redis_server = ENV['REDIS_SERVER_BIN'] || 'redis-server'
 redis_dir = "#{scratch_dir}/redis.#{port}"
 
 mkdir_p redis_dir
@@ -23,4 +24,4 @@ end
 
 puts conf_path
 
-exec "redis-server #{Shellwords.shellescape(conf_path)}"
+exec "#{redis_server} #{Shellwords.shellescape(conf_path)}"
