@@ -27,6 +27,3 @@ require 'cucumber/rails'
 # recommended as it will mask a lot of errors for you!
 #
 ActionController::Base.allow_rescue = false
-
-# Truncate database tables after every scenario.
-DatabaseCleaner.strategy = :truncation
