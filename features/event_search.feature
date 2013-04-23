@@ -25,7 +25,6 @@ Feature: Event search
       | Baz    | no          |
       | Foo    | yes         |
 
-  @wip
   Scenario: Clicking "search" tells the user that a search is in progress
     When I start an event search with the parameters
       | event type | Pre-Pregnancy Visit |
