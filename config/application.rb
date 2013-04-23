@@ -79,6 +79,12 @@ module Pancakes
       proxy_retrieval_url: ENV['CAS_PROXY_RETRIEVAL_URL']
     }
 
+    # Redis configuration.
+    config.services[:redis] = {
+      url: ENV['REDIS_URL'],
+      namespace: 'nubic:pancakes'
+    }
+
     # Use CAS for interactive authentication; permit HTTP Basic auth for
     # testing API endpoints.
     config.aker do
