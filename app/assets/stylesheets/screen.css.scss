@@ -13,6 +13,10 @@ body {
   line-height: $base-line-height;
 }
 
+#entropy-seed {
+  display: none;
+}
+
 .banner {
   background-color: $nu-purple;
   color: white;

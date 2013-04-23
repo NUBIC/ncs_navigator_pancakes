@@ -1,8 +1,9 @@
 class Api::EventSearchesController < ApiController
-  def create
-    e = EventSearch.create(:json => params[:event_search],
-                           :username => current_user.username)
+  def update
+    e = EventSearch.find_or_initialize_by_uuid(params[:id])
+    e.json = params[:event_search]
+    e.save!
 
-    respond_with ok(e.id), :status => :created, :location => event_search_path(e.id)
+    render :nothing => true, :status => :no_content, :location => event_search_path(e.uuid)
   end
 end

@@ -11,13 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130420223742) do
+ActiveRecord::Schema.define(:version => 20130422194112) do
 
-  create_table "event_searches", :force => true do |t|
+  create_table "event_searches", :id => false, :force => true do |t|
     t.text     "json"
     t.string   "username"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                                                                   :null => false
+    t.datetime "updated_at",                                                                   :null => false
+    t.string   "uuid",       :limit => 36, :default => "00000000-0000-0000-0000-000000000000", :null => false
   end
+
+  add_index "event_searches", ["uuid"], :name => "index_event_searches_on_uuid", :unique => true
 
 end
