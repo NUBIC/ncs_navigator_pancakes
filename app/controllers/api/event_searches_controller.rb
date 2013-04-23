@@ -4,6 +4,8 @@ class Api::EventSearchesController < ApiController
     e.json = params[:event_search]
     e.save!
 
+    e.queue
+
     render :nothing => true, :status => :no_content, :location => event_search_path(e.uuid)
   end
 

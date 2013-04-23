@@ -6,6 +6,15 @@ class EventSearch < ActiveRecord::Base
   serialize :json
 
   self.primary_key = :uuid
+
+  ##
+  # Queues processing of an EventSearch.
+  def queue
+    EventSearchWorker.perform_async(uuid)
+  end
+
+  def execute
+  end
 end
 
 # vim:ts=2:sw=2:et:tw=78
