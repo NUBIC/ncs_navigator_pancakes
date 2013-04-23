@@ -6,4 +6,12 @@ class Api::EventSearchesController < ApiController
 
     render :nothing => true, :status => :no_content, :location => event_search_path(e.uuid)
   end
+
+  def show
+    e = EventSearch.find(params[:id])
+
+    respond_with e
+  end
 end
+
+# vim:ts=2:sw=2:et:tw=78

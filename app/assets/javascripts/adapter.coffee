@@ -23,6 +23,20 @@ Pancakes.Adapter = DS.RESTAdapter.extend
     x = sjcl.codec.hex.fromBits(words)
     "#{x.slice(0, 8)}-#{x.slice(8, 12)}-#{x.slice(12, 16)}-#{x.slice(16, 20)}-#{x.slice(20)}"
 
+  # In Pancakes, create and update are the same operation.  However, we still
+  # need to call @didCreateRecord instead of @didUpdateRecord.
+  createRecord: (store, type, record) ->
+    root = @rootForType type
+    data = {}
+    data[root] = @serialize record, includeId: true
+
+    @ajax @buildURL(root, record.get('id')), 'PUT',
+      data: data,
+      success: (json) ->
+        Ember.run this, ->
+          @didCreateRecord store, type, record, json
+      error: (xhr) ->
+        @didError store, type, record, xhr
 
 Pancakes.Adapter.configure 'plurals',
   event_search: 'event_searches'

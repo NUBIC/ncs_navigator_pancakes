@@ -3,7 +3,11 @@ Pancakes.EventSearchesNewRoute = Ember.Route.extend
     @txn = DS.get('defaultStore').transaction()
 
   setupController: (controller) ->
-    controller.set 'content', @txn.createRecord(Pancakes.EventSearch)
+    search = @txn.createRecord Pancakes.EventSearch
+    search.one 'didCommit', =>
+      @transitionTo 'event_searches.show', search
+
+    controller.set 'content', search
 
     @controllerFor('studyLocations').setProperties
       editable: true
