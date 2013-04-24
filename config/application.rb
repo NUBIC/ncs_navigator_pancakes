@@ -56,6 +56,7 @@ module Pancakes
     config.before_initialize do
       ncs_config = NcsNavigator::Configuration.new(config.navigator_ini_path)
 
+      config.ncs_config = ncs_config
       config.mdes_version = ncs_config.pancakes_mdes_version
     end
 

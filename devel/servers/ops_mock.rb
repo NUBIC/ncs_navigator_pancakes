@@ -1,3 +1,4 @@
+require 'aker'
 require 'sinatra'
 
 $USERS = <<-END
@@ -28,9 +29,28 @@ END
 abort 'PORT must be set' unless ENV['PORT']
 set :port, ENV['PORT']
 
-trap('TERM') { exit! 0 }
+sio = StringIO.new(<<END)
+users:
+  psc_application:
+    password: t00t!!
+END
+
+static = Aker::Authorities::Static.new.load!(sio)
+
+Aker.configure do
+  api_mode :http_basic
+  authorities static
+end
+
+use Rack::Session::Cookie, :secret => 'supersekrit'
+
+Aker::Rack.use_in(Sinatra::Application)
+
+OpenSSL::SSL::SSLContext::DEFAULT_PARAMS[:verify_mode] = OpenSSL::SSL::VERIFY_NONE
 
 get '/users.json' do
+  env['aker.check'].authentication_required!
+
   content_type 'application/json'
   $USERS
 end
