@@ -1,6 +1,6 @@
 Pancakes.EventSearchesNewRoute = Ember.Route.extend
   activate: ->
-    @txn = DS.get('defaultStore').transaction()
+    @txn = @get('store').transaction()
 
   setupController: (controller) ->
     search = @txn.createRecord Pancakes.EventSearch
