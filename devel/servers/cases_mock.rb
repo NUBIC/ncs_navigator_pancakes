@@ -41,5 +41,13 @@ get '/api/v1/events' do
   end
 
   content_type 'application/json'
-  $DATA
+
+  sleep(rand)
+  if rand < 0.3
+    status 403
+  elsif rand > 0.7
+    raise "Uh oh"
+  else
+    $DATA
+  end
 end
