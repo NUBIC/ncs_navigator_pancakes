@@ -16,10 +16,9 @@ class EventSearch < ActiveRecord::Base
   ##
   # Runs this search against all study locations configured in the search.
   #
-  # - credentials: an opaque token that will be used to authenticate requests
-  #   (this is usually a CAS proxy-granting ticket)
-  def execute(credentials)
-    locations.each { |sl| sl.events_for(self, credentials) }
+  # Requires a CAS PGT as a string.
+  def execute(pgt)
+    locations.each { |sl| sl.events_for(self, pgt) }
   end
 
   def event_type_ids

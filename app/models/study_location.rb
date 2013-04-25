@@ -25,6 +25,8 @@ class StudyLocation
   ##
   # Runs an event search against this location.  Returns a Faraday::Response.
   #
+  # Parameters:
+  #
   # - es: an EventSearch object
   # - pgt: a CAS proxy-granting ticket
   def events_for(es, pgt)
