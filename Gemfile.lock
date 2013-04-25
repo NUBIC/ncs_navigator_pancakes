@@ -322,6 +322,7 @@ DEPENDENCIES
   celluloid
   coffee-rails (~> 3.2.1)
   compass-rails
+  connection_pool
   cucumber-rails
   database_cleaner
   ember-rails
