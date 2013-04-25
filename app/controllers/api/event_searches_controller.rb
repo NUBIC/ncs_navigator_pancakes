@@ -3,8 +3,7 @@ class Api::EventSearchesController < ApiController
     e = EventSearch.find_or_initialize_by_uuid(params[:id])
     e.json = params[:event_search]
     e.save!
-
-    e.queue
+    e.queue(current_user.pgt)
 
     render :nothing => true, :status => :no_content, :location => event_search_path(e.uuid)
   end

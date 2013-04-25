@@ -9,8 +9,10 @@ class EventSearch < ActiveRecord::Base
 
   ##
   # Queues processing of an EventSearch.
-  def queue
-    EventSearchWorker.perform_async(uuid)
+  #
+  # Requires a CAS PGT as a string.
+  def queue(pgt)
+    EventSearchWorker.perform_async(uuid, pgt)
   end
 
   ##
@@ -18,7 +20,9 @@ class EventSearch < ActiveRecord::Base
   #
   # Requires a CAS PGT as a string.
   def execute(pgt)
-    locations.each { |sl| sl.events_for(self, pgt) }
+    qs = locations.map { |l| ::Query.queue(lambda { l.event_report(self, pgt) }, l) }
+
+    qs.map(&:value)
   end
 
   def event_type_ids

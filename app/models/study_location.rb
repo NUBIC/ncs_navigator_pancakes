@@ -23,13 +23,13 @@ class StudyLocation
   end
 
   ##
-  # Runs an event search against this location.  Returns a Faraday::Response.
+  # Requests an event report from this location.  Returns a Faraday::Response.
   #
   # Parameters:
   #
   # - es: an EventSearch object
   # - pgt: a CAS proxy-granting ticket
-  def events_for(es, pgt)
+  def event_report(es, pgt)
     client(:url => url, :pgt => pgt).get('/api/v1/events', params_for(es))
   end
 
@@ -66,3 +66,5 @@ class StudyLocation
     attributes
   end
 end
+
+# vim:ts=2:sw=2:et:tw=78
