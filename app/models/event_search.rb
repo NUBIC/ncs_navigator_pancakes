@@ -15,6 +15,18 @@ class EventSearch < ActiveRecord::Base
     EventSearchWorker.perform_async(uuid, pgt)
   end
 
+  def status_url=(url)
+    json['status_url'] = url
+  end
+
+  def status_url
+    json['status_url']
+  end
+
+  def status
+    {}
+  end
+
   ##
   # Runs this search against all study locations configured in the search.
   #
