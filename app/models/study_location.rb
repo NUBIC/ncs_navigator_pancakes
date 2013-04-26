@@ -22,26 +22,8 @@ class StudyLocation
     @errors = ActiveModel::Errors.new(self)
   end
 
-  ##
-  # Requests an event report from this location.  Returns a Faraday::Response.
-  #
-  # Parameters:
-  #
-  # - es: an EventSearch object
-  # - pgt: a CAS proxy-granting ticket
-  def event_report(es, pgt)
-    client(:url => url, :pgt => pgt).get('/api/v1/events', params_for(es))
-  end
-
-  def params_for(es)
-    { types: es.event_type_ids,
-      data_collectors: es.data_collector_netids,
-      scheduled_date: date_range_for(es)
-    }.reject { |_, v| v.blank? }
-  end
-
-  def date_range_for(es)
-    "[#{[es.scheduled_start_date, es.scheduled_end_date].join(',')}]"
+  def connection(pgt)
+    yield client(:url => url, :pgt => pgt)
   end
 
   def valid?

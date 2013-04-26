@@ -7,10 +7,11 @@ class EventSearch < ActiveRecord::Base
 
   self.primary_key = :uuid
 
-  ##
-  # Queues processing of an EventSearch.
+  # Public: Queues up this EventSearch for execution.
   #
-  # Requires a CAS PGT as a string.
+  # pgt - a CAS proxy-granting ticket.
+  #
+  # Returns nothing.
   def queue(pgt)
     EventSearchWorker.perform_async(uuid, pgt)
   end
@@ -27,14 +28,13 @@ class EventSearch < ActiveRecord::Base
     {}
   end
 
-  ##
-  # Runs this search against all study locations configured in the search.
+  # Public: Builds and executes an EventReport from this EventSearch.
   #
-  # Requires a CAS PGT as a string.
+  # pgt - a CAS proxy-granting ticket.
+  #
+  # Returns an EventReport.
   def execute(pgt)
-    qs = locations.map { |l| ::Query.queue(lambda { l.event_report(self, pgt) }, l) }
-
-    qs.map(&:value)
+    EventReport.new(self).tap { |r| r.execute(pgt) }
   end
 
   def event_type_ids
