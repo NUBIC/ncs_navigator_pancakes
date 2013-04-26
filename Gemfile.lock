@@ -232,6 +232,7 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (10.0.4)
+    rb-readline (0.4.2)
     rdoc (3.12.2)
       json (~> 1.4)
     redis (3.0.3)
@@ -340,6 +341,7 @@ DEPENDENCIES
   puma
   rack-test
   rails (= 3.2.13)
+  rb-readline
   rspec-rails
   sass-rails (~> 3.2.3)
   sidekiq
