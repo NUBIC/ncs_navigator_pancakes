@@ -23,6 +23,8 @@ Pancakes.EventSearchesShowRoute = Ember.Route.extend
     @_super controller, model
     @openTransaction model
 
+    @controllerFor('studyLocationStatuses').set 'source', model
+
     @controllerFor('studyLocations').setProperties
       editable: true
       command: controller.get 'content'
