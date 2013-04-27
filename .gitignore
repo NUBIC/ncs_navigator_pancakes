@@ -22,3 +22,6 @@
 
 # Ignore SQLite files.
 db/*.sqlite
+
+# Ignore rbenv .ruby-version files.
+.ruby-version
