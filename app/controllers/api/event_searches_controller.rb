@@ -1,24 +1,33 @@
 class Api::EventSearchesController < ApiController
-  def update
-    e = EventSearch.find_or_initialize_by_uuid(params[:id])
-    e.json = params[:event_search]
-    e.status_url = status_event_search_url(e)
-    e.save!
-    e.queue(current_user.pgt)
-
-    render :json => e, :location => event_search_path(e.uuid)
-  end
+  after_filter :add_links, :only => [:show, :update]
 
   def show
-    e = EventSearch.find(params[:id])
+    @model = EventSearch.find(params[:id])
 
-    respond_with e
+    respond_with @model
+  end
+
+  def update
+    @model = EventSearch.find_or_initialize_by_uuid(params[:id])
+    @model.json = params[:event_search]
+    @model.save!
+    @model.queue(current_user.pgt)
+
+    respond_with @model
   end
 
   def status
     e = EventSearch.find(params[:id])
 
     respond_with e.status
+  end
+
+  private
+
+  def add_links
+    response.headers['Link'] = [
+      "<#{status_event_search_url(@model)}>; rel=status"
+    ]
   end
 end
 
