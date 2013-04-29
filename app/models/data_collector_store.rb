@@ -18,7 +18,10 @@ class DataCollectorStore
   end
 
   def request
-    @response ||= Celluloid::Future.new { @authority.find_users.freeze }
+    @response ||= Celluloid::Future.new do
+      users = @authority.find_users
+      users.map { |u| DataCollector.new(u) }.freeze
+    end
   end
 end
 

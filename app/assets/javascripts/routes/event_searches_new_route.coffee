@@ -1,13 +1,9 @@
 Pancakes.EventSearchesNewRoute = Ember.Route.extend
-  activate: ->
-    @txn = @get('store').transaction()
+  model: ->
+    Pancakes.EventSearch.create()
 
-  setupController: (controller) ->
-    search = @txn.createRecord Pancakes.EventSearch
-    search.one 'didCommit', =>
-      @transitionTo 'event_searches.show', search
-
-    controller.set 'content', search
+  setupController: (controller, model) ->
+    controller.set 'content', model
 
     @controllerFor('studyLocations').setProperties
       editable: true
@@ -15,6 +11,10 @@ Pancakes.EventSearchesNewRoute = Ember.Route.extend
 
   events:
     submit: ->
-      @txn.commit()
+      search = @get 'controller.content'
+
+      search.save().done(=>
+        @transitionTo 'event_searches.show', search
+      )
 
 # vim:ts=2:sw=2:et:tw=78

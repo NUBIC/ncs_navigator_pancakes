@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require handlebars
 //= require ember
-//= require ember-data-git/ember-data
 //= require modernizr-latest
 //= require pancakes
 //= require underscore/underscore

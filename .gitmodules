@@ -1,6 +1,3 @@
 [submodule "vendor/assets/javascripts/underscore"]
 	path = vendor/assets/javascripts/underscore
 	url = https://github.com/documentcloud/underscore.git
-[submodule "vendor/ember-data"]
-	path = vendor/ember-data
-	url = https://github.com/emberjs/data.git

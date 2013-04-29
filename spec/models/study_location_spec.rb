@@ -16,6 +16,10 @@ describe StudyLocation do
       json['name'].should == "Foobar"
     end
 
+    it 'maps url to "id"' do
+      json['id'].should == 'https://cases.example.edu'
+    end
+
     it 'maps url to "url"' do
       json['url'].should == "https://cases.example.edu"
     end

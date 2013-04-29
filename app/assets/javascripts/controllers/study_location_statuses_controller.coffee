@@ -1,7 +1,4 @@
 Pancakes.StudyLocationStatusesController = Ember.Controller.extend
-	pollerId: null
-	source: null
-
 	pollControl: (->
 		id = @get 'pollerId'
 		m = @get 'source'
@@ -15,6 +12,6 @@ Pancakes.StudyLocationStatusesController = Ember.Controller.extend
 	).observes('source')
 
 	poller: ->
-		$.ajax(@get('source.statusUrl'), 'GET')
+    $.ajax(@get('source.statusUrl'), 'GET')
 
 # vim:ts=2:sw=2:et:tw=78
