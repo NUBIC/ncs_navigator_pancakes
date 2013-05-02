@@ -1,1 +1,1 @@
-concurrency: ops=1,cas=1,callback=1,cases=3,redis=1
+concurrency: ops=1,cas=1,callback=1,cases=3,redis=1,sidekiq=1

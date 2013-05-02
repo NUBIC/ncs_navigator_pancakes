@@ -109,4 +109,10 @@ past.  To eliminate this warning, remove all services.* files under
       exec "cd #{Shellwords.shellescape(server_dir)} && bundle exec ruby cases_mock.rb"
     end
   end
+
+  namespace :sidekiq do
+    task :start => 'test:env' do
+      exec 'bundle exec sidekiq'
+    end
+  end
 end
