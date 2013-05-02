@@ -9,6 +9,10 @@ describe EventType do
     let(:code) { stub(:value => 1, :label => 'foo') }
     let(:json) { JSON.parse(EventType.new(code).to_json) }
 
+    it 'maps local_code to "id"' do
+      json['id'].should == 1
+    end
+
     it 'maps local_code to "local_code"' do
       json['local_code'].should == 1
     end

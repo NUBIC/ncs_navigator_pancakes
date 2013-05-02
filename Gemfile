@@ -2,15 +2,19 @@ source 'https://rubygems.org'
 
 gem 'active_model_serializers', '~> 0.7.0'
 gem 'aker-rails'
+gem 'castanet'
 gem 'celluloid'
+gem 'connection_pool'
 gem 'ember-rails'
 gem 'ember-source', '1.0.0.rc3'
+gem 'faraday'
 gem 'haml'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'ncs_mdes'
 gem 'ncs_navigator_configuration', :git => 'https://github.com/NUBIC/ncs_navigator_configuration.git'
-gem 'ncs_navigator_authority', :git => 'https://github.com/NUBIC/ncs_navigator_authority.git', :branch => 'configurable-sp-url'
+gem 'ncs_navigator_authority', :git => 'https://github.com/NUBIC/ncs_navigator_authority.git'
+gem 'rb-readline'
 gem 'puma'
 gem 'rails', '3.2.13'
 gem 'sidekiq'
@@ -25,6 +29,7 @@ group :assets do
 end
 
 group :test, :development do
+  gem 'aker-cas_cli'
   gem 'castanet-testing', :git => 'https://github.com/NUBIC/castanet-testing.git'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'

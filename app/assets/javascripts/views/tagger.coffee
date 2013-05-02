@@ -8,7 +8,7 @@ SelectedTags = Ember.CollectionView.extend
   itemViewClass: Ember.View.extend
     classNames: ['selected-tag']
     template: Ember.Handlebars.compile '''
-      {{view.content.label}}
+      <span class="tag-label">{{view.content.label}}</span>
       <span class="remove-tag">&#x232b;</span>
     '''
 

@@ -8,7 +8,11 @@ Pancakes::Application.routes.draw do
       enum.resources :study_locations
     end
 
-    resources :event_searches, :only => [:update, :show]
+    resources :event_searches, :only => [:update, :show] do
+      member do
+        get :status
+      end
+    end
 
     put '/mdes_version' => 'mdes_version#set'
 
