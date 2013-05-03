@@ -1,7 +1,9 @@
 Pancakes.EventSearchesNewController = Ember.ObjectController.extend
   needs: ['eventSearchCriteria', 'studyLocations']
 
-  contentBinding: 'controllers.eventSearchCriteria.content'
+  setupEditor: (->
+    @set 'controllers.eventSearchCriteria.content', @get('content')
+  ).observes('content')
 
   defaultToSelected: (->
     sc = @get 'controllers.studyLocations'
