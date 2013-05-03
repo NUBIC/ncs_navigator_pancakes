@@ -18,6 +18,8 @@ When(/^I enter the parameters$/) do |table|
       find('.scheduled-date.end input').set(value)
     when 'done by'
       find('.done-by input').set("#{value}\n")
+    when 'location'
+      check value
     else raise "Unknown key #{key}"
     end
   end
@@ -42,6 +44,19 @@ Then(/^I see the search criteria$/) do |table|
     if elem
       actual << [key, elem]
     end
+  end
+
+  table.diff!(actual)
+end
+
+Then(/^I see progress updates for$/) do |table|
+  # stall for a bit to let the status poller catch up
+  sleep 2
+
+  actual = []
+
+  table.raw.each do |location|
+    actual << find("label.status-updated", :text => location).text
   end
 
   table.diff!(actual)

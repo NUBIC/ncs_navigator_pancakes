@@ -35,6 +35,25 @@
   h1 {
     @include heading;
   }
+
+  .query-status {
+    display: inline-block;
+    vertical-align: middle;
+    width: $base-line-height / 2;
+    height: $base-line-height / 2;
+  }
+
+  .query-status.success {
+    background-color: green;
+  }
+
+  .query-status.failure {
+    background-color: red;
+  }
+
+  .query-status.started {
+    background-color: yellow;
+  }
 }
 
 .report {

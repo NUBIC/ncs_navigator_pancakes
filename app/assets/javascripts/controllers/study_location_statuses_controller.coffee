@@ -12,6 +12,8 @@ Pancakes.StudyLocationStatusesController = Ember.Controller.extend
 	).observes('source')
 
 	poller: ->
-    $.ajax(@get('source.statusUrl'), 'GET')
+    $.getJSON(@get 'source.statusUrl').done((json) =>
+      @set 'content', json
+    )
 
 # vim:ts=2:sw=2:et:tw=78

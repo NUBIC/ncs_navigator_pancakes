@@ -1,9 +1,10 @@
 %ul
   = hb 'each location in controller.arrangedContent' do
     %li
-      %label{:bind => { :title => 'url' }}
+      %label{:bind => { :title => 'location.url' }}
         = hb 'if controller.editable' do
           = hb 'view Pancakes.StudyLocationSelector locationBinding="location" selectionBinding="controller.selection"'
+        = hb 'view Pancakes.StudyLocationStatusView locationBinding="location" statusesBinding="controller.statuses"'
         = hb 'location.name'
     = hb 'else'
     Loading
