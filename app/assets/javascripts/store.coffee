@@ -24,6 +24,7 @@ Pancakes.Store = Ember.Object.extend
       unless @references[ref]
         model = serializer.materialize(type, obj, resp)
         @references[ref] = model
+        model.set 'isLoaded', true
 
       @references[ref]
 
@@ -49,6 +50,7 @@ Pancakes.Store = Ember.Object.extend
       $.getJSON("#{path}/#{id}")
         .done((json, status, resp) ->
           serializer.deserializeOne(json, resp, type, m)
+          m.set 'isLoaded', true
         )
         .fail(->
           console.log "findById #{type} failed"
