@@ -31,9 +31,9 @@ Then(/^I see the search criteria$/) do |table|
            when 'event type'
              find('.event-type .tag-label', :text => expected).text
            when 'start date'
-             find(".scheduled-date.start input[@value='#{expected}']").value
+             find(".scheduled-date.start input").value
            when 'end date'
-             find(".scheduled-date.end input[@value='#{expected}']").value
+             find(".scheduled-date.end input").value
            when 'done by'
              find('.done-by .tag-label', :text => expected).text
            else raise "Unknown key #{key}"
