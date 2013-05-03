@@ -38,22 +38,15 @@
   }
 
   .query-status {
-    display: inline-block;
-    vertical-align: middle;
-    width: $base-line-height / 2;
-    height: $base-line-height / 2;
+    display: inline;
   }
 
   .query-status.success {
-    background-color: green;
+    color: green;
   }
 
   .query-status.failure {
-    background-color: red;
-  }
-
-  .query-status.started {
-    background-color: yellow;
+    color: red;
   }
 }
 
