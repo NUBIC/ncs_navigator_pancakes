@@ -9,14 +9,23 @@
 # 4. Execution status
 # 5. The report data
 #
-# EventReport data is cached for one hour.
+# Report data and metadata is cached in Redis to speed up retrieval and
+# pagination.
 class EventReport
   attr_reader :search
+  attr_reader :started_at
 
   ##
-  # es - The EventSearch that will be used to generate this report's data.
-  def initialize(es)
+  # es         - The EventSearch that will be used to generate this report's
+  #              data.
+  # started_at - When report generation started.
+  def initialize(es, started_at)
     @search = es
+    @started_at = started_at.to_i
+  end
+
+  def cache_key
+    "report:#{search.id}:#{started_at}"
   end
 
   # Public: Build the report.
@@ -24,16 +33,32 @@ class EventReport
   # The report data, once assembled, will be available via the #data reader.
   # See that method's documentation for more information.
   #
-  # pgt - a CAS PGT that will be used to contact each Cases instance named in
-  #       the EventSearch.
+  # pgt - a CAS PGT that will be used to contact each Cases instance
+  #       named in the EventSearch
+  # ttl - lifetime of cached report data and metadata, in seconds
   #
   # Returns nothing.
-  def execute(pgt)
+  def execute(pgt, ttl)
+    recorder = QueryRecorder.new(self, ttl, $REDIS)
+
     qs = search.locations.map do |l|
-      ::Query.queue run_at_location(l, pgt), l
+      ::Query.queue run_at_location(l, pgt), l.id, recorder
     end
 
-    qs.map(&:value)
+    qs.map(&:value).tap { |v| recorder.alldone }
+  end
+
+  def status
+    r = $REDIS
+
+    keys = r.smembers(cache_key)
+    results = []
+
+    r.pipelined do
+      keys.each { |k| results << r.hmget(k, 'tag', 'status') }
+    end
+
+    Hash[*results.map(&:value).flatten]
   end
 
   # Public: Translates this report's EventSearch into API parameters.

@@ -9,24 +9,29 @@ class EventSearch < ActiveRecord::Base
 
   # Public: Queues up this EventSearch for execution.
   #
-  # pgt - a CAS proxy-granting ticket.
+  # pgt - a CAS proxy-granting ticket
+  # ttl - lifetime of cached report data and metadata, in seconds
   #
   # Returns nothing.
-  def queue(pgt)
-    EventSearchWorker.perform_async(uuid, pgt)
+  def queue(pgt, ttl)
+    EventSearchWorker.perform_async(uuid, pgt, ttl)
   end
 
   def status
-    {}
+    EventReport.new(self, last_started_at).status
   end
 
   # Public: Builds and executes an EventReport from this EventSearch.
   #
-  # pgt - a CAS proxy-granting ticket.
+  # pgt - a CAS proxy-granting ticket
+  # ttl - lifetime of cached report data and metadata, in seconds
   #
   # Returns an EventReport.
-  def execute(pgt)
-    EventReport.new(self).tap { |r| r.execute(pgt) }
+  def execute(pgt, ttl)
+    started_at = Time.now
+
+    update_attribute(:last_started_at, started_at)
+    EventReport.new(self, started_at).tap { |r| r.execute(pgt, ttl) }
   end
 
   def event_type_ids
