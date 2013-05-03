@@ -35,17 +35,18 @@ Pancakes.EventSearch = Pancakes.Model.extend
       eventTypes: ets
       studyLocations: sls
 
-    @readStatusLink resp.getResponseHeader('Link')
+    @readLinks resp.getResponseHeader('Link')
 
   save: ->
     @set('id', @get('store').generateId()) unless @get('id')
 
     @get('store').save(this).done (json, status, resp) =>
-      @readStatusLink resp.getResponseHeader('Link')
+      @readLinks resp.getResponseHeader('Link')
 
-  readStatusLink: (link) ->
+  readLinks: (link) ->
     links = $.linkheaders link
 
     @set 'statusUrl', links.find('status').resolve()
+    @set 'refreshUrl', links.find('refresh').resolve()
 
 # vim:ts=2:sw=2:et:tw=78

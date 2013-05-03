@@ -11,6 +11,7 @@ Pancakes::Application.routes.draw do
     resources :event_searches, :only => [:update, :show] do
       member do
         get :status
+        post :refresh
       end
     end
 
