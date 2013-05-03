@@ -49,16 +49,7 @@ class EventReport
   end
 
   def status
-    r = $REDIS
-
-    keys = r.smembers(cache_key)
-    results = []
-
-    r.pipelined do
-      keys.each { |k| results << r.hmget(k, 'tag', 'status') }
-    end
-
-    Hash[*results.map(&:value).flatten]
+    QueryStatus.new(cache_key, $REDIS)
   end
 
   # Public: Translates this report's EventSearch into API parameters.

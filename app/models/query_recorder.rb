@@ -11,6 +11,8 @@ require 'json'
 # - when the recorded data will expire
 # - the ultimate outcome of each query (success, failure, timeout, error)
 class QueryRecorder
+  include QueryStatusKeys
+
   attr_reader :ttl
   attr_reader :owner
   attr_reader :r
@@ -48,10 +50,12 @@ class QueryRecorder
 
   def alldone
     keys = r.smembers owner.cache_key
+    time = Time.now.to_i + ttl
 
-    r.pipelined do
-      keys.each { |k| r.expire k, ttl }
-      r.expire owner.cache_key, ttl
+    r.multi do
+      r.sadd owner.cache_key, Done
+      keys.each { |k| r.expireat k, time }
+      r.expireat owner.cache_key, time
     end
   end
 
@@ -60,7 +64,7 @@ class QueryRecorder
   def result(status, tag, data = {})
     key = "#{owner.cache_key}:#{tag}"
     r.sadd owner.cache_key, key
-    r.hmset key, 'tag', tag, 'status', status, 'data', data.to_json
+    r.hmset key, Tag, tag, Status, status, Data, data.to_json
   end
 
   def present_resp(resp)
