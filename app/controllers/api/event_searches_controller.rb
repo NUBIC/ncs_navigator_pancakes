@@ -11,7 +11,7 @@ class Api::EventSearchesController < ApiController
     @model = EventSearch.find_or_initialize_by_uuid(params[:id])
     @model.json = params[:event_search]
     @model.save!
-    @model.queue(current_user.pgt)
+    @model.queue(current_user.pgt, 90.minutes)
 
     respond_with @model
   end
