@@ -3,7 +3,8 @@ require 'spec_helper'
 describe EventReport do
   describe '#params' do
     let(:es) { EventSearch.new }
-    let(:er) { EventReport.new(es) }
+    let(:started_at) { Time.at(1234567890) }
+    let(:er) { EventReport.new(es, started_at) }
     let(:params) { er.params }
 
     it 'contains a list of event type codes in the EventSearch' do
