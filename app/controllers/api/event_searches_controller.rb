@@ -1,42 +1,48 @@
 class Api::EventSearchesController < ApiController
-  after_filter :add_links, :only => [:show, :update]
-
   def show
-    @model = EventSearch.find(params[:id])
+    s = EventSearch.find(params[:id])
 
-    respond_with @model
+    respond_with s, :meta => links(s)
+  end
+
+  def create
+    s = EventSearch.new
+    s.id = SecureRandom.uuid
+    s.json = params[:event_search]
+    s.save!
+
+    respond_with s, :meta => links(s)
   end
 
   def update
-    @model = EventSearch.find_or_initialize_by_uuid(params[:id])
-    @model.json = params[:event_search]
-    @model.save!
+    s = EventSearch.find(params[:id])
+    s.json = params[:event_search]
+    s.save!
 
-    respond_with @model
+    respond_with s, :meta => links(s)
   end
 
   def status
-    e = EventSearch.find(params[:id])
+    s = EventSearch.find(params[:id])
 
-    respond_with e.status
+    respond_with s.status
   end
 
   def refresh
-    e = EventSearch.find(params[:id])
+    s = EventSearch.find(params[:id])
     ttl = params[:ttl] ? [params[:ttl].to_i, 90.minutes].min : 90.minutes
 
-    e.queue(current_user.pgt, ttl)
+    s.queue(current_user.pgt, ttl)
 
     render :json => ok, :status => :accepted
   end
 
   private
 
-  def add_links
-    response.headers['Link'] = [
-      "<#{status_event_search_url(@model)}>; rel=status",
-      "<#{refresh_event_search_url(@model)}>; rel=refresh"
-    ]
+  def links(model)
+    { status: status_event_search_url(model),
+      refresh: refresh_event_search_url(model)
+    }
   end
 end
 

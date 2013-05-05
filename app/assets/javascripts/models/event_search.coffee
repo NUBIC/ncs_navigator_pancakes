@@ -1,5 +1,3 @@
-#= require uritemplate
-#= require linkheaders
 #= require models/model
 
 Pancakes.EventSearch = Pancakes.Model.extend
@@ -18,7 +16,7 @@ Pancakes.EventSearch = Pancakes.Model.extend
     event_types: @get('eventTypes').map (o) -> o.serialize()
     study_locations: @get('studyLocations').map (o) -> o.serialize()
 
-  deserialize: (doc, resp) ->
+  deserialize: (doc, meta) ->
     store = @get 'store'
     lookup = Ember.lookup
     get = Ember.get
@@ -34,19 +32,10 @@ Pancakes.EventSearch = Pancakes.Model.extend
       dataCollectors: dcs
       eventTypes: ets
       studyLocations: sls
-
-    @readLinks resp.getResponseHeader('Link')
+      statusUrl: meta['status']
+      refreshUrl: meta['refresh']
 
   save: ->
-    @set('id', @get('store').generateId()) unless @get('id')
-
-    @get('store').save(this).done (json, status, resp) =>
-      @readLinks resp.getResponseHeader('Link')
-
-  readLinks: (link) ->
-    links = $.linkheaders link
-
-    @set 'statusUrl', links.find('status').resolve()
-    @set 'refreshUrl', links.find('refresh').resolve()
+    @get('store').save(this)
 
 # vim:ts=2:sw=2:et:tw=78

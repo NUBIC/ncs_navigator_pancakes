@@ -8,7 +8,7 @@ Pancakes::Application.routes.draw do
       enum.resources :study_locations
     end
 
-    resources :event_searches, :only => [:update, :show] do
+    resources :event_searches, :only => [:create, :update, :show] do
       member do
         get :status
         post :refresh

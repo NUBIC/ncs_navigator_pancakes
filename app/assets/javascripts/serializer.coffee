@@ -25,12 +25,12 @@ Pancakes.Serializer = Ember.Object.extend
   referenceFor: (type, json) ->
     "#{type}:#{json['id']}"
 
-  materialize: (type, json, resp) ->
-    _.tap type.create(), (m) ->
-      m.deserialize(json, resp)
+  materialize: (type, json) ->
+    _.tap type.create(), (m) =>
+      m.deserialize json
 
-  deserializeOne: (json, resp, type, m) ->
+  deserializeOne: (json, type, m) ->
     root = @rootForType type
-    m.deserialize json[root], resp
+    m.deserialize json[root], json['meta']
 
 # vim:ts=2:sw=2:et:tw=78

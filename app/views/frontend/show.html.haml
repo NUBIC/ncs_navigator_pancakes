@@ -8,5 +8,3 @@
       NCS Navigator Pancakes
   %body
     = javascript_include_tag 'application'
-    #entropy-seed{%s(data-estimated-entropy) => 256}
-      = Base64.encode64(SecureRandom.random_bytes(32))
