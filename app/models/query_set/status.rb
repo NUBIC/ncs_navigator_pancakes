@@ -33,11 +33,15 @@ module QuerySet
       results = []
 
       redis.pipelined do
-        keys.each { |k| results << redis.hmget(k, Tag, Status) unless k == Done }
+        keys.each do |k|
+          if !(k == Done || k == Started)
+            results << redis.hmget(k, Tag, StatusKeys::Status)
+          end
+        end
       end
 
       @queries = Hash[*results.map(&:value).flatten]
-      @started = !queries.empty?
+      @started = keys.include?(Started)
       @done = keys.include?(Done)
     end
   end

@@ -10,16 +10,15 @@ module QuerySet
       redis.flushdb
     end
 
-    describe 'if no status entries exist for the given key' do
+    describe 'if the query is not marked as started' do
       it 'is not started' do
         status.should_not be_started
       end
     end
 
-    describe 'if a status entry exists for the given key' do
+    describe 'if the query is marked as started' do
       before do
-        redis.sadd cache_key, 'qs_test_1'
-        redis.hmset 'qs_test_1', 'status', 'foo'
+        redis.sadd cache_key, StatusKeys::Started
       end
 
       it 'is started' do

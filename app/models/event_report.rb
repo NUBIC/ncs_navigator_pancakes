@@ -40,12 +40,13 @@ class EventReport
   # Returns nothing.
   def execute(pgt, ttl)
     recorder = QuerySet::Recorder.new(self, ttl, $REDIS)
+    recorder.startall
 
     qs = search.locations.map do |l|
       QuerySet::Runner.queue run_at_location(l, pgt), l.id, recorder
     end
 
-    qs.map(&:value).tap { |v| recorder.alldone }
+    qs.map(&:value).tap { |v| recorder.doneall }
   end
 
   def status

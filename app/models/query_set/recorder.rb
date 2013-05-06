@@ -29,6 +29,10 @@ module QuerySet
       @r = redis
     end
 
+    def startall
+      r.sadd owner.cache_key, Started
+    end
+
     def started(tag)
       result 'started', tag
     end
@@ -49,7 +53,7 @@ module QuerySet
       result 'error', tag, present_error(err)
     end
 
-    def alldone
+    def doneall
       keys = r.smembers owner.cache_key
       time = Time.now.to_i + ttl
 
