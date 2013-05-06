@@ -39,17 +39,17 @@ class EventReport
   #
   # Returns nothing.
   def execute(pgt, ttl)
-    recorder = QueryRecorder.new(self, ttl, $REDIS)
+    recorder = QuerySet::Recorder.new(self, ttl, $REDIS)
 
     qs = search.locations.map do |l|
-      ::Query.queue run_at_location(l, pgt), l.id, recorder
+      QuerySet::Runner.queue run_at_location(l, pgt), l.id, recorder
     end
 
     qs.map(&:value).tap { |v| recorder.alldone }
   end
 
   def status
-    QueryStatus.new(cache_key, $REDIS)
+    QuerySet::Status.new(cache_key, $REDIS)
   end
 
   # Public: Translates this report's EventSearch into API parameters.
