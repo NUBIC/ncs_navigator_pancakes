@@ -35,6 +35,16 @@ Pancakes.EventSearch = Pancakes.Model.extend
       statusUrl: meta['status']
       refreshUrl: meta['refresh']
 
+  updateStatus: ->
+    $.getJSON(@get 'statusUrl').done((json) =>
+      @set 'isStarted', json['started']
+      @set 'isDone', json['done']
+      @set 'queries', json['queries']
+    )
+
+  refresh: ->
+    $.ajax(@get('refreshUrl'), type: 'POST')
+
   save: ->
     @get('store').save(this)
 

@@ -3,8 +3,11 @@
     Pancakes
 .container
   = hb 'outlet'
-  %section.status
+  %section.locations
     %header
       %h1
         Study locations
-    = hb 'outlet studyLocations'
+    .manifest
+      = hb 'outlet studyLocations'
+    .status
+      = hb 'outlet studyLocationStatuses'

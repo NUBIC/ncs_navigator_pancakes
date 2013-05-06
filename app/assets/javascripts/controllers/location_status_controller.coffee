@@ -7,7 +7,7 @@ Pancakes.LocationStatusController = Ember.ArrayController.extend
     status = @get 'status'
 
     @get('locations').map (l) ->
-      status[l.get('url')] if status
+      { name: l.get('name'), status: status[l.get('url')] if status }
   ).property('locations.@each', 'status')
 
 # vim:ts=2:sw=2:et:tw=78

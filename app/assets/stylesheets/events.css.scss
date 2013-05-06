@@ -1,6 +1,7 @@
 @import "base";
 @import "icons";
 @import "motifs";
+@import "compass/css3/opacity";
 
 @mixin search-criterion($stretch-input: false) {
   .label, .input {
@@ -30,16 +31,28 @@
   }
 }
 
-.status {
+.locations {
   @include span-columns(3);
-
-  h1 {
-    @include heading;
-  }
 }
 
 .report {
   @include span-columns(13 omega);
+
+  .in-progress {
+    width: 100%;
+  }
+
+  .in-progress {
+    text-align: center;
+
+    .spinner {
+      @include opacity(0.1);
+
+      display: block;
+      font-size: $base-font-size * 8;
+    }
+  }
+
 }
 
 .search {

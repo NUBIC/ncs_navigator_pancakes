@@ -1,22 +1,25 @@
 Pancakes.EventSearchesShowRoute = Ember.Route.extend
-  setupController: (controller, model) ->
+  renderTemplate: (controller, model) ->
     @_super controller, model
 
-    @controllerFor('studyLocationStatuses').set 'source', model
+    @render 'studyLocationStatuses',
+      into: 'application',
+      outlet: 'studyLocationStatuses',
+      controller: 'locationStatus'
+
+  setupController: (controller, model) ->
+    @_super controller, model
 
     @controllerFor('studyLocations').setProperties
       editable: true
       command: controller.get 'content'
-
-  deactivate: ->
-    @controllerFor('studyLocationStatuses').set 'source', null
 
   events:
     submit: ->
       search = @get 'controller.content'
 
       search.save().done(=>
-        @transitionTo 'event_searches.show', search
+        @get('controller').refresh()
       )
 
 # vim:ts=2:sw=2:et:tw=78

@@ -1,6 +1,6 @@
 Pancakes.StudyLocationStatusView = Ember.View.extend
   classNameBindings: ['standardClasses', 'statusClasses']
-
+  attributeBindings: ['title', 'name:data-location-name']
   standardClasses: ['status-view']
 
   statusClasses: (->
@@ -14,4 +14,9 @@ Pancakes.StudyLocationStatusView = Ember.View.extend
       else
         'blank'
   ).property('status')
+
+  title: (->
+    "#{@get('name')}: #{@get('status')}"
+  ).property('name', 'status')
+
 # vim:ts=2:sw=2:et:tw=78
