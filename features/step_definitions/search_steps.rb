@@ -18,6 +18,8 @@ When(/^I enter the parameters$/) do |table|
       find('.scheduled-date.end input').set(value)
     when 'done by'
       find('.done-by input').set("#{value}\n")
+    when 'location'
+      check value
     else raise "Unknown key #{key}"
     end
   end
@@ -43,6 +45,15 @@ Then(/^I see the search criteria$/) do |table|
       actual << [key, elem]
     end
   end
+
+  table.diff!(actual)
+end
+
+Then(/^I see progress updates for$/) do |table|
+  # stall for a bit to let the status poller catch up
+  sleep Capybara.default_wait_time
+
+  actual = all('.status-view').map { |e| [e['data-location-name']] }
 
   table.diff!(actual)
 end

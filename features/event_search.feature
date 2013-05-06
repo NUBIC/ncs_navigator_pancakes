@@ -25,18 +25,24 @@ Feature: Event search
       | Baz    | no          |
       | Foo    | yes         |
 
-  Scenario: Clicking "search" tells the user that a search is in progress
-    When I start an event search
-    And I enter the parameters
+  Scenario: When a search is started, its progress is updated
+    Given I start an event search with the parameters
       | event type | Pre-Pregnancy Visit |
       | event type | Pregnancy Visit 1   |
       | start date | 04/01/2013          |
       | end date   | 04/14/2013          |
       | done by    | arl012              |
       | done by    | fcr456              |
-    And I click "Search"
+      | location   | Foo                 |
+      | location   | Bar                 |
+      | location   | Baz                 |
 
-    Then I see "Search in progress"
+    When I click "Search"
+
+    Then I see progress updates for
+      | Bar |
+      | Baz |
+      | Foo |
 
   Scenario: Editing the search persists the new parameters
     Given I start an event search with the parameters
@@ -59,5 +65,6 @@ Feature: Event search
       | event type | Two Tier Enumeration |
       | start date | 01/02/2013           |
       | end date   | 02/03/2013           |
+
 
 # vim:ts=2:sw=2:et:tw=78
