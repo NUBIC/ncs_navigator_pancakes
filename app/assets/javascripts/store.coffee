@@ -72,7 +72,6 @@ Pancakes.Store = Ember.Object.extend
       type: method,
       contentType: 'application/json; charset=UTF-8'
       data: JSON.stringify data
-      dataType: 'json'
     ).done((json) =>
       if json
         @get('serializer').deserializeOne(json, type, model)
