@@ -73,6 +73,7 @@
   }
 }
 
-.icon-spinner:before              { content: "\f110"; }
+.icon-exchange:before             { content: "\f0ec"; }
 .icon-exclamation-sign:before     { content: "\f06a"; }
-.icon-ok-sign:before              { content: "\f058"; }
+.icon-ok:before                   { content: "\f00c"; }
+.icon-spinner:before              { content: "\f110"; }

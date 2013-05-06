@@ -1,0 +1,3 @@
+.in-progress
+  .spinner
+    .icon-spinner.icon-spin{:title => 'Search in progress'}

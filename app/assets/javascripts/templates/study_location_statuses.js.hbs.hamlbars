@@ -1,0 +1,4 @@
+%ul
+  = hb 'each status in controller' do
+    %li
+      = hb 'view Pancakes.StudyLocationStatusView statusBinding="status"'
