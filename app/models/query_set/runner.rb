@@ -3,11 +3,10 @@ require 'timeout'
 
 module QuerySet
   ##
-  # An Actor that runs a proc (typically a query) that is expected to
-  # occasionally fail.  If the proc fails, it is retried up to THRESHOLD
-  # times.
+  # An Actor that runs code that is expected to occasionally fail.  If the
+  # code fails, it is retried up to THRESHOLD times.
   #
-  # Procs MUST return an object that responds to #success?.  Success or
+  # The code ran MUST return an object that responds to #success?.  Success or
   # failure of the block is determined as follows:
   #
   # 1. If the block raises StandardError or a subclass, it fails.
@@ -15,18 +14,14 @@ module QuerySet
   # 3. If #success? returns false, it fails.
   # 4. If #success? return true, it succeeds.
   #
-  # If a Proc raises an exception whose class is not StandardError or a
+  # If the code raises an exception whose class is not StandardError or a
   # subclass, it will NOT be caught.  The rationale is that non-StandardErrors
   # generally reflect errors that should result in termination of the Ruby
   # process, e.g. SyntaxErrors.
   #
-  # Some libraries do not respect this convention.  In those cases, you will
-  # have to rescue the offending exception yourself or get in touch with the
-  # library's author to fix things up.
-  #
-  # Procs will be retried a maximum of five times, and will time out after 60
-  # seconds.  Therefore, the maximum execution time for a given proc is 300
-  # seconds.
+  # Code objects will be retried a maximum of five times, and will time out
+  # after 60 seconds.  Therefore, the maximum execution time for a given
+  # object is 300 seconds.
   #
   # It is RECOMMENDED that you call Runner.queue to queue up work.
   # Runner.queue will return a Celluloid::Future, which on completion will
@@ -40,55 +35,76 @@ module QuerySet
     ##
     # Public: Queues up a query proc for execution.
     #
-    # code     - The proc to run.  The proc MUST have zero arity.
-    # tag      - An object associated with this proc.  Used by the reporter to
-    #            label the proc's result.
-    # reporter - Query results are sent here.  See #run for the expected
-    #            interface.
-    def self.queue(code, tag, reporter)
-      RunnerPool.future.run(code, tag, reporter)
+    # code     - The object to run.  The object MUST have a zero-arity #call.
+    # handlers - The result handlers.  See #run for more information.
+    def self.queue(code, handlers)
+      RunnerPool.future.run(code, handlers)
     end
 
     ##
     # Runs a query.
     #
-    # When a query proc terminates or times out, its return value (or
-    # associated exception) and tag are sent to the reporter.  The reporter
-    # MUST respond to the following messages:
+    # A query may terminate in four ways:
     #
-    # 1. #started(tag):      called when the query proc begins execution
-    # 2. #success(ret, tag): called if the proc's return value responds truthy
-    #                        to #success?
-    # 3. #failure(ret, tag): called if the proc's return value responds falsy
-    #                        to #success?
-    # 4. #timeout(ret, tag): called if the proc timed out
-    # 5. #error(ret, tag):   called if the proc raised StandardError or
-    #                        subclass
-    def run(code, tag, reporter)
+    # 1. Successfully.
+    # 2. Non-exception failure.
+    # 3. Exception failure.
+    # 4. Timeout.
+    #
+    # These termination cases are handled by the success, failure, error, and
+    # timeout handlers, respectively.  The success and non-exception failure
+    # handlers receive the proc's return value.  The exception and timeout
+    # handlers receive the exception object.
+    #
+    # There also exists a handler that is invoked whenever a query proc is
+    # started.  This handler is given the query object.
+    #
+    # Example invocation:
+    #
+    #     run query,
+    #       started: ->(obj) { ... },
+    #       success: ->(ret) { ... },
+    #       failure: ->(ret) { ... },
+    #       error:   ->(err) { ... },
+    #       timeout: ->(err) { ... }
+    #
+    # Each handler is passed the return value of the query proc.  You MUST
+    # specify all handlers; a missing handler will raise an error.
+    #
+    # Returns the value of the invoked handler.
+    def run(code, handlers)
       tries = 0
 
       loop do
         r = begin
-              reporter.started(tag)
+              h(handlers, :started).call(code)
               ret = Timeout::timeout(TIMEOUT) { code.call }
 
               if ret.success?
-                break reporter.success(ret, tag)
+                break h(handlers, :success).call(ret)
               else
-                reporter.failure(ret, tag)
+                h(handlers, :failure).call(ret)
               end
             rescue Timeout::Error => e
-              reporter.timeout(e, tag)
+              h(handlers, :timeout).call(e)
+            rescue UnspecifiedHandlerError => e
+              raise e
             rescue => e
-              reporter.error(e, tag)
+              h(handlers, :error).call(e)
             end
 
         tries += 1
 
-        if tries > THRESHOLD
+        if tries >= THRESHOLD
           break r
         end
       end
+    end
+
+    private
+
+    def h(handlers, status)
+      handlers[status] || lambda { |ret| raise UnspecifiedHandlerError, "#{status} handler not specified" }
     end
   end
 
@@ -97,6 +113,9 @@ module QuerySet
   # influence on Pancakes' maximum number of concurrent outbound connections
   # to NCS Navigator services.
   RunnerPool = Runner.pool(:size => 16)
+
+  class UnspecifiedHandlerError < StandardError
+  end
 end
 
 # vim:ts=2:sw=2:et:tw=78

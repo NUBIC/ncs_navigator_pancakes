@@ -43,10 +43,16 @@ class EventReport
     recorder.startall
 
     qs = search.locations.map do |l|
-      QuerySet::Runner.queue run_at_location(l, pgt), l.id, recorder
+      QuerySet::Runner.queue run_at_location(l, pgt),
+        started: ->(obj) { recorder.started(l.id) },
+        success: ->(ret) { recorder.success(ret, l.id) },
+        failure: ->(ret) { recorder.failure(ret, l.id) },
+        error:   ->(err) { recorder.error(err, l.id) },
+        timeout: ->(err) { recorder.timeout(err, l.id) }
     end
 
-    qs.map(&:value).tap { |v| recorder.doneall }
+    qs.each(&:value)
+    recorder.doneall
   end
 
   def status
