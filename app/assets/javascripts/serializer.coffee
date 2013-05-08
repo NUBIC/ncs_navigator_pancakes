@@ -27,10 +27,14 @@ Pancakes.Serializer = Ember.Object.extend
 
   materialize: (type, json) ->
     _.tap type.create(), (m) =>
-      m.deserialize json
+      @deserialize m, json
 
   deserializeOne: (json, type, m) ->
     root = @rootForType type
-    m.deserialize json[root], json['meta']
+    @deserialize m, json[root], json['meta']
+
+  deserialize: (m, json, meta) ->
+    m.deserialize json, meta
+    m.set 'isLoaded', true
 
 # vim:ts=2:sw=2:et:tw=78
