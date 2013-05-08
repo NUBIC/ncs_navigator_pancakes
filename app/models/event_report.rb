@@ -1,26 +1,19 @@
-##
-# An EventReport is the result of executing an EventSearch.
-#
-# EventReports have five components:
-#
-# 1. The EventSearch from which they spawned
-# 2. When they began execution (from 1)
-# 3. Their report criteria (also from 1)
-# 4. Execution status
-# 5. The report data
-#
-# Report data and metadata is cached in Redis to speed up retrieval and
-# pagination.
+# Public: The result of executing an EventSearch.
 class EventReport
+  Done = '__done__'
+  Started = '__started__'
+  Status = 'status'
+  Tag = 'tag'
+
   attr_reader :search
   attr_reader :started_at
 
   ##
-  # es         - The EventSearch that will be used to generate this report's
+  # search     - The EventSearch that will be used to generate this report's
   #              data.
   # started_at - When report generation started.
-  def initialize(es, started_at)
-    @search = es
+  def initialize(search, started_at)
+    @search = search
     @started_at = started_at.to_i
   end
 
@@ -30,33 +23,30 @@ class EventReport
 
   # Public: Build the report.
   #
-  # The report data, once assembled, will be available via the #data reader.
-  # See that method's documentation for more information.
-  #
   # pgt - a CAS PGT that will be used to contact each Cases instance
   #       named in the EventSearch
   # ttl - lifetime of cached report data and metadata, in seconds
   #
   # Returns nothing.
   def execute(pgt, ttl)
-    recorder = QuerySet::Recorder.new(self, ttl, $REDIS)
-    recorder.startall
+    startall
 
-    qs = search.locations.map do |l|
-      QuerySet::Runner.queue run_at_location(l, pgt),
-        started: ->(obj) { recorder.started(l.id) },
-        success: ->(ret) { recorder.success(ret, l.id) },
-        failure: ->(ret) { recorder.failure(ret, l.id) },
-        error:   ->(err) { recorder.error(err, l.id) },
-        timeout: ->(err) { recorder.timeout(err, l.id) }
-    end
+    locations = search.locations.each(&:freeze)
+    jobs = locations.map { |l| EventReportJob.new(l, params, pgt, cache_key) }
+    futures = jobs.map { |job| QueryRunner.queue(job) }
+    results = futures.map(&:value)
 
-    qs.each(&:value)
-    recorder.doneall
+    collate results.select(&:success?)
+    doneall(ttl)
   end
 
   def status
-    QuerySet::Status.new(cache_key, $REDIS)
+    read_status
+
+    { started: @started,
+      done: @done,
+      queries: @query_statuses
+    }
   end
 
   # Public: Translates this report's EventSearch into API parameters.
@@ -67,14 +57,82 @@ class EventReport
     }.reject { |_, v| v.blank? }
   end
 
+  # Public: This report's data.
+  #
+  # Data, like all other EventReport characteristics, is identified by a
+  # search ID and a start timestamp.  Therefore, two EventReports with the
+  # same search ID and started_at will have the same data.
+  def data
+    data = redis.get(data_list_key)
+    data ? JSON.parse(data) : []
+  end
+
+  # Internal: Collates results from #execute.
+  #
+  # This method is intended for use only by EventReport, but is publicly
+  # exposed for testing.
+  #
+  # Returns nothing.
+  def collate(results)
+    agg = results.each_with_object([]) do |result, r|
+      next unless result.body.respond_to?('has_key?') && result.body.has_key?('events')
+
+      name = result.location.name
+      url = result.location.url
+
+      result.body['events'].each do |e|
+        e['pancakes.location'] = { 'name' => name, 'url' => url }
+        r << e
+      end
+    end
+
+    redis.set data_list_key, agg.to_json
+  end
+
   private
 
-  def run_at_location(l, pgt)
-    lambda { l.connection(pgt) { |c| c.get('/api/v1/events', params) } }
+  def data_list_key
+    "#{cache_key}:data"
+  end
+
+  def startall
+    redis.sadd cache_key, Started
+  end
+
+  def doneall(ttl)
+    keys = redis.smembers cache_key
+    time = Time.now.to_i + ttl
+
+    redis.multi do
+      redis.sadd cache_key, Done
+      keys.each { |k| redis.expireat k, time }
+      redis.expireat cache_key, time
+    end
+  end
+
+  def read_status
+    keys = redis.smembers cache_key
+    results = []
+
+    redis.pipelined do
+      keys.each do |k|
+        if !(k == Done || k == Started)
+          results << redis.hmget(k, Tag, Status)
+        end
+      end
+    end
+
+    @query_statuses = Hash[*results.map(&:value).flatten]
+    @started = keys.include?(Started)
+    @done = keys.include?(Done)
   end
 
   def date_range
     "[#{[search.scheduled_start_date, search.scheduled_end_date].join(',')}]"
+  end
+
+  def redis
+    $REDIS
   end
 end
 

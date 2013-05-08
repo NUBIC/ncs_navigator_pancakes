@@ -25,6 +25,10 @@ class StudyLocation < Model
     yield client(:url => url, :pgt => pgt)
   end
 
+  def events(params, pgt)
+    connection(pgt) { |c| c.get('/api/v1/events', params) }
+  end
+
   def valid?
     !!(name && url)
   end

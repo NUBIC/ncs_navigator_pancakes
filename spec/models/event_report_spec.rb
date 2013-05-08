@@ -1,11 +1,12 @@
 require 'spec_helper'
 
 describe EventReport do
+  let(:es) { EventSearch.new }
+  let(:started_at) { Time.at(1234567890) }
+  let(:report) { EventReport.new(es, started_at) }
+
   describe '#params' do
-    let(:es) { EventSearch.new }
-    let(:started_at) { Time.at(1234567890) }
-    let(:er) { EventReport.new(es, started_at) }
-    let(:params) { er.params }
+    let(:params) { report.params }
 
     it 'contains a list of event type codes in the EventSearch' do
       es.stub!(:event_type_ids => [1, 2, 3])
@@ -41,6 +42,83 @@ describe EventReport do
       es.stub!(:scheduled_start_date => '2000-01-01', :scheduled_end_date => '2000-02-01')
 
       params[:scheduled_date].should == '[2000-01-01,2000-02-01]'
+    end
+  end
+
+  describe '#status' do
+    before do
+      $REDIS.flushdb
+    end
+
+    it 'maps :started to true when it is started' do
+      report.execute(nil, 1.minute)
+
+      report.status[:started].should be_true
+    end
+
+    it 'maps :started to false when it is not started' do
+      report.status[:started].should be_false
+    end
+
+    it 'maps :done to true when it is done' do
+      report.execute(nil, 1.minute)
+
+      report.status[:done].should be_true
+    end
+
+    it 'maps :done to false when it is not done' do
+      report.status[:done].should be_false
+    end
+
+    it "includes each query's status" do
+      sl1 = StudyLocation.new('url' => 'https://cases1.example.edu')
+      sl2 = StudyLocation.new('url' => 'https://cases2.example.edu')
+      es.stub!(:locations => [sl1, sl2])
+
+      report.execute(nil, 1.minute)
+
+      report.status[:queries].keys.should include('https://cases1.example.edu')
+      report.status[:queries].keys.should include('https://cases2.example.edu')
+    end
+  end
+
+  shared_context 'event report data' do
+    let(:sl) { StudyLocation.new('name' => 'Baz', 'url' => 'https://foo.example.edu') }
+    let(:r1) do
+      double(:body => { 'events' => [{ 'foo' => 'bar' }, { 'baz' => 'qux' }] },
+             :location => sl)
+    end
+
+    before do
+      $REDIS.flushdb
+    end
+  end
+
+  describe '#collate' do
+    include_context 'event report data'
+
+    it 'inserts location data into each row' do
+      report.collate([r1])
+
+      report.data.should == [
+        { 'foo' => 'bar', 'pancakes.location' => { 'name' => 'Baz', 'url' => 'https://foo.example.edu' } },
+        { 'baz' => 'qux', 'pancakes.location' => { 'name' => 'Baz', 'url' => 'https://foo.example.edu' } }
+      ]
+    end
+  end
+
+  describe '#data' do
+    include_context 'event report data'
+
+    it 'is an empty list by default' do
+      report.data.should == []
+    end
+
+    it 'is accessible to two EventReports with the same search and timestamp' do
+      report.collate([r1])
+      report2 = EventReport.new(report.search, report.started_at)
+
+      report2.data.should == report.data
     end
   end
 end

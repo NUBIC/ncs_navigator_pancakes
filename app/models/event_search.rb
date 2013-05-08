@@ -21,6 +21,10 @@ class EventSearch < ActiveRecord::Base
     EventReport.new(self, last_started_at).status
   end
 
+  def data
+    EventReport.new(self, last_started_at).data
+  end
+
   # Public: Builds and executes an EventReport from this EventSearch.
   #
   # pgt - a CAS proxy-granting ticket
