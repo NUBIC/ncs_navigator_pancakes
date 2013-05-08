@@ -44,7 +44,7 @@ Feature: Event search
       | Baz |
       | Foo |
 
-  @wip @all-locations-ok
+  @all-locations-ok
   Scenario: When the search completes, its results are displayed
     When I start an event search with the parameters
       | event type | Pre-Pregnancy Visit |
