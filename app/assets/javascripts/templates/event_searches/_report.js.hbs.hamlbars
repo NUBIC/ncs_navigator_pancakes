@@ -1,1 +1,2 @@
 .search-results
+  = hb 'view Pancakes.SearchResultsGrid'
