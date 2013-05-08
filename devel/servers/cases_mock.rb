@@ -3,7 +3,24 @@ require 'sinatra'
 
 $DATA = %Q{
 {
-    "events": [],
+    "events": [
+        {
+            "data_collector_usernames": [
+                "abc123",
+                "fgh456"
+            ],
+            "event_disposition": 40,
+            "event_disposition_category": 1,
+            "event_id": "242d6bc8-cc9b-469e-bb70-e583982f6537",
+            "event_type": {
+                "display_text": "Foo",
+                "local_code": "-99"
+            },
+            "links": [],
+            "participant_id": "a6e2a94f-bdf6-4400-a95a-214dd67768e9",
+            "scheduled_date": "2013-01-01"
+        }
+    ],
     "filters": {}
 }
 }
