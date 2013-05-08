@@ -1,4 +1,5 @@
 require 'redis'
+require 'redis/namespace'
 
 # There are two Redis connection sources in Pancakes:
 #
