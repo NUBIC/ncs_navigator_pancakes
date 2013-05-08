@@ -44,6 +44,22 @@ Feature: Event search
       | Baz |
       | Foo |
 
+  @wip @all-locations-ok
+  Scenario: When the search completes, its results are displayed
+    When I start an event search with the parameters
+      | event type | Pre-Pregnancy Visit |
+      | event type | Pregnancy Visit 1   |
+      | start date | 04/01/2013          |
+      | end date   | 04/14/2013          |
+      | done by    | arl012              |
+      | done by    | fcr456              |
+      | location   | Foo                 |
+      | location   | Bar                 |
+      | location   | Baz                 |
+    And I click "Search"
+
+    Then I see search results
+
   Scenario: Editing the search persists the new parameters
     Given I start an event search with the parameters
       | event type | Pre-Pregnancy Visit |
@@ -65,6 +81,5 @@ Feature: Event search
       | event type | Two Tier Enumeration |
       | start date | 01/02/2013           |
       | end date   | 02/03/2013           |
-
 
 # vim:ts=2:sw=2:et:tw=78

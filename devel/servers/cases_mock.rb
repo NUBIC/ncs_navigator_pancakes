@@ -27,6 +27,18 @@ Aker::Rack.use_in(Sinatra::Application)
 
 OpenSSL::SSL::SSLContext::DEFAULT_PARAMS[:verify_mode] = OpenSSL::SSL::VERIFY_NONE
 
+$ideal = false
+
+post '/_controls/behave' do
+  $ideal = true
+  status 200
+end
+
+post '/_controls/misbehave' do
+  $ideal = false
+  status 200
+end
+
 get '/api/v1/events' do
   env['aker.check'].authentication_required!
 
@@ -42,12 +54,16 @@ get '/api/v1/events' do
 
   content_type 'application/json'
 
-  sleep(rand)
-  if rand < 0.3
-    status 403
-  elsif rand > 0.7
-    raise "Uh oh"
-  else
+  if $ideal
     $DATA
+  else
+    sleep(rand)
+    if rand < 0.3
+      status 403
+    elsif rand > 0.7
+      raise "Uh oh"
+    else
+      $DATA
+    end
   end
 end
