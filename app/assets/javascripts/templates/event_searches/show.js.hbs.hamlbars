@@ -1,2 +1,5 @@
 .report
-  Search in progress
+  = hb 'unless isDone' do
+    = hb 'partial "event_searches/in_progress"'
+    = hb 'else'
+    = hb 'partial "event_searches/report"'
