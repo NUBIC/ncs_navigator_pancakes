@@ -80,6 +80,11 @@ GEM
       ember-source
       execjs
       handlebars-source
+    bcdatabase (1.2.3)
+      activesupport (>= 2.0)
+      highline (~> 1.5, < 1.6.9)
+      i18n
+      thor (~> 0.14)
     builder (3.0.4)
     capybara (2.0.2)
       mime-types (>= 1.16)
@@ -164,6 +169,7 @@ GEM
       tilt
     hana (1.0.1)
     handlebars-source (1.0.0.rc3)
+    highline (1.6.8)
     hike (1.2.1)
     i18n (0.6.1)
     inifile (0.4.1)
@@ -316,6 +322,7 @@ DEPENDENCIES
   activerecord-jdbcpostgresql-adapter
   aker-cas_cli
   aker-rails
+  bcdatabase
   castanet
   castanet-testing!
   celluloid

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z $RAILS_ENV ]; then
-    export RAILS_ENV='test'
+    export RAILS_ENV='ci'
 fi
 
 if [ -z $GEMSET ]; then
