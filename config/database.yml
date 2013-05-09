@@ -1,7 +1,7 @@
 <%
 require 'bcdatabase'
 
-Bcdatabase.load
+bcdb = Bcdatabase.load
 %>
 
 development:
