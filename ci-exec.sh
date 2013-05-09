@@ -23,6 +23,8 @@ if [ -z "$WORKSPACE" ]; then
     exit 1
 fi
 
+export JOHN_FRUM_WILL_RETURN=1
+
 # Feel free to bump this as new versions of bundler that work with this CI
 # script are released.
 export BUNDLER_VERSION=1.3.2
