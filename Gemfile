@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'active_model_serializers', '~> 0.7.0'
 gem 'aker-rails'
+gem 'bcdatabase'
 gem 'castanet'
 gem 'celluloid'
 gem 'connection_pool'

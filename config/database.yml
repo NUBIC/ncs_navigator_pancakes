@@ -1,3 +1,9 @@
+<%
+require 'bcdatabase'
+
+Bcdatabase.load
+%>
+
 development:
   adapter: <%= 'jdbc' if RUBY_PLATFORM =~ /java/ %>postgresql
   database: ncs_navigator_pancakes
@@ -13,3 +19,5 @@ test:
   password: ncs_navigator_pancakes_test
   host: localhost
   pool: 20
+
+<%= bcdb.ci :public_ci_postgresql9, :ncs_navigator_pancakes %>
