@@ -42,11 +42,11 @@ group :test, :development do
 
   platform :ruby do
     gem 'therubyracer', :require => false
-    gem 'sqlite3'
+    gem 'pg'
   end
 
   platform :jruby do
     gem 'therubyrhino', :require => false
-    gem 'activerecord-jdbcsqlite3-adapter'
+    gem 'activerecord-jdbcpostgresql-adapter'
   end
 end

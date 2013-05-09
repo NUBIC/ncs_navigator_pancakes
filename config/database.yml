@@ -1,6 +1,15 @@
 development:
-  adapter: <%= 'jdbc' if RUBY_PLATFORM =~ /java/ %>sqlite3
-  database: db/development.sqlite
+  adapter: <%= 'jdbc' if RUBY_PLATFORM =~ /java/ %>postgresql
+  database: ncs_navigator_pancakes
+  username: ncs_navigator_pancakes
+  password: ncs_navigator_pancakes
+  host: localhost
+  pool: 20
+
 test:
-  adapter: <%= 'jdbc' if RUBY_PLATFORM =~ /java/ %>sqlite3
-  database: db/test.sqlite
+  adapter: <%= 'jdbc' if RUBY_PLATFORM =~ /java/ %>postgresql
+  database: ncs_navigator_pancakes_test
+  username: ncs_navigator_pancakes_test
+  password: ncs_navigator_pancakes_test
+  host: localhost
+  pool: 20
