@@ -4,3 +4,6 @@
 [submodule "vendor/assets/javascripts/SlickGrid"]
 	path = vendor/assets/javascripts/SlickGrid
 	url = https://github.com/mleibman/SlickGrid.git
+[submodule "vendor/ncs_navigator_schema"]
+	path = vendor/ncs_navigator_schema
+	url = https://github.com/NUBIC/ncs_navigator_schema.git
