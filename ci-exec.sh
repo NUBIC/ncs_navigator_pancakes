@@ -1,8 +1,5 @@
 #!/bin/bash
 
-if [ -z $RAILS_ENV ]; then
-    export RAILS_ENV='ci'
-fi
 
 if [ -z $GEMSET ]; then
     GEMSET=ncs_navigator_pancakes
@@ -29,10 +26,10 @@ export JOHN_FRUM_WILL_RETURN=1
 # script are released.
 export BUNDLER_VERSION=1.3.2
 
-set +xe
+echo "RAILS_ENV=$RAILS_ENV"
+
 echo "Initializing RVM"
 source ~/.rvm/scripts/rvm
-set -xe
 
 # On the overnight build, reinstall all gems
 if [ `date +%H` -lt 5 ]; then
