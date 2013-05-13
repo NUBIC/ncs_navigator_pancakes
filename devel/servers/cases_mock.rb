@@ -9,8 +9,11 @@ $DATA = %Q{
                 "abc123",
                 "fgh456"
             ],
-            "event_disposition": 40,
-            "event_disposition_category": 1,
+            "disposition_code": {
+                "category_code": 2,
+                "disposition": "Vacant housing unit",
+                "interim_code": "040"
+            },
             "event_id": "242d6bc8-cc9b-469e-bb70-e583982f6537",
             "event_type": {
                 "display_text": "Foo",
