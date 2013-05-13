@@ -34,6 +34,7 @@ Pancakes.EventSearch = Pancakes.Model.extend
       studyLocations: sls
       statusUrl: meta['status']
       refreshUrl: meta['refresh']
+      dataUrl: meta['data']
 
   updateStatus: ->
     $.getJSON(@get 'statusUrl').done((json) =>
@@ -47,5 +48,10 @@ Pancakes.EventSearch = Pancakes.Model.extend
 
   save: ->
     @get('store').save(this)
+
+  loadData: ->
+    $.getJSON(@get 'dataUrl').done((json) =>
+      @set 'reportData', json
+    )
 
 # vim:ts=2:sw=2:et:tw=78

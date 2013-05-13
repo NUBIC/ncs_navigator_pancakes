@@ -28,6 +28,12 @@ class Api::EventSearchesController < ApiController
     respond_with s.status
   end
 
+  def data
+    s = EventSearch.find(params[:id])
+
+    render :json => s.data
+  end
+
   def refresh
     s = EventSearch.find(params[:id])
     ttl = params[:ttl] ? [params[:ttl].to_i, 90.minutes].min : 90.minutes
@@ -41,7 +47,8 @@ class Api::EventSearchesController < ApiController
 
   def links(model)
     { status: status_event_search_url(model),
-      refresh: refresh_event_search_url(model)
+      refresh: refresh_event_search_url(model),
+      data: data_event_search_url(model)
     }
   end
 end

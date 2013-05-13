@@ -1,2 +1,2 @@
 .search-results
-  = hb 'view Pancakes.SearchResultsGrid'
+  = hb 'view Pancakes.EventSearchResultsGrid contentBinding="reportData"'
