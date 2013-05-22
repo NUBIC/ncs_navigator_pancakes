@@ -50,4 +50,6 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'sinatra'
   gem 'term-ansicolor'
+  gem 'vlad'
+  gem 'vlad-git'
 end
