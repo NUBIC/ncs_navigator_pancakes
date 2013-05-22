@@ -8,6 +8,6 @@ Pancakes::Application.load_tasks
 
 begin
   require 'vlad'
-  Vlad.load
+  Vlad.load :scm => 'git'
 rescue LoadError
 end

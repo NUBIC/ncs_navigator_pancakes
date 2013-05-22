@@ -313,6 +313,9 @@ GEM
     vlad (2.5.0)
       rake (>= 0.8, < 11.0)
       rake-remote_task (~> 2.1)
+    vlad-extras (0.7.2)
+      rake-remote_task (~> 2.1)
+      vlad (>= 2.2.4, < 3)
     vlad-git (2.2.0)
       vlad (>= 2.1.0)
     warden (1.2.1)
@@ -367,4 +370,5 @@ DEPENDENCIES
   therubyrhino
   uglifier (>= 1.0.3)
   vlad
+  vlad-extras
   vlad-git

@@ -51,5 +51,6 @@ group :test, :development do
   gem 'sinatra'
   gem 'term-ansicolor'
   gem 'vlad'
+  gem 'vlad-extras', :require => false
   gem 'vlad-git'
 end
