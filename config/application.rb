@@ -19,7 +19,7 @@ module Pancakes
     ENV['PANCAKES_SERVER']
   end
 
-  module_function :app_server
+  module_function :app_server?
 
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
