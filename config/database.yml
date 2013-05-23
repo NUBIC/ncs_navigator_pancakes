@@ -21,3 +21,4 @@ test:
   pool: 20
 
 <%= bcdb.ci :public_ci_postgresql9, :ncs_navigator_pancakes %>
+<%= bcdb.production :ncsdb_prod, :ncs_navigator_pancakes %>
