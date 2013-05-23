@@ -20,6 +20,16 @@ gem 'puma'
 gem 'rails', '3.2.13'
 gem 'sidekiq'
 
+platform :ruby do
+  gem 'pg'
+  gem 'therubyracer', :require => false
+end
+
+platform :jruby do
+  gem 'activerecord-jdbcpostgresql-adapter'
+  gem 'therubyrhino', :require => false
+end
+
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'compass-rails'
@@ -40,14 +50,4 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'sinatra'
   gem 'term-ansicolor'
-
-  platform :ruby do
-    gem 'therubyracer', :require => false
-    gem 'pg'
-  end
-
-  platform :jruby do
-    gem 'therubyrhino', :require => false
-    gem 'activerecord-jdbcpostgresql-adapter'
-  end
 end
