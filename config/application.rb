@@ -104,7 +104,7 @@ module Pancakes
         if Rails.env.production?
           authorities :cas
         else
-          static = Aker::Authorities::Static.from_file(File.expand_path('../../../devel/logins.yml', __FILE__))
+          static = Aker::Authorities::Static.from_file(File.expand_path('../../devel/logins.yml', __FILE__))
           authorities :cas, static
         end
       end
