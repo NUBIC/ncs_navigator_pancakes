@@ -10,4 +10,6 @@ verify = -> h do
   end
 end
 
-verify[Pancakes::Application.config.services]
+if Pancakes.app_server?
+  verify[Pancakes::Application.config.services]
+end

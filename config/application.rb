@@ -15,6 +15,12 @@ if defined?(Bundler)
 end
 
 module Pancakes
+  def app_server?
+    ENV['PANCAKES_SERVER']
+  end
+
+  module_function :app_server
+
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -89,10 +95,19 @@ module Pancakes
     # Use CAS for interactive authentication; permit HTTP Basic auth for
     # testing API endpoints.
     config.aker do
-      api_mode :http_basic
-      ui_mode :cas
-      portal :NCSNavigator
-      cas_parameters Pancakes::Application.config.services[:cas]
+      if Pancakes.app_server?
+        api_mode :http_basic
+        ui_mode :cas
+        portal :NCSNavigator
+        cas_parameters Pancakes::Application.config.services[:cas]
+
+        if Rails.env.production?
+          authorities :cas
+        else
+          static = Aker::Authorities::Static.from_file(File.expand_path('../../../devel/logins.yml', __FILE__))
+          authorities :cas, static
+        end
+      end
     end
   end
 end
