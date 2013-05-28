@@ -79,18 +79,36 @@ module Pancakes
     # Load up our study location manifest.
     config.services[:study_locations_file] = ENV['STUDY_LOCATIONS_PATH']
 
-    # Load up the CAS URLs.
-    config.services[:cas] = {
-      base_url: ENV['CAS_BASE_URL'],
-      proxy_callback_url: ENV['CAS_PROXY_CALLBACK_URL'],
-      proxy_retrieval_url: ENV['CAS_PROXY_RETRIEVAL_URL']
-    }
+    # Load up the CAS URLs unless we've been told to use an Aker central file.
+    unless ENV['AKER_CENTRAL_PATH']
+      config.services[:cas] = {
+        base_url: ENV['CAS_BASE_URL'],
+        proxy_callback_url: ENV['CAS_PROXY_CALLBACK_URL'],
+        proxy_retrieval_url: ENV['CAS_PROXY_RETRIEVAL_URL']
+      }
+    end
 
     # Redis configuration.
-    config.services[:redis] = {
-      url: ENV['REDIS_URL'],
-      namespace: 'nubic:pancakes'
-    }
+    if ENV['USE_BCDATABASE_FOR_REDIS']
+      db_config = File.read(Rails.root.join("config/database.yml"))
+      redis_conf = YAML.load(ERB.new(db_config).result(binding))["redis_#{Rails.env}"]
+
+      if !redis_conf
+        fail "No Redis configuration found for #{Rails.env}"
+      end
+
+      redis_url = "redis://#{redis_conf['host']}:#{redis_conf['port']}/#{redis_conf['db']}"
+
+      config.services[:redis] = {
+        url: redis_url,
+        namespace: 'nubic:pancakes'
+      }
+    else
+      config.services[:redis] = {
+        url: ENV['REDIS_URL'],
+        namespace: 'nubic:pancakes'
+      }
+    end
 
     # Use CAS for interactive authentication; permit HTTP Basic auth for
     # testing API endpoints.
@@ -99,7 +117,12 @@ module Pancakes
         api_mode :http_basic
         ui_mode :cas
         portal :NCSNavigator
-        cas_parameters Pancakes::Application.config.services[:cas]
+
+        if ENV['AKER_CENTRAL_PATH']
+          central ENV['AKER_CENTRAL_PATH']
+        else
+          cas_parameters Pancakes::Application.config.services[:cas]
+        end
 
         if Rails.env.production?
           authorities :cas
