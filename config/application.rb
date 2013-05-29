@@ -81,13 +81,6 @@ module Pancakes
         api_mode :http_basic
         portal :NCSNavigator
         ui_mode :cas
-
-        if Rails.env.production?
-          authorities :cas
-        else
-          static = Aker::Authorities::Static.from_file(File.expand_path('../../devel/logins.yml', __FILE__))
-          authorities :cas, static
-        end
       end
     end
   end

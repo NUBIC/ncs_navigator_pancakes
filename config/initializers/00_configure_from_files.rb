@@ -15,5 +15,12 @@ end
 if ENV['AKER_CENTRAL_PATH']
   Pancakes::Application.config.aker do
     central ENV['AKER_CENTRAL_PATH']
+
+    if Rails.env.production?
+      authorities :cas
+    else
+      static = Aker::Authorities::Static.from_file(File.expand_path('../../../devel/logins.yml', __FILE__))
+      authorities :cas, static
+    end
   end
 end
