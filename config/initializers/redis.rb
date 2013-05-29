@@ -8,7 +8,12 @@ require 'redis/namespace'
 #
 # redis-rb is thread-safe, so we can get away with just using a single Redis
 # connection for now.  If it becomes a bottleneck we'll pool it.
-redis = Redis.new(:url => Pancakes::Application.config.services[:redis][:url])
-ns = Pancakes::Application.config.services[:redis][:namespace]
 
-$REDIS = Redis::Namespace.new(ns, :redis => redis)
+if Pancakes::Application.config.services[:redis]
+  redis = Redis.new(:url => Pancakes::Application.config.services[:redis][:url])
+  ns = Pancakes::Application.config.services[:redis][:namespace]
+
+  $REDIS = Redis::Namespace.new(ns, :redis => redis)
+else
+  Rails.logger.warn "Redis configuration not found; not connecting"
+end
