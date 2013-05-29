@@ -1,8 +1,3 @@
-require 'bundler/vlad'
-require 'vlad/assets'
-require 'vlad/maintenance'
-require 'vlad/rails'
-
 set :application, 'ncs_navigator_pancakes'
 set :deploy_to, ENV['DEPLOY_TO']
 set :keep_releases, 5

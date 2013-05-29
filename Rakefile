@@ -5,9 +5,3 @@
 require File.expand_path('../config/application', __FILE__)
 
 Pancakes::Application.load_tasks
-
-begin
-  require 'vlad'
-  Vlad.load :scm => 'git'
-rescue LoadError
-end

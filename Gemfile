@@ -50,7 +50,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'sinatra'
   gem 'term-ansicolor'
-  gem 'vlad'
+  gem 'vlad', :require => false
   gem 'vlad-extras', :require => false
-  gem 'vlad-git'
+  gem 'vlad-git', :require => false
 end
