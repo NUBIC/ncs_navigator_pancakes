@@ -62,8 +62,7 @@ Pancakes::Application.configure do
   config.ember.variant = :production
 
   # Where we expect to find the NCS Navigator configuration
-  config.navigator_ini_path = ENV['NCS_NAVIGATOR_INI_PATH'] ||
-    File.expand_path('../production_navigator.ini', __FILE__)
+  config.navigator_ini_path = ENV['NCS_NAVIGATOR_INI_PATH']
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
