@@ -16,7 +16,7 @@ end
 
 module Pancakes
   def app_server?
-    ENV['PANCAKES_SERVER']
+    ENV['PANCAKES_SERVER'] || Rails.env.test?
   end
 
   module_function :app_server?
