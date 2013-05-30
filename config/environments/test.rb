@@ -1,3 +1,5 @@
+require 'sidekiq/testing/inline'
+
 Pancakes::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
