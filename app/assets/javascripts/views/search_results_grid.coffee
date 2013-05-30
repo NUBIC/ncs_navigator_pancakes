@@ -20,10 +20,11 @@ Pancakes.SearchResultsGrid = Ember.View.extend
       inlineFilters: true
     )
 
+    @set 'view', view
+
     grid = new Slick.Grid el, @get('view'), @get('columns'), @get('options')
 
     @set 'grid', grid
-    @set 'view', view
 
     view.onRowCountChanged.subscribe (e, args) ->
       grid.updateRowCount()
