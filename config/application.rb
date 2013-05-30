@@ -60,10 +60,12 @@ module Pancakes
 
     # Set MDES version and other NCS Navigator bits
     config.before_initialize do
-      ncs_config = NcsNavigator::Configuration.new(config.navigator_ini_path)
+      if Pancakes.app_server?
+        ncs_config = NcsNavigator::Configuration.new(config.navigator_ini_path)
 
-      config.ncs_config = ncs_config
-      config.mdes_version = ncs_config.pancakes_mdes_version
+        config.ncs_config = ncs_config
+        config.mdes_version = ncs_config.pancakes_mdes_version
+      end
     end
 
     # Pancakes relies on many other services.
