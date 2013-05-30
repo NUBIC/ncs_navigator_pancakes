@@ -23,7 +23,7 @@ if %w(CAS_BASE_URL CAS_PROXY_CALLBACK_URL CAS_PROXY_RETRIEVAL_URL).all? { |e| EN
     cas_parameters Pancakes::Config[:cas]
 
     if Rails.env.production?
-      authorities :cas
+      authorities :cas, :automatic_access
     else
       static = Aker::Authorities::Static.from_file(File.expand_path('../../../devel/logins.yml', __FILE__))
       authorities :cas, static

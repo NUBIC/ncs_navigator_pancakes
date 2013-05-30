@@ -81,7 +81,6 @@ module Pancakes
     config.aker do
       if Pancakes.app_server?
         api_mode :http_basic
-        portal :NCSNavigator
         ui_mode :cas
       end
     end
