@@ -53,6 +53,23 @@
     }
   }
 
+  .search-results {
+    height: 800px;
+
+    .grid {
+      height: 100%;
+
+      .slick-column-name {
+        @include heading;
+      }
+
+      .slick-group-title {
+        @include heading;
+
+        color: gray;
+      }
+    }
+  }
 }
 
 .search {

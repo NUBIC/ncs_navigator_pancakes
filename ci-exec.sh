@@ -1,5 +1,8 @@
 #!/bin/bash
 
+if [ -z $RAILS_ENV ]; then
+    export RAILS_ENV='ci'
+fi
 
 if [ -z $GEMSET ]; then
     GEMSET=ncs_navigator_pancakes

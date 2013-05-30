@@ -23,6 +23,11 @@ Pancakes.EventSearchesShowController = Ember.ObjectController.extend
       @pollForUpdates()
   ).observes('isLoaded', 'isDone')
 
+  # When the search is done, load its data.
+  loadDataWhenDone: (->
+    @get('content').loadData() if @get('isDone')
+  ).observes('isDone')
+
   refresh: ->
     @get('content').refresh().done(=> @updateStatus())
 
