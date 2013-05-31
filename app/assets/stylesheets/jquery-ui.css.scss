@@ -25,6 +25,7 @@
   height: $base-line-height * $visible-autocomplete-candidates;
   max-width: 480px;
   overflow-y: scroll;
+  z-index: 20;
 }
 
 .ui-autocomplete .ui-menu-item a {
