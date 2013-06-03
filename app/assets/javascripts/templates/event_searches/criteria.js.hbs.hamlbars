@@ -23,5 +23,5 @@
     .input
       = hb 'view Pancakes.Tagger selectionBinding="dataCollectors" criterionBinding="controller.dataCollectorCriterion" candidatesBinding="controller.dataCollectorCandidates"'
 .go
-  %button{:_action => 'submit'}
+  %button{:_action => 'submit', :bind => { :disabled => 'invalid' }}
     Search

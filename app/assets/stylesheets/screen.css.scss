@@ -32,6 +32,16 @@ button, input {
   @include input-field;
 }
 
+button[disabled] {
+  @include opacity(0.25);
+
+  cursor: inherit;
+
+  &:active {
+    background-color: $dark-background-color;
+  }
+}
+
 button {
   cursor: pointer;
   background-color: $dark-background-color;

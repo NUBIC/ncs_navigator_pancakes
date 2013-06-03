@@ -8,6 +8,16 @@ Pancakes.EventSearch = Pancakes.Model.extend
     @set 'eventTypes', Ember.A() unless @get('eventTypes')
     @set 'studyLocations', Ember.A() unless @get('studyLocations')
 
+  valid: (->
+    @get('hasDateRange')
+  ).property('hasDateRange')
+
+  invalid: Ember.computed.not('valid')
+
+  hasDateRange: (->
+    @get('scheduledStartDate') || @get('scheduledEndDate')
+  ).property('scheduledStartDate', 'scheduledEndDate')
+
   serialize: ->
     id: @get('id')
     scheduled_start_date: @get 'scheduledStartDate'

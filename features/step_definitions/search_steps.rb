@@ -25,6 +25,15 @@ When(/^I enter the parameters$/) do |table|
   end
 end
 
+Then(/^I can(not)? start a search$/) do |negated|
+  if negated
+    # NOTE: Capybara 2 treats disabled elements as not present.
+    page.should have_no_button('Search')
+  else
+    page.should have_button('Search')
+  end
+end
+
 Then(/^I see the search criteria$/) do |table|
   actual = []
 

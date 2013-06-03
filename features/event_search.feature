@@ -15,6 +15,21 @@ Feature: Event search
       | Baz    | yes         |
       | Foo    | yes         |
 
+  Scenario: A search cannot be triggered without a date range
+    When I start an event search with the parameters
+      | event type | Pre-Pregnancy Visit |
+      | done by    | arl012              |
+
+    Then I cannot start a search
+
+  Scenario: A search with no end date can be executed
+    When I start an event search with the parameters
+      | event type | Pre-Pregnancy Visit |
+      | start date | 2013-06-01          |
+      | done by    | arl012              |
+
+    Then I can start a search
+
   Scenario: New searches have adjustable study location scope
     When I start an event search
     And I uncheck "Baz"
