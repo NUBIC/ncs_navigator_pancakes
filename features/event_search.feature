@@ -24,6 +24,7 @@ Feature: Event search
     When I start an event search with the parameters
       | event type | Pre-Pregnancy Visit |
       | done by    | arl012              |
+    And the search has a blank date range
 
     Then I cannot start a search
 

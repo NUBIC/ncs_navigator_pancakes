@@ -25,6 +25,20 @@ When(/^I enter the parameters$/) do |table|
   end
 end
 
+When(/^the search has a blank date range$/) do
+  steps %q{
+    When I enter the parameters
+      | start date ||
+      | end date   ||
+  }
+
+  # HACK: selenium-webdriver using Firefox doesn't seem to trigger Ember
+  # property updates when fields are cleared.  Sending a backspace character
+  # has no effect on field content, but is sufficient to get property updates
+  # going.
+  find('.scheduled-date.end input').set("\b")
+end
+
 Then(/^I can(not)? start a search$/) do |negated|
   if negated
     # NOTE: Capybara 2 treats disabled elements as not present.
