@@ -43,8 +43,4 @@ Pancakes::Application.configure do
   config.before_initialize do
     OpenSSL::SSL::SSLContext::DEFAULT_PARAMS[:verify_mode] = OpenSSL::SSL::VERIFY_NONE
   end
-
-  config.aker do
-    authorities :cas, Aker::Authorities::Static.from_file(File.expand_path('../../../devel/logins.yml', __FILE__))
-  end
 end
