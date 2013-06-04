@@ -4,6 +4,8 @@ Pancakes.DateField = Ember.TextField.extend
   attributeBindings: ['placeholder']
 
   didInsertElement: ->
-    @$().datepicker()
+    @$().datepicker
+      constrainInput: false
+      dateFormat: 'yy-mm-dd'
 
 # vim:ts=2:sw=2:et:tw=78
