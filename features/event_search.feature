@@ -50,8 +50,8 @@ Feature: Event search
     Given I start an event search with the parameters
       | event type | Pre-Pregnancy Visit |
       | event type | Pregnancy Visit 1   |
-      | start date | 04/01/2013          |
-      | end date   | 04/14/2013          |
+      | start date | 2013-04-01          |
+      | end date   | 2013-04-14          |
       | done by    | arl012              |
       | done by    | fcr456              |
       | location   | Foo                 |
@@ -70,8 +70,8 @@ Feature: Event search
     When I start an event search with the parameters
       | event type | Pre-Pregnancy Visit |
       | event type | Pregnancy Visit 1   |
-      | start date | 04/01/2013          |
-      | end date   | 04/14/2013          |
+      | start date | 2013-04-01          |
+      | end date   | 2013-04-14          |
       | done by    | arl012              |
       | done by    | fcr456              |
       | location   | Foo                 |
@@ -85,22 +85,22 @@ Feature: Event search
     Given I start an event search with the parameters
       | event type | Pre-Pregnancy Visit |
       | event type | Pregnancy Visit 1   |
-      | start date | 04/01/2013          |
-      | end date   | 04/14/2013          |
+      | start date | 2013-04-01          |
+      | end date   | 2013-04-14          |
       | done by    | arl012              |
       | done by    | fcr456              |
     And I click "Search"
 
     When I enter the parameters
       | event type | Two Tier Enumeration |
-      | start date | 01/02/2013           |
-      | end date   | 02/03/2013           |
+      | start date | 2013-01-02           |
+      | end date   | 2013-02-03           |
     And I click "Search"
     And I refresh the page
 
     Then I see the search criteria
       | event type | Two Tier Enumeration |
-      | start date | 01/02/2013           |
-      | end date   | 02/03/2013           |
+      | start date | 2013-01-02           |
+      | end date   | 2013-02-03           |
 
 # vim:ts=2:sw=2:et:tw=78
