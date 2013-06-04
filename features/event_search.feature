@@ -15,6 +15,11 @@ Feature: Event search
       | Baz    | yes         |
       | Foo    | yes         |
 
+  Scenario: New searches have a default date range
+    When I start an event search
+
+    Then my search spans 6 weeks
+
   Scenario: A search cannot be triggered without a date range
     When I start an event search with the parameters
       | event type | Pre-Pregnancy Visit |

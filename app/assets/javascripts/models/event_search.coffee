@@ -1,5 +1,13 @@
 #= require models/model
 
+format = (prop) ->
+  (->
+    v = @get prop
+
+    if moment.isMoment(v) && v.isValid()
+      @set prop, v.format('YYYY-MM-DD')
+  ).observes(prop)
+
 Pancakes.EventSearch = Pancakes.Model.extend
   init: ->
     @_super.apply(this, arguments)
@@ -13,6 +21,9 @@ Pancakes.EventSearch = Pancakes.Model.extend
   ).property('hasDateRange')
 
   invalid: Ember.computed.not('valid')
+
+  enforceStartDateAsString: format('scheduledStartDate')
+  enforceEndDateAsString: format('scheduledEndDate')
 
   hasDateRange: (->
     @get('scheduledStartDate') || @get('scheduledEndDate')

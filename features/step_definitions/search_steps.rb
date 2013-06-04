@@ -77,6 +77,13 @@ Then(/^my search involves the study locations$/) do |table|
   table.diff!(actual)
 end
 
+Then(/^my search spans (\d+) weeks$/) do |num|
+  start = find('.scheduled-date.start input').value
+  finish = find('.scheduled-date.end input').value
+
+  (Date.parse(finish) - Date.parse(start)).days.should == num.to_i.weeks
+end
+
 Then(/^I see search results$/) do
   page.should have_selector('.search-results')
 end

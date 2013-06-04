@@ -12,4 +12,14 @@ Pancakes.EventSearchesNewController = Ember.ObjectController.extend
       sc.select(l)
   ).observes('controllers.studyLocations.available.@each')
 
+  setDefaultDateRange: (->
+    start = moment()
+    end = moment(start).add 'weeks', 6
+
+    Ember.run =>
+      @setProperties
+        scheduledStartDate: start
+        scheduledEndDate: end
+  ).observes('content')
+
 # vim:ts=2:sw=2:et:tw=78
