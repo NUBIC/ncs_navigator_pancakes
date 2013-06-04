@@ -8,6 +8,13 @@ format = (prop) ->
       @set prop, v.format('YYYY-MM-DD')
   ).observes(prop)
 
+isDate = (prop) ->
+  (->
+    v = @get prop
+
+    v && moment(v).isValid()
+  ).property(prop)
+
 Pancakes.EventSearch = Pancakes.Model.extend
   init: ->
     @_super.apply(this, arguments)
@@ -25,9 +32,10 @@ Pancakes.EventSearch = Pancakes.Model.extend
   enforceStartDateAsString: format('scheduledStartDate')
   enforceEndDateAsString: format('scheduledEndDate')
 
-  hasDateRange: (->
-    @get('scheduledStartDate') || @get('scheduledEndDate')
-  ).property('scheduledStartDate', 'scheduledEndDate')
+  hasStartDate: isDate('scheduledStartDate')
+  hasEndDate: isDate('scheduledEndDate')
+
+  hasDateRange: Ember.computed.any 'hasStartDate', 'hasEndDate'
 
   serialize: ->
     id: @get('id')
