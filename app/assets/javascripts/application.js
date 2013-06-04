@@ -15,6 +15,7 @@
 //= require handlebars
 //= require ember
 //= require modernizr-latest
+//= require moment
 //= require pancakes
 //= require underscore/underscore
 //= require_tree .
