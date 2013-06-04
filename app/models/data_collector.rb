@@ -1,3 +1,5 @@
+require File.expand_path('../model', __FILE__)
+
 class DataCollector < Model
   attr_reader :user
 

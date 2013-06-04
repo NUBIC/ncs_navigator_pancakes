@@ -1,3 +1,5 @@
+require File.expand_path('../model', __FILE__)
+
 require 'pancakes/cas_https_client'
 
 ##

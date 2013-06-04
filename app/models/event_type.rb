@@ -1,3 +1,5 @@
+require File.expand_path('../model', __FILE__)
+
 class EventType < Model
   def self.all
     Stores.event_types.all
