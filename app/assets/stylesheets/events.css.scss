@@ -54,11 +54,9 @@
   }
 
   .search-results {
-    height: 800px;
+    width: 100%;
 
     .grid {
-      height: 100%;
-
       .slick-column-name {
         @include heading;
       }
