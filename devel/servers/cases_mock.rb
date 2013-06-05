@@ -20,7 +20,9 @@ $DATA = %Q{
                 "local_code": "-99"
             },
             "links": [],
+            "participant_first_name": "Jane",
             "participant_id": "a6e2a94f-bdf6-4400-a95a-214dd67768e9",
+            "participant_last_name": "Smith",
             "scheduled_date": "2013-01-01"
         }
     ],
