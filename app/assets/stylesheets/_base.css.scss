@@ -48,6 +48,7 @@ $show-grid-backgrounds  : false;
 $nu-purple              : #520063;
 $light-background-color : #f8f8f8;
 $dark-background-color  : #c0c0c0;
+$grid-background-color  : $light-background-color;
 $link-color             : #0000ff;
 $border                 : 1px solid $dark-background-color;
 $focus-background-color : desaturate(lighten($nu-purple, 70%), 80%);

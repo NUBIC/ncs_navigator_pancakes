@@ -57,18 +57,6 @@
     width: 100%;
 
     .grid {
-      .slick-column-name {
-        @include heading;
-      }
-
-      .slick-group-title {
-        @include heading;
-
-        color: gray;
-      }
-    }
-
-    .slick-cell {
       .participant-id {
         font-size: 80%;
 

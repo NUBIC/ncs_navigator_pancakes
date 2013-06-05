@@ -61,7 +61,7 @@ Pancakes.EventSearchResultsGrid = Pancakes.SearchResultsGrid.extend
     { id: 'data_collectors', name: 'Data collectors', field: 'data_collector_usernames', formatter: dcFormatter },
     { id: 'disposition', name: 'Disposition', field: 'disposition_code', formatter: edFormatter },
     { id: 'event_type', name: 'Event type', field: 'event_type', formatter: etFormatter },
-    { id: 'participant', name: 'Participant', formatter: pFormatter },
+    { id: 'participant', name: 'Participant', formatter: pFormatter, width: 200 },
     { id: 'scheduled_date', name: 'Scheduled date', field: 'scheduled_date' }
   ]
 
