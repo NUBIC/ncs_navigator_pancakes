@@ -2,6 +2,7 @@
 
 @mixin heading {
   font-variant: small-caps;
+  letter-spacing: 0.1em;
 }
 
 @mixin input-field {
