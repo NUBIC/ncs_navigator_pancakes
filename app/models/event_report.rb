@@ -40,6 +40,14 @@ class EventReport
     doneall(ttl)
   end
 
+  # Public: The TTL of the data key.
+  #
+  # Returns the TTL of the data key, or -1 if the data does not exist or has
+  #   expired.
+  def ttl
+    $REDIS.ttl(data_list_key)
+  end
+
   def status
     read_status
 
@@ -86,7 +94,7 @@ class EventReport
       end
     end
 
-    redis.set data_list_key, agg.to_json
+    record(data_list_key) { |k| redis.set k, agg.to_json }
   end
 
   private
@@ -96,7 +104,7 @@ class EventReport
   end
 
   def startall
-    redis.sadd cache_key, Started
+    record Started
   end
 
   def doneall(ttl)
@@ -104,7 +112,7 @@ class EventReport
     time = Time.now.to_i + ttl
 
     redis.multi do
-      redis.sadd cache_key, Done
+      record Done
       keys.each { |k| redis.expireat k, time }
       redis.expireat cache_key, time
     end
@@ -116,7 +124,7 @@ class EventReport
 
     redis.pipelined do
       keys.each do |k|
-        if !(k == Done || k == Started)
+        if !(k == Done || k == Started || k == data_list_key)
           results << redis.hmget(k, Tag, Status)
         end
       end
@@ -129,6 +137,11 @@ class EventReport
 
   def date_range
     "[#{[search.scheduled_start_date, search.scheduled_end_date].join(',')}]"
+  end
+
+  def record(key)
+    redis.sadd cache_key, key
+    yield key if block_given?
   end
 
   def redis

@@ -121,4 +121,27 @@ describe EventReport do
       report2.data.should == report.data
     end
   end
+
+  describe '#ttl' do
+    describe 'if the report has data' do
+      include_context 'event report data'
+
+      it 'is the TTL set in execution' do
+        report.execute('bogus', 3600)
+        report.stub!(:collate => [])
+
+        report.ttl.should be_within(10).of(3600)
+      end
+    end
+
+    describe 'if the report has no data' do
+      before do
+        $REDIS.flushdb
+      end
+
+      it 'returns -1' do
+        report.ttl.should == -1
+      end
+    end
+  end
 end
