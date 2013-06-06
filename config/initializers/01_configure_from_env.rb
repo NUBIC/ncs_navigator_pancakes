@@ -12,6 +12,10 @@ if ENV['STUDY_LOCATIONS_PATH']
   Pancakes::Config.from_env :study_locations_file, ENV['STUDY_LOCATIONS_PATH']
 end
 
+if ENV['QUERY_CONCURRENCY']
+  Pancakes::Config.from_env :query_concurrency, ENV['QUERY_CONCURRENCY'] || 16
+end
+
 if %w(CAS_BASE_URL CAS_PROXY_CALLBACK_URL CAS_PROXY_RETRIEVAL_URL).all? { |e| ENV[e] }
   Pancakes::Config.from_env :cas, {
     base_url: ENV['CAS_BASE_URL'],
