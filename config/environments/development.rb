@@ -31,6 +31,9 @@ Pancakes::Application.configure do
   # Use Ember.js in development mode
   config.ember.variant = :development
 
+  # Expose the Javascript test suite
+  config.assets.paths << Rails.root.join('spec', 'javascripts')
+
   # Where we expect to find the NCS Navigator configuration
   config.navigator_ini_path = File.expand_path('../development_navigator.ini', __FILE__)
 

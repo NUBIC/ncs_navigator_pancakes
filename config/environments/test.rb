@@ -38,6 +38,9 @@ Pancakes::Application.configure do
   # as if it's in production.
   config.ember.variant = :production
 
+  # Expose the Javascript test suite
+  config.assets.paths << Rails.root.join('spec', 'javascripts')
+
   # Where we expect to find the NCS Navigator configuration
   config.navigator_ini_path = File.expand_path('../test_navigator.ini', __FILE__)
 

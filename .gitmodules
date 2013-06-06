@@ -4,3 +4,6 @@
 [submodule "vendor/assets/javascripts/SlickGrid"]
 	path = vendor/assets/javascripts/SlickGrid
 	url = https://github.com/mleibman/SlickGrid.git
+[submodule "vendor/assets/javascripts/testing/jquery-mockjax"]
+	path = vendor/assets/javascripts/testing/jquery-mockjax
+	url = https://github.com/appendto/jquery-mockjax.git
