@@ -63,6 +63,7 @@ end
 # Because most queries are HTTP requests, the size of this pool has a direct
 # influence on Pancakes' maximum number of concurrent outbound connections
 # to NCS Navigator services.
-QueryRunnerPool = QueryRunner.pool(:size => 16)
+concurrency_level = ENV['QUERY_CONCURRENCY'] ? ENV['QUERY_CONCURRENCY'].to_i : 4
+QueryRunnerPool = QueryRunner.pool(:size => concurrency_level)
 
 # vim:ts=2:sw=2:et:tw=78
