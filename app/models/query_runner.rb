@@ -63,8 +63,6 @@ end
 # Because most queries are HTTP requests, the size of this pool has a direct
 # influence on Pancakes' maximum number of concurrent outbound connections
 # to NCS Navigator services.
-#
-# See config/initializers/01_configure_from_env.rb for defaults.
-QueryRunnerPool = QueryRunner.pool(:size => Pancakes::Application.config.query_concurrency)
+QueryRunnerPool = QueryRunner.pool(:size => 16)
 
 # vim:ts=2:sw=2:et:tw=78
