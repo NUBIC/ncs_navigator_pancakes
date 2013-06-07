@@ -82,8 +82,9 @@ CandidateList = Ember.CollectionView.extend
     mouseEnter: ->
       @set 'parentView.currentIndex', @get('contentIndex')
 
-    click: ->
+    click: (e) ->
       @get('parentView').willAddSelection()
+      e.preventDefault()
 
   willAddSelection: ->
     @get('parentView').willAddSelection()
