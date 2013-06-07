@@ -26,6 +26,9 @@ Entry = Ember.TextField.extend
     @get('value.length') > 0
   ).property('value')
 
+  clear: ->
+    @set 'value', ''
+
   focusOut: ->
     @set 'wantsCandidates', false
 
@@ -38,7 +41,7 @@ Entry = Ember.TextField.extend
           pv.willAddSelection()
 
         if @get 'hasText'
-          @set 'value', ''
+          @clear()
           e.preventDefault()
       when $.ui.keyCode.UP
         pv.selectPreviousCandidate() if @get 'wantsCandidates'
@@ -154,11 +157,13 @@ Pancakes.Tagger = Ember.ContainerView.extend
     if @get('controller').canAddSelection @get('selections.content'), item
       @get('controller').addSelection @get('selections.content'), item
       @set 'entry.wantsCandidates', false
+      @get('entry').clear()
 
   willRemoveSelection: (item) ->
     if @get('controller').canRemoveSelection @get('selections.content'), item
       @get('controller').removeSelection @get('selections.content'), item
       @set 'entry.wantsCandidates', false
+      @get('entry').clear()
 
   willRemoveLastSelection: ->
     @willRemoveSelection @get('selections.content.lastObject')
