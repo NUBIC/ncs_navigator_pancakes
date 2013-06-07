@@ -42,12 +42,13 @@ cmp = (a, b) ->
     0
 
 comparer = (a, b) ->
-  ord = 0
-
   for field in fields
-    ord += cmp(a[field], b[field])
+    res = cmp(a[field], b[field])
 
-  ord
+    if res != 0
+      return res
+
+  0
 
 # ----------------------------------------------------------------------------
 # GRID
