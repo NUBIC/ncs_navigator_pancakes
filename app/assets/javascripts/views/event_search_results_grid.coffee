@@ -73,11 +73,6 @@ Pancakes.EventSearchResultsGrid = Pancakes.SearchResultsGrid.extend
       view.setGrouping([{ getter: 'group', formatter: (g) -> "Location: #{g.value}" }])
   ).observes('content', 'view')
 
-  establishOrder: (->
-    @get('view').onRowsChanged.subscribe (e, args) =>
-      @get('view').sort comparer, true
-  ).observes('view')
-
   # The underlying DataView and GroupItemMetadataProvider have a couple of
   # requirements:
   #
@@ -97,6 +92,7 @@ Pancakes.EventSearchResultsGrid = Pancakes.SearchResultsGrid.extend
         o['group'] = o['pancakes.location']['name']
 
       view.setItems data
+      view.sort comparer, true
   ).observes('content', 'view')
 
 # vim:ts=2:sw=2:et:tw=78
