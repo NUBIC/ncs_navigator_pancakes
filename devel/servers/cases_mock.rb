@@ -85,7 +85,7 @@ get '/api/v1/events' do
     elsif rand > 0.7
       raise "Uh oh"
     else
-      $DATA
+      `ruby gen_event_report.rb`
     end
   end
 end
