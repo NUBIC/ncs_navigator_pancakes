@@ -13,12 +13,24 @@ body {
   line-height: $base-line-height;
 }
 
+a {
+  color: $link-color;
+
+  &:hover {
+    color: $hover-link-color;
+  }
+
+  &:visited {
+    color: $visited-link-color;
+  }
+}
+
 #entropy-seed {
   display: none;
 }
 
 .banner {
-  background-color: $nu-purple;
+  background-color: $dominant-color;
   color: white;
   margin-bottom: $base-line-height;
 }

@@ -45,16 +45,21 @@ $show-grid-backgrounds  : false;
 // Colors
 // ---------------------------------------------------------------------------
 
-$nu-purple              : #520063;
+$dominant-color         : #520063;
+$cold-accent-color      : #006c2c;
+$warm-accent-color      : #966c00;
 $light-background-color : #f8f8f8;
 $dark-background-color  : #c0c0c0;
-$grid-background-color  : $light-background-color;
-$link-color             : #0000ff;
-$border                 : 1px solid $dark-background-color;
-$focus-background-color : desaturate(lighten($nu-purple, 70%), 80%);
-$tag-background-color   : $focus-background-color;
-$tag-color              : invert($tag-background-color);
 $foreground-color       : #222222;
+
+$grid-background-color  : $light-background-color;
+$link-color             : $cold-accent-color;
+$hover-link-color       : lighten($link-color, 10%);
+$visited-link-color     : darken($link-color, 20%);
+$border                 : 1px solid $dark-background-color;
+$focus-background-color : lighten(desaturate($cold-accent-color, 80%), 70%);
+$tag-background-color   : $focus-background-color;
+$tag-color              : $foreground-color;
 
 // ---------------------------------------------------------------------------
 // Maxima
