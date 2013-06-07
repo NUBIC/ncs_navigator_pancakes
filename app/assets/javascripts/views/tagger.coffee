@@ -55,7 +55,8 @@ Entry = Ember.TextField.extend
           pv.willRemoveLastSelection()
           e.preventDefault()
       else
-        @set 'wantsCandidates', true
+        if @get('hasText')
+          @set 'wantsCandidates', true
 
 # ----------------------------------------------------------------------------
 
