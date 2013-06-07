@@ -26,6 +26,9 @@ Entry = Ember.TextField.extend
     @get('value.length') > 0
   ).property('value')
 
+  focusOut: ->
+    @set 'wantsCandidates', false
+
   keyDown: (e) ->
     pv = @get 'parentView'
 
