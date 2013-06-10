@@ -19,7 +19,12 @@ $DATA = %Q{
                 "display_text": "Foo",
                 "local_code": "-99"
             },
-            "links": [],
+            "links": [
+                {
+                    "href": "https://cases.example.edu/participants/a6e2a94f-bdf6-4400-a95a-214dd67768e9",
+                    "rel": "participant"
+                }
+            ],
             "participant_first_name": "Jane",
             "participant_id": "a6e2a94f-bdf6-4400-a95a-214dd67768e9",
             "participant_last_name": "Smith",
