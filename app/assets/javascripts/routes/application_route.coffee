@@ -14,7 +14,4 @@ Pancakes.ApplicationRoute = Ember.Route.extend
       editable: false
       available: Pancakes.StudyLocation.find()
 
-  redirect: ->
-    @transitionTo 'event_searches.new'
-
 # vim:ts=2:sw=2:et:tw=78
