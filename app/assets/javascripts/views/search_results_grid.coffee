@@ -26,11 +26,17 @@ Pancakes.SearchResultsGrid = Ember.View.extend
 
     @set 'grid', grid
 
-    view.onRowCountChanged.subscribe (e, args) ->
+    view.onRowCountChanged.subscribe (e, args) =>
+      grid = @get 'grid'
+      return unless grid
+
       grid.updateRowCount()
       grid.render()
 
-    view.onRowsChanged.subscribe (e, args) ->
+    view.onRowsChanged.subscribe (e, args) =>
+      grid = @get 'grid'
+      return unless grid
+
       grid.invalidateRows(args.rows)
       grid.render()
 
