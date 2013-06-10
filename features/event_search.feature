@@ -81,6 +81,21 @@ Feature: Event search
 
     Then I see search results
 
+  @all-locations-ok
+  Scenario: When the search completes, links to each participants are displayed
+    Given I start an event search with the parameters
+      | event type | Pre-Pregnancy Visit |
+      | event type | Pregnancy Visit 1   |
+      | start date | 2013-04-01          |
+      | end date   | 2013-04-14          |
+      | done by    | arl012              |
+      | done by    | fcr456              |
+    And I click "Search"
+
+    Then I see a link for participant "Jane Smith" with
+      | href                                                                        |
+      | https://cases.example.edu/participants/a6e2a94f-bdf6-4400-a95a-214dd67768e9 |
+
   Scenario: Editing the search persists the new parameters
     Given I start an event search with the parameters
       | event type | Pre-Pregnancy Visit |

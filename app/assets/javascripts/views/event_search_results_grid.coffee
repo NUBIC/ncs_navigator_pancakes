@@ -16,6 +16,10 @@ edFormatter = (row, cell, value, columnDef, dataContext) ->
 etFormatter = (row, cell, value, columnDef, dataContext) ->
   value['display_text']
 
+# Link extractor.
+linksFor = (rel, links) ->
+  link['href'] for link in links when link['rel'] == rel
+
 # Participant formatter.
 guard = (v) ->
   if v.toString().trim().length == 0
@@ -24,11 +28,18 @@ guard = (v) ->
     v
 
 pFormatter = (row, cell, value, columnDef, dataContext) ->
-  """
-  <span class="name">#{guard dataContext['participant_first_name']}</span>
-  <span class="name">#{guard dataContext['participant_last_name']}</span>
-  <span class="participant-id">#{dataContext['participant_id']}</span>
-  """
+  links = linksFor 'participant', dataContext['links']
+
+  html = """
+         <span class="name">#{guard dataContext['participant_first_name']}</span>
+         <span class="name">#{guard dataContext['participant_last_name']}</span>
+         <span class="participant-id">#{dataContext['participant_id']}</span>
+         """
+
+  if links[0]
+    html = "<a href=\"#{links[0]}\">#{html}</a>"
+
+  html
 
 # Sort helpers.
 fields = ['participant_first_name', 'participant_last_name', 'scheduled_date']

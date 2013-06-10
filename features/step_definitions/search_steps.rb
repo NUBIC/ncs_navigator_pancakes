@@ -101,3 +101,9 @@ end
 Then(/^I see search results$/) do
   page.should have_selector('.search-results')
 end
+
+Then(/^I see a link for participant "([^"]*)" with$/) do |name, table|
+  href = table.hashes.first['href']
+
+  page.should have_link(name, :href => href)
+end
