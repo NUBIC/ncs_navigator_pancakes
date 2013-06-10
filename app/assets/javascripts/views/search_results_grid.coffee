@@ -37,6 +37,8 @@ Pancakes.SearchResultsGrid = Ember.View.extend
     grid.autosizeColumns()
     grid.registerPlugin(groupItemMetadataProvider)
 
+    $(window).resize _.debounce((=> @get('grid')?.resizeCanvas()), 100)
+
   # When this view is destroyed, destroy the grid and view also.
   willDestroyElement: ->
     @get('grid').destroy()

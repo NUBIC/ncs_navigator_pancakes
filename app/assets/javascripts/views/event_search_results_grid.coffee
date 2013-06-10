@@ -68,6 +68,7 @@ comparer = (a, b) ->
 Pancakes.EventSearchResultsGrid = Pancakes.SearchResultsGrid.extend
   options:
     autoHeight: true
+    forceFitColumns: true
 
   columns: [
     { id: 'data_collectors', name: 'Data collectors', field: 'data_collector_usernames', formatter: dcFormatter },
