@@ -114,9 +114,9 @@ describe EventReport do
       report.data.should == []
     end
 
-    it 'is accessible to two EventReports with the same search and timestamp' do
+    it 'is accessible to two EventReports with the same search and timecode' do
       report.collate([r1])
-      report2 = EventReport.new(report.search, report.started_at)
+      report2 = EventReport.new(report.search, report.timecode)
 
       report2.data.should == report.data
     end

@@ -18,11 +18,11 @@ class EventSearch < ActiveRecord::Base
   end
 
   def status
-    EventReport.new(self, last_started_at).status
+    EventReport.new(self, updated_at).status
   end
 
   def data
-    EventReport.new(self, last_started_at).data
+    EventReport.new(self, updated_at).data
   end
 
   # Public: Builds and executes an EventReport from this EventSearch.
@@ -35,7 +35,7 @@ class EventSearch < ActiveRecord::Base
     started_at = Time.now
 
     update_attribute(:last_started_at, started_at)
-    EventReport.new(self, started_at).tap { |r| r.execute(pgt, ttl) }
+    EventReport.new(self, updated_at).tap { |r| r.execute(pgt, ttl) }
   end
 
   def event_type_ids

@@ -6,19 +6,20 @@ class EventReport
   Tag = 'tag'
 
   attr_reader :search
-  attr_reader :started_at
+  attr_reader :timecode
 
   ##
-  # search     - The EventSearch that will be used to generate this report's
-  #              data.
-  # started_at - When report generation started.
-  def initialize(search, started_at)
+  # search -   The EventSearch that will be used to generate this report's
+  #            data.
+  # timecode - A time associated with this report; used to differentiate
+  #            amongst multiple runs of the same report.
+  def initialize(search, timecode)
     @search = search
-    @started_at = started_at.to_i
+    @timecode = timecode.to_i
   end
 
   def cache_key
-    "report:#{search.id}:#{started_at}"
+    "report:#{search.id}:#{timecode}"
   end
 
   # Public: Build the report.
@@ -69,7 +70,7 @@ class EventReport
   #
   # Data, like all other EventReport characteristics, is identified by a
   # search ID and a start timestamp.  Therefore, two EventReports with the
-  # same search ID and started_at will have the same data.
+  # same search ID and timecode will have the same data.
   def data
     data = redis.get(data_list_key)
     data ? JSON.parse(data) : []
