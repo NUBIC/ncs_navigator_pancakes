@@ -4,7 +4,7 @@ Given(/^I start an event search with the parameters$/) do |table|
 end
 
 When(/^I start an event search$/) do
-  visit '/event_searches/new'
+  visit '#/event_searches/new'
 end
 
 When(/^I enter the parameters$/) do |table|
