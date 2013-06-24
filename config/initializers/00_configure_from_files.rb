@@ -14,6 +14,7 @@ end
 
 if ENV['AKER_CENTRAL_PATH']
   Pancakes::Application.config.aker do
+    ui_mode :cas
     central ENV['AKER_CENTRAL_PATH']
 
     if Rails.env.production?
