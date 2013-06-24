@@ -15,6 +15,8 @@ Pancakes.EventSearchesShowRoute = Ember.Route.extend
       command: controller.get 'content'
 
   deactivate: ->
+    @controllerFor('studyLocations').set 'editable', false
+
     @set 'controller.content', null
 
   events:

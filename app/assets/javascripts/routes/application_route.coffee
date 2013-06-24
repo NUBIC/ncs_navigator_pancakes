@@ -11,7 +11,6 @@ Pancakes.ApplicationRoute = Ember.Route.extend
     @_super(controller)
 
     @controllerFor('studyLocations').setProperties
-      editable: false
       available: Pancakes.StudyLocation.find()
 
 # vim:ts=2:sw=2:et:tw=78

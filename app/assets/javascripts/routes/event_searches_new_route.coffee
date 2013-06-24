@@ -9,6 +9,9 @@ Pancakes.EventSearchesNewRoute = Ember.Route.extend
       editable: true
       command: controller.get 'content'
 
+  deactivate: ->
+    @controllerFor('studyLocations').set 'editable', false
+
   events:
     submit: ->
       search = @get 'controller.content'
