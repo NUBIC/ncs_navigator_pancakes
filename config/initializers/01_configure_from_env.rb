@@ -20,6 +20,7 @@ if %w(CAS_BASE_URL CAS_PROXY_CALLBACK_URL CAS_PROXY_RETRIEVAL_URL).all? { |e| EN
   }
 
   Pancakes::Application.config.aker do
+    ui_mode :cas
     cas_parameters Pancakes::Config[:cas]
 
     if Rails.env.production?
