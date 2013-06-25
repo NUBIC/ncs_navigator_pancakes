@@ -12,15 +12,7 @@ development:
   host: localhost
   pool: 20
 
-test:
-  adapter: <%= 'jdbc' if RUBY_PLATFORM =~ /java/ %>postgresql
-  database: ncs_navigator_pancakes_test
-  username: ncs_navigator_pancakes_test
-  password: ncs_navigator_pancakes_test
-  host: localhost
-  pool: 20
-
-<%= bcdb.ci :public_ci_postgresql9, :ncs_navigator_pancakes %>
+<%= bcdb.test :public_ci_postgresql9, :ncs_navigator_pancakes %>
 <%= bcdb.staging :ncsdb_staging, :ncs_navigator_pancakes %>
 <%= bcdb.production :ncsdb_prod, :ncs_navigator_pancakes %>
 <%= bcdb.redis_development :local_redis, :ncs_navigator_pancakes %>

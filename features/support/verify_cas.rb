@@ -1,3 +1,4 @@
+require 'castanet/testing'
 require 'castanet/testing/connection_testing'
 require 'timeout'
 
