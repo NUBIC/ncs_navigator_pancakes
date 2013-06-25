@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/NUBIC/castanet-testing.git
-  revision: 55349e3e6ca8e572f584166ac68526432436bc50
+  revision: d2bf738cb20821fe0de93bbafc9ae3e5367b71bd
   specs:
     castanet-testing (0.0.1)
       json
@@ -237,7 +237,7 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
-    rake (10.0.4)
+    rake (10.1.0)
     rake-remote_task (2.2.1)
       open4 (~> 1.0)
       rake (>= 0.8, < 11.0)
